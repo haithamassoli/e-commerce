@@ -3,6 +3,13 @@
 ## Synopsis
 e-commerce.
 
+## Contributors
+1. Ahmad Abutoimah (Project Owner).
+2. Dania Darweesh.
+3. Haitham Assoli (Scrum Master).
+4. Farah Mango.
+5. Sarah Hasan.
+
 ## Technologies
 1. HTML5.
 2. CSS3.
@@ -23,8 +30,6 @@ An updated version of any Browser connected to an internet connection only needs
 
 ## Wireframe
 
-
 ## Mockup
 
 ## Trello
-
