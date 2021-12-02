@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2021 at 03:22 PM
+-- Generation Time: Dec 02, 2021 at 10:36 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -76,7 +76,10 @@ CREATE TABLE `products` (
   `product_price` varchar(255) NOT NULL,
   `product_quantity` int(11) NOT NULL,
   `product_rate` int(11) DEFAULT NULL,
-  `product_image` varchar(255) NOT NULL,
+  `product_main_image` varchar(255) NOT NULL,
+  `product_desc_image_1` varchar(255) DEFAULT NULL,
+  `product_desc_image_2` varchar(255) DEFAULT NULL,
+  `product_desc_image_3` varchar(255) DEFAULT NULL,
   `product_tag` varchar(255) NOT NULL,
   `product_categorie_id` int(11) NOT NULL,
   `product_admin_id` int(11) NOT NULL,
