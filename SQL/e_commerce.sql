@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2021 at 10:36 PM
+-- Generation Time: Dec 03, 2021 at 03:47 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -100,8 +100,16 @@ CREATE TABLE `users` (
   `user_mobile` int(14) DEFAULT NULL,
   `user_location` varchar(255) DEFAULT NULL,
   `user_image` varchar(255) NOT NULL,
+  `user_gender` varchar(255) NOT NULL,
   `user_creation_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_password`, `user_mobile`, `user_location`, `user_image`, `user_gender`, `user_creation_date`) VALUES
+(2, 'ali', 'ali@gmail.com', 'Aa123456', NULL, NULL, 'uploads/61a96980bfe2fdiscord.png', 'male', '2021-12-03 00:49:04');
 
 --
 -- Indexes for dumped tables
@@ -175,7 +183,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
