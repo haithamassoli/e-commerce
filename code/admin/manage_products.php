@@ -1,9 +1,5 @@
 <?php include "./includes/header.php"; ?>
-<link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
-<link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-<link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
-<link rel="stylesheet" href="assets/css/app.css">
-<link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+<!-- start table -->
 <div class="row">
   <div class="col-lg-12">
     <div class="users-table table-wrapper">
@@ -256,4 +252,5 @@
     </div>
   </div>
 </div>
+<!-- end table -->
 <?php include "./includes/footer.php"; ?>
