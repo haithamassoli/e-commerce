@@ -41,8 +41,6 @@ if (isset($_GET['delete'])) {
   redirect("manage_users.php");
 }
 // add and edit 
-
-
 if (isset($_GET['do'])) {
   $do = $_GET["do"];
   if ($do == "edit") {
@@ -57,8 +55,6 @@ if (isset($_GET['do'])) {
       $name = ($_POST["user_name"]);
       $email = strtolower($_POST["user_email"]);
       $password=($_POST["user_password"]);
-      // $mobile = ($_POST["user_mobile"]);
-      $location = ($_POST["user_location"]);
       $gender=($_POST["user_gender"]);
       //  input validation 
       // name validation 
@@ -71,8 +67,6 @@ if (isset($_GET['do'])) {
         $emailError = ("email is not a valid email address");
         $check = 0;
       }
-     
-    
       if ($name == "") {
         $check = 0;
         $nameError = "The name shouldn't be empty!";
@@ -95,8 +89,6 @@ if (isset($_GET['do'])) {
       $image_folder = "uploads/user_image/";
       $target_file = $image_folder . uniqid() . basename($image["name"]);
       move_uploaded_file($image["tmp_name"], $target_file);
-
-
       if ($check == 1) {
         $sql2 = "UPDATE users  SET user_name = '$name', user_email ='$email', user_password='$password', user_gender='$gender' ,user_image=' $target_file' WHERE user_id = '$id'";
         if ($conn->query($sql2) === TRUE) {
@@ -117,11 +109,7 @@ if (isset($_GET['do'])) {
       $name = ($_POST["user_name"]);
       $email = strtolower($_POST["user_email"]);
       $password=($_POST["user_password"]);
-      $mobile = ($_POST["user_mobile"]);
-      $location = ($_POST["user_location"]);
       $gender=($_POST["user_gender"]);
-
-
        //  input validation 
       // name validation 
       if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
@@ -156,11 +144,9 @@ if (isset($_GET['do'])) {
       $image_folder = "uploads/user_image/";
       $target_file = $image_folder . uniqid() . basename($image["name"]);
       move_uploaded_file($image["tmp_name"], $target_file);
-
-
       if ($check == 1) {
         $sql = "INSERT INTO `users` (`user_name`,`user_email`,`user_password`, `user_gender`,`user_image`) 
-                              VALUES ('$name','$email','$password','$gender','$target_file')";
+                            VALUES ('$name','$email','$password','$gender','$target_file')";
         if (mysqli_query($conn, $sql)) {
           echo "New record created successfully";
         } else {
@@ -182,8 +168,6 @@ if (isset($_GET['do'])) {
         <form class="form form-horizontal" method="POST"  enctype="multipart/form-data">
           <div class="form-body">
             <div class="row">
-
-
             <div class="col-md-4">
                 <label>Image</label>
               </div>
@@ -193,7 +177,6 @@ if (isset($_GET['do'])) {
                     <input type="file" name="user_image" class="form-control col-9 mb-2" placeholder="image" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
                     <div class="form-control-icon col-3 ">
                     </div>
-                    <div style="color:red"><?php echo @$nameError ;  ?></div>
                   </div>
                 </div>
               </div>
@@ -248,6 +231,7 @@ if (isset($_GET['do'])) {
                     <input type="text" name="user_gender" class="form-control col-9 mb-2" placeholder="Gender" style="border: 1px solid #dce7f1 !important;">
                     <div class="form-control-icon col-3">
                     </div>
+                    <div style="color:red"><?php echo @$genderError ;  ?></div>
                   </div>
                 </div>
               </div>
@@ -296,7 +280,6 @@ if (!isset($_GET['do'])) { ?>
       <button class="btn btn-primary" style="float: right;margin:10px 50px 0px 10px;"> 
        <a href="manage_users.php?do=add">Add user </a>
       </button>
-
         <thead>
           <tr class="users-table-info">
             <th>
@@ -308,13 +291,10 @@ if (!isset($_GET['do'])) { ?>
             <th>User Name</th>
             <th>User Email</th>
             <th>User Password</th>
-            <!-- <th>User Mobile</th> -->
-            <!-- <th>User Location</th> -->
             <th>User Gender</th>
             <th>User Creation Date</th>
             <th>Action</th>
           </tr>
-
         </thead>
         <tbody>
         <?php foreach ($users as $key => $user) { ?>
@@ -329,7 +309,6 @@ if (!isset($_GET['do'])) { ?>
         <td><?php echo isset($user['user_name']) ? $user['user_name'] : ''; ?></td>
         <td><?php echo isset($user['user_email']) ? $user['user_email'] : ''; ?></td>
         <td><?php echo isset($user['user_password']) ? $user['user_password'] : ''; ?></td>
-
         <td><?php echo isset($user['user_gender']) ? $user['user_gender'] : ''; ?></td>
         <td><?php echo isset($user['user_creation_date']) ? $user['user_creation_date'] : ''; ?></td>
         <td>
@@ -350,7 +329,6 @@ if (!isset($_GET['do'])) { ?>
     </div>
   </div>
 </div>
-
 </div>
 </main>
 <?php } ?>
