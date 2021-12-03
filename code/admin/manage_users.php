@@ -1,5 +1,5 @@
 <?php include "./includes/header.php"; ?>
-<<<<<<< HEAD
+
 <?php 
 function redirect($url)
 {
@@ -285,9 +285,9 @@ $conn->close();
 if (!isset($_GET['do'])) { ?>
 <main class="main users chart-page" id="skip-target">
 <div class="container">
-=======
+
 <!-- start table -->
->>>>>>> 79452dcc0d08a44144c7a0efb80e094092db938a
+
 <div class="row">
   <div class="col-lg-12">
     <div class="users-table table-wrapper">
@@ -350,11 +350,10 @@ if (!isset($_GET['do'])) { ?>
     </div>
   </div>
 </div>
-<<<<<<< HEAD
+
 </div>
 </main>
 <?php } ?>
-=======
+
 <!-- end table -->
->>>>>>> 79452dcc0d08a44144c7a0efb80e094092db938a
 <?php include "./includes/footer.php"; ?>
