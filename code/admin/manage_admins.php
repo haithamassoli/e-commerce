@@ -1,9 +1,88 @@
 <?php include "./includes/header.php"; ?>
-<link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
-<link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-<link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
-<link rel="stylesheet" href="assets/css/app.css">
-<link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+<!-- start form -->
+<div class="col-md-6 col-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Horizontal Form with Icons</h4>
+    </div>
+    <div class="card-content">
+      <div class="card-body">
+        <form class="form form-horizontal">
+          <div class="form-body">
+            <div class="row">
+              <div class="col-md-4">
+                <label>Name</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative row justify-content-center align-items-center d-flex">
+                    <input type="text" class="form-control col-9 mb-2" placeholder="Name" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                    <div class="form-control-icon col-3 ">
+                      <i class="bi bi-person" style="position: absolute; top:-10px; left: -20px;"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label>Email</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative row justify-content-center align-items-center d-flex">
+                    <input type="email" class="form-control col-9 mb-2" placeholder="Email" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                    <div class="form-control-icon col-3">
+                      <i class="bi bi-envelope" style="position: absolute; top:-10px; left: -20px;"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label>Mobile</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative row justify-content-center align-items-center d-flex">
+                    <input type="number" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" placeholder="Mobile">
+                    <div class="form-control-icon col-3">
+                      <i class="bi bi-phone" style="position: absolute; top:-10px; left: -20px;"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label>Password</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative row justify-content-center align-items-center d-flex">
+                    <input type="password" class="form-control col-9 mb-2" placeholder="Password" style="border: 1px solid #dce7f1 !important;">
+                    <div class="form-control-icon col-3">
+                      <i class="bi bi-lock" style="position: absolute; top:-10px; left: -20px;"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-8 offset-md-4">
+                <div class='form-check'>
+                  <div class="checkbox">
+                    <input type="checkbox" id="checkbox2" class='form-check-input' checked>
+                    <label for="checkbox2">Remember Me</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end form -->
+<!-- start table -->
 <div class="row">
   <div class="col-lg-12">
     <div class="users-table table-wrapper">
@@ -256,4 +335,5 @@
     </div>
   </div>
 </div>
+<!-- end table -->
 <?php include "./includes/footer.php"; ?>
