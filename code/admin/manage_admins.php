@@ -136,15 +136,17 @@ if (isset($_GET['do'])) {
         $check = 0;
         $typeErr= "The type shouldn't be empty!";
       }
-      elseif($admin_type== 1|| $admin_type==0){
-        $admin_type = $_POST["admin_type"];
+      if($admin_type==1|| $admin_type==0){
+        $check=1;
       }
-      else {
+      else{
         $typeErr=" The type value should be 0 or 1 ";
+        $check=0;
       }
+      
 
       if ($check == 1) {
-        $sql = "INSERT INTO `admins` (`admin_name`,`admin_email`,`admin_password`, `admin_type`) VALUES ('$admin_name','$admin_email','$admin_password',0)";
+        $sql = "INSERT INTO `admins` (`admin_name`,`admin_email`,`admin_password`, `admin_type`) VALUES ('$admin_name','$admin_email','$admin_password','$admin_type')";
         if (mysqli_query($conn, $sql)) {
           echo "New record created successfully";
         } else {
@@ -160,7 +162,7 @@ if (isset($_GET['do'])) {
 
 <!-- start form -->
 
-<div class="col-md-6 col-12">
+<div class="col-md-6 col-12 offset-3">
   
   <div class="card">
     <div class="card-header">
@@ -177,8 +179,7 @@ if (isset($_GET['do'])) {
               <div class="col-md-8">
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input name="admin_name" type="text" class="form-control col-9 mb-2" placeholder="Name" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-
+                    <input name="admin_name" type="text" class="form-control col-9 mb-2" placeholder="Name" value="<?php if ($do == "edit"){echo $row['admin_name']; }?>" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
                     <div class="form-control-icon col-3 ">
                       <i class="bi bi-person" style="position: absolute; top:-10px; left: -20px;"></i>
                     </div>
@@ -192,7 +193,7 @@ if (isset($_GET['do'])) {
               <div class="col-md-8">
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input name="admin_email" type="email" class="form-control col-9 mb-2" placeholder="Email" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                    <input name="admin_email" type="email" class="form-control col-9 mb-2" placeholder="Email" value="<?php if ($do == "edit"){echo $row['admin_email']; }?>"style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
                     
                     <div class="form-control-icon col-3">
                       <i class="bi bi-envelope" style="position: absolute; top:-10px; left: -20px;"></i>
@@ -208,8 +209,9 @@ if (isset($_GET['do'])) {
               <div class="col-md-8">
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input name="admin_password" type="password" class="form-control col-9 mb-2" placeholder="Password" style="border: 1px solid #dce7f1 !important;">
+                    <input name="admin_password" type="password" class="form-control col-9 mb-2" placeholder="Password" value="<?php if ($do == "edit"){echo $row['admin_password']; } 
                     
+                    ?>" style="border: 1px solid #dce7f1 !important;">
                     <div class="form-control-icon col-3">
                       <i class="bi bi-lock" style="position: absolute; top:-10px; left: -20px;"></i>
                     </div>
@@ -223,7 +225,7 @@ if (isset($_GET['do'])) {
               <div class="col-md-8">
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input name="admin_type" type="number" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" placeholder="Type">
+                    <input name="admin_type" type="number" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" placeholder="Type" value="<?php if ($do == "edit"){echo $row['admin_type']; }?>">
                     
                     <div class="form-control-icon col-3">
                       <i class="bi bi-phone" style="position: absolute; top:-10px; left: -20px;"></i>

@@ -1,7 +1,13 @@
 <?php
+<<<<<<< HEAD
 include "./admin/includes/connect.php";
 include "./admin/includes/functions.php";
+=======
+>>>>>>> d2cd811b355aca6b6fb43a7deecdfdbefe8511f5
 session_start();
+print_r($_SESSION);
+include "./admin/includes/connect.php";
+
 $sql = "SELECT * FROM categories";
 $result = mysqli_query($conn, $sql);
 $categories  = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -68,7 +74,7 @@ $product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<a href="profile.php" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
 

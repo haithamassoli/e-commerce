@@ -158,7 +158,7 @@ if (isset($_GET['do'])) {
     }
   }
 ?>
-  <div class="col-md-6 col-12">
+  <div class="col-md-6 col-12 offset-3">
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">Manage Users</h4>
