@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2021 at 09:12 PM
+-- Generation Time: Dec 04, 2021 at 11:05 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -109,10 +109,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `product_description`, `product_price`, `product_quantity`, `product_rate`, `product_main_image`, `product_desc_image_1`, `product_desc_image_2`, `product_desc_image_3`, `product_tag`, `product_categorie_id`, `product_nd_color_image`, `product_thd_color_image`, `product_fourth_color_image`) VALUES
-(45, 'sara', 'wwwwww', '3', 77, 0, '../admin/uploads/61abbd25a42aegallery-06.jpg', '../admin/uploads/61abbd25a42d8gallery-02.jpg', '../admin/uploads/61abbd25a42dfgallery-08.jpg', '../admin/uploads/61abbd25a42e3gallery-01.jpg', 'sssss', 2, NULL, NULL, NULL),
-(46, 'sara', 'wwwwww', '3', 66, 0, '../admin/uploads/61abbd5bb9401banner-05.jpg', '../admin/uploads/61abbd5bb9411product-02.jpg', '../admin/uploads/61abbd5bb9417gallery-07.jpg', '../admin/uploads/61abbd5bb941cgallery-05.jpg', 'style', 2, NULL, NULL, NULL),
-(47, 'adeeb', 'wwwwww', '22', 55, NULL, '../admin/uploads/61abbe307db44banner-06.jpg', '../admin/uploads/61abbe307db51banner-06.jpg', '../admin/uploads/61abbe307db56banner-06.jpg', '../admin/uploads/61abbe307db5bbanner-06.jpg', 'style', 2, NULL, NULL, NULL),
-(48, 'ttttttttt', 'rrrrrrrrrrggggggggg', '99', 300, 0, '../admin/uploads/61abc0a25866dgallery-07.jpg', '../admin/uploads/61abc0a25867egallery-06.jpg', '../admin/uploads/61abc0a258684blog-01.jpg', '../admin/uploads/61abc0a25868agallery-04.jpg', 'stylish', 3, NULL, NULL, NULL);
+(51, 'ffffffffffffff', 'ffffffff', '22', 444, NULL, 'uploads/61abdf2b6bbaebanner-04.jpg', 'uploads/61abdf2b6bbbabg-01.jpg', 'uploads/61abdf2b6bbbdbanner-05.jpg', 'uploads/61abdf2b6bbbfbanner-06.jpg', 'sfffffyyyyyyyyyyyyyy', 2, 'uploads/61abdf2b6bbc1banner-02.jpg', 'uploads/61abdf2b6bbc3about-02.jpg', 'uploads/61abdf2b6bbc5gallery-06.jpg');
 
 -- --------------------------------------------------------
 
@@ -203,7 +200,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `users`
