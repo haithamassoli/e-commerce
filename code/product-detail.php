@@ -1,14 +1,11 @@
 <?php
-<<<<<<< HEAD
-require('connect.php');
+require('admin/includes/connect.php');
 $sql = "SELECT * FROM products INNER JOIN categories ON categories.category_id = products.product_categorie_id";
 $result = mysqli_query($conn,$sql);
 $product  = mysqli_fetch_all($result,MYSQLI_ASSOC);
-=======
-include "./admin/includes/connect.php";
->>>>>>> a55173c98989c491ccf18b7aaa970cab8f7d2d1e
-?>
+include ("admin/includes/connect.php");
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -358,13 +355,9 @@ include "./admin/includes/connect.php";
 			</span>
 		</div>
 	</div>
-<<<<<<< HEAD
-		
+	
 	<?php foreach($product as $key => $row){?> 
-=======
 
-
->>>>>>> a55173c98989c491ccf18b7aaa970cab8f7d2d1e
 	<!-- Product Detail -->
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
@@ -376,31 +369,59 @@ include "./admin/includes/connect.php";
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 							<div class="slick3 gallery-lb">
-								<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+								<div class="item-slick3" data-thumb="<?php echo 'admin/'.$row["product_main_image"]; ?>">
 									<div class="wrap-pic-w pos-relative">
-										<img src="<?php echo $row["product_main_image"]; ?>" alt="IMG-PRODUCT">
+										<img src="<?php echo 'admin/'.$row["product_main_image"]; ?>" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?php echo 'admin/'.$row["product_main_image"]; ?>">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
 								</div>
 
-								<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
+								<div class="item-slick3" data-thumb="<?php echo 'admin/'.$row["product_desc_image_2"]; ?>">
 									<div class="wrap-pic-w pos-relative">
-										<img src="<?php echo $row["product_desc_image_2"]; ?>" alt="IMG-PRODUCT">
+										<img src="<?php echo 'admin/'.$row["product_desc_image_2"]; ?>" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?php echo 'admin/'.$row["product_desc_image_2"]; ?>">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
 								</div>
 
-								<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
+								<div class="item-slick3" data-thumb="<?php echo 'admin/'.$row["product_desc_image_3"]; ?>">
 									<div class="wrap-pic-w pos-relative">
-										<img src="<?php echo $row["product_desc_image_3"]; ?>" alt="IMG-PRODUCT">
+										<img src="<?php echo 'admin/'.$row["product_desc_image_3"]; ?>" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?php echo 'admin/'.$row["product_desc_image_3"]; ?>">
+											<i class="fa fa-expand"></i>
+										</a>
+									</div>
+								</div>
+
+								<div class="item-slick3" data-thumb="<?php echo 'admin/'.$row["product_nd_color_image"]; ?>">
+									<div class="wrap-pic-w pos-relative">
+										<img src="<?php echo 'admin/'.$row["product_nd_color_image"]; ?>" alt="IMG-PRODUCT">
+
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?php echo 'admin/'.$row["product_nd_color_image"]; ?>">
+											<i class="fa fa-expand"></i>
+										</a>
+									</div>
+								</div>
+								<div class="item-slick3" data-thumb="<?php echo 'admin/'.$row["product_thd_color_image"]; ?>">
+									<div class="wrap-pic-w pos-relative">
+										<img src="<?php echo 'admin/'.$row["product_thd_color_image"]; ?>" alt="IMG-PRODUCT">
+
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?php echo 'admin/'.$row["product_thd_color_image"]; ?>">
+											<i class="fa fa-expand"></i>
+										</a>
+									</div>
+								</div>
+								<div class="item-slick3" data-thumb="<?php echo 'admin/'.$row["product_fourth_color_image"]; ?>">
+									<div class="wrap-pic-w pos-relative">
+										<img src="<?php echo 'admin/'.$row["product_fourth_color_image"]; ?>" alt="IMG-PRODUCT">
+
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?php echo 'admin/'.$row["product_fourth_color_image"]; ?>">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
@@ -409,11 +430,7 @@ include "./admin/includes/connect.php";
 						</div>
 					</div>
 				</div>
-<<<<<<< HEAD
-				  	
-=======
 
->>>>>>> a55173c98989c491ccf18b7aaa970cab8f7d2d1e
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">

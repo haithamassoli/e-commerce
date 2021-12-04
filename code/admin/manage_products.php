@@ -17,7 +17,7 @@ function redirect($url)
 //header
 include "./includes/header.php";
  //connect
-include('../connect.php');
+include('includes/connect.php');
 //select product from database
 $sql = "SELECT * FROM products INNER JOIN categories ON categories.category_id = products.product_categorie_id";
 $result = mysqli_query($conn,$sql);
@@ -46,11 +46,15 @@ if (isset($_GET['do'])) {
   @$product_quantity = $_POST["product_quantity"];
   @$product_rate = $_POST["product_rate"];
   @$product_main_image = $_POST["product_main_image"];
-  @$product_desc_image_1 = $_POST["product_desc_image_1"];
-  @$product_desc_image_2 = $_POST["product_desc_image_2"];
-  @$product_desc_image_3 = $_POST["product_desc_image_3"];
   @$product_tag = $_POST["product_tag"];
   @$product_categorie_id = $_POST["categorieid"];
+  @$image = $_FILES["mainimage"];
+  @$image1 = $_FILES["image1"];
+  @$image2 = $_FILES["image2"];
+  @$image3 = $_FILES["image3"];
+  @$image4 = $_FILES["image4"];
+  @$image5 = $_FILES["image5"];
+  @$image6 = $_FILES["image6"];
 
   $check = 1;
   if ($do == "edit") {
@@ -60,10 +64,6 @@ if (isset($_GET['do'])) {
       $row = mysqli_fetch_array($edit, MYSQLI_ASSOC);
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $check = 1;
-          $image = $_FILES["mainimage"];
-          $image1 = $_FILES["image1"];
-          $image2 = $_FILES["image2"];
-          $image3 = $_FILES["image3"];
           // Check file size
           if ($image["size"] > 500000 || $image["size"] == 0) {
               $imageError = "Sorry, your file is too large.";
@@ -81,6 +81,18 @@ if (isset($_GET['do'])) {
         $imageError = "Sorry, your file is too large.";
         $check      = 0;
     }
+      if ($image4["size"] > 500000 || $image4["size"] == 0) {
+        $imageError = "Sorry, your file is too large.";
+        $check      = 0;
+    }
+      if ($image5["size"] > 500000 || $image5["size"] == 0) {
+        $imageError = "Sorry, your file is too large.";
+        $check      = 0;
+    }
+      if ($image6["size"] > 500000 || $image6["size"] == 0) {
+        $imageError = "Sorry, your file is too large.";
+        $check      = 0;
+    }
        // Check if image file is a actual image or fake image
           // $check_if_image = getimagesize($image["tmp_name"]);
           // if ($check_if_image == false) {
@@ -88,19 +100,26 @@ if (isset($_GET['do'])) {
           //     $check = 0;
           // }
           if ($check == 1) {
-              $image_folder = "../admin/uploads/";
+              $image_folder = "admin/uploads/";
               $target_file  = $image_folder . uniqid() . basename($image["name"]);
               $target_file1 = $image_folder . uniqid() . basename($image1["name"]);
               $target_file2 = $image_folder . uniqid() . basename($image2["name"]);
               $target_file3 = $image_folder . uniqid() . basename($image3["name"]);
+              $target_file4 = $image_folder . uniqid() . basename($image4["name"]);
+              $target_file5 = $image_folder . uniqid() . basename($image5["name"]);
+              $target_file6 = $image_folder . uniqid() . basename($image6["name"]);
               move_uploaded_file($image["tmp_name"], $target_file);
               move_uploaded_file($image1["tmp_name"], $target_file1);
               move_uploaded_file($image2["tmp_name"], $target_file2);
               move_uploaded_file($image3["tmp_name"], $target_file3);
+              move_uploaded_file($image4["tmp_name"], $target_file4);
+              move_uploaded_file($image5["tmp_name"], $target_file5);
+              move_uploaded_file($image6["tmp_name"], $target_file6);
               $sql2 = "UPDATE products SET product_name = '$product_name', product_description='$product_description',
                       product_price ='$product_price', product_quantity='$product_quantity',product_rate='$product_rate',
                       product_main_image= '$target_file', product_desc_image_1 ='$target_file1', product_desc_image_2='$target_file2',
-                      product_desc_image_3='$target_file3', product_tag= '$product_tag'
+                      product_desc_image_3='$target_file3', product_tag= '$product_tag',`product_nd_color_image`= '$target_file4' ,
+                      `product_thd_color_image`='$target_file5',`product_fourth_color_image`='$target_file6'
                       WHERE product_id = '$id'";
               if ($conn->query($sql2) === TRUE) {
                   echo "New record created successfully";
@@ -116,10 +135,6 @@ if (isset($_GET['do'])) {
   else if ($do == "add") {
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $check = 1;
-          $image = $_FILES["mainimage"];
-          $image1 = $_FILES["image1"];
-          $image2 = $_FILES["image2"];
-          $image3 = $_FILES["image3"];
           // Check file size
           if ($image["size"] > 500000 || $image["size"] == 0) {
             $imageError = "Sorry, your file is too large.";
@@ -144,20 +159,27 @@ if (isset($_GET['do'])) {
           //     $check = 0;
           // }
           if ($check == 1) {
-            $image_folder = "../admin/uploads/";
+            $image_folder = "uploads/";
             $target_file  = $image_folder . uniqid() . basename($image["name"]);
-            $target_file1 = $image_folder . uniqid() . basename($image1["name"]);
-            $target_file2 = $image_folder . uniqid() . basename($image2["name"]);
-            $target_file3 = $image_folder . uniqid() . basename($image3["name"]);
-            move_uploaded_file($image["tmp_name"], $target_file);
-            move_uploaded_file($image1["tmp_name"], $target_file1);
-            move_uploaded_file($image2["tmp_name"], $target_file2);
-            move_uploaded_file($image3["tmp_name"], $target_file3);
+              $target_file1 = $image_folder . uniqid() . basename($image1["name"]);
+              $target_file2 = $image_folder . uniqid() . basename($image2["name"]);
+              $target_file3 = $image_folder . uniqid() . basename($image3["name"]);
+              $target_file4 = $image_folder . uniqid() . basename($image4["name"]);
+              $target_file5 = $image_folder . uniqid() . basename($image5["name"]);
+              $target_file6 = $image_folder . uniqid() . basename($image6["name"]);
+              move_uploaded_file($image["tmp_name"], $target_file);
+              move_uploaded_file($image1["tmp_name"], $target_file1);
+              move_uploaded_file($image2["tmp_name"], $target_file2);
+              move_uploaded_file($image3["tmp_name"], $target_file3);
+              move_uploaded_file($image4["tmp_name"], $target_file4);
+              move_uploaded_file($image5["tmp_name"], $target_file5);
+              move_uploaded_file($image6["tmp_name"], $target_file6);
              $sql = "INSERT INTO `products` (`product_name`, `product_description`, `product_price`, `product_quantity`, 
             `product_main_image`, `product_desc_image_1`, `product_desc_image_2`, `product_desc_image_3`,
-            `product_tag`, `product_categorie_id`) VALUES ('$product_name', '$product_description', $product_price,
-             $product_quantity, '$target_file', '$target_file1', '$target_file2', '$target_file3', 
-             '$product_tag', 	$product_categorie_id)";            
+            `product_tag`, `product_categorie_id`, `product_nd_color_image`, `product_thd_color_image`, `product_fourth_color_image`)
+             VALUES ('$product_name','$product_description',$product_price,
+             $product_quantity,'$target_file','$target_file1','$target_file2','$target_file3', 
+             '$product_tag',$product_categorie_id,'$target_file4','$target_file5','$target_file6')";            
              if (mysqli_query($conn, $sql)) {
               echo "New record created successfully";
           } else {
@@ -271,6 +293,39 @@ if (isset($_GET['do'])) {
                 </div>
               </div>
               <div class="col-md-4">
+                <label> product image color option 1</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative row justify-content-center align-items-center d-flex">
+                  <input name="image4" class="mt-2 p-2" type="file" />
+                    <div class="form-control-icon col-3 "></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label> product image color option 2</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative row justify-content-center align-items-center d-flex">
+                  <input name="image5" class="mt-2 p-2" type="file" />
+                    <div class="form-control-icon col-3 "></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label> product image color option 3</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative row justify-content-center align-items-center d-flex">
+                  <input name="image6" class="mt-2 p-2" type="file" />
+                    <div class="form-control-icon col-3 "></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
                 <label>product_tag</label>
               </div>
               <div class="col-md-8">
@@ -338,6 +393,9 @@ if (!isset($_GET['do'])) {
             <th>image_1</th>
             <th>image_2</th>
             <th>image_3</th>
+            <th>color image1</th>
+            <th>color image2</th>
+            <th>color image3</th>
             <th>tag</th>
             <th>categorie_id</th>
             <th> </th> 
@@ -370,6 +428,9 @@ if (!isset($_GET['do'])) {
             <td><img src="<?php echo isset($row['product_desc_image_1']) ? $row['product_desc_image_1'] : ''; ?>" alt="ff" style='width:50px; height:50px;'></td>
             <td><img src="<?php echo isset($row['product_desc_image_2']) ? $row['product_desc_image_2'] : ''; ?>" alt="ff" style='width:50px; height:50px;'></td>
             <td><img src="<?php echo isset($row['product_desc_image_3']) ? $row['product_desc_image_3'] : ''; ?>" alt="ff" style='width:50px; height:50px;'></td>
+            <td><img src="<?php echo isset($row['product_nd_color_image']) ? $row['product_nd_color_image'] : ''; ?>" alt="ff" style='width:50px; height:50px;'></td>
+            <td><img src="<?php echo isset($row['product_thd_color_image']) ? $row['product_thd_color_image'] : ''; ?>" alt="ff" style='width:50px; height:50px;'></td>
+            <td><img src="<?php echo isset($row['product_fourth_color_image']) ? $row['product_fourth_color_image'] : ''; ?>" alt="ff" style='width:50px; height:50px;'></td>
             <td><?php echo isset($row['product_tag']) ? $row['product_tag'] : ''; ?></td>
             <td><?php echo isset($row['product_categorie_id']) ? $row['product_categorie_id'] : ''; ?></td>
             <td>
