@@ -1,11 +1,7 @@
 <?php
-<<<<<<< HEAD
 include "./admin/includes/connect.php";
 include "./admin/includes/functions.php";
-=======
->>>>>>> d2cd811b355aca6b6fb43a7deecdfdbefe8511f5
 session_start();
-print_r($_SESSION);
 include "./admin/includes/connect.php";
 
 $sql = "SELECT * FROM categories";
@@ -1185,29 +1181,18 @@ $product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 		print_r($result);
 		$products  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 		if ($result->num_rows > 0) {
-			// print_r($result);
-
-			// redirect("shop.php");
 			foreach ($products as $product) {
 				$product_id = $product['product_id'];
-				// $product_search_name = $product["product_name"];
 				$sql = "SELECT * FROM products WHERE product_id=$product_id";
 				$result = mysqli_query($conn, $sql);
 				$product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 				foreach ($product as $array) {
 					array_push($search_array, $array["product_id"]);
 				}
-				// echo "ahmad";
 			}
 			$_SESSION["search"] = $search_array;
 		}
 		redirect("search.php");
 	}
 }
-
-// echo "<select>";
-// foreach($products as $key=>$value){
-// 	echo "<option>".$;
-// }
-// echo "</select>";
 ?>
