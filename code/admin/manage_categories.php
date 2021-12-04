@@ -68,7 +68,7 @@ if (isset($_GET["do"])) {
   <div class="col-md-5 offset-3 col-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title">Horizontal Form with Icons</h4>
+        <h4 class="card-title">Manage Category</h4>
       </div>
       <div class="card-content">
         <div class="card-body">

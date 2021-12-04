@@ -1,10 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "e_commerce");
-if ($conn) {
-    echo "connected";
-} else {
-    echo "failed";
-}
+include "./admin/includes/connect.php";
 ?>
 <?php
 function redirect($url)
