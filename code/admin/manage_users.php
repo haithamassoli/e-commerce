@@ -242,7 +242,6 @@ if (isset($_GET['do'])) {
 
 
                       <div class="form-control-icon col-3">
-                        <i class="bi bi-lock" style="position: absolute; top:-10px; left: -20px;"></i>
                       </div>
                       <div style="color:red"><?php echo @$genderError;  ?></div>
                     </div>
