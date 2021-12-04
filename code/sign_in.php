@@ -1,6 +1,7 @@
 <?php
 include "./admin/includes/connect.php";
-
+session_start();
+//$_SESSION["type"] 0 => user, 1 => admin, 2 => super admin
 function redirect($url)
 {
     if (!headers_sent()) {
@@ -44,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $users  = mysqli_fetch_all($result, MYSQLI_ASSOC);
             foreach ($users as $user) {
                 if ($email == $user["user_email"] && $password == $user["user_password"]) {
-                    $_SESSION["user"] = $email;
+                    $_SESSION["type"] = 0;
                     redirect("index.php");
                 } else {
                     $error = "your email or password is wrong";
@@ -64,10 +65,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $admins  = mysqli_fetch_all($result, MYSQLI_ASSOC);
             foreach ($admins as $admin) {
                 if ($email == $admin["admin_email"] && $password == $admin["admin_password"] && $admin["admin_type"] == 1) {
-                    $_SESSION["super_admin"] = $email;
+                    $_SESSION["type"] = 2;
                     redirect("index.php");
                 } elseif ($email == $admin["admin_email"] && $password == $admin["admin_password"] && $admin["admin_type"] == 0) {
-                    $_SESSION["admin"] = $email;
+                    $_SESSION["type"] = 1;
                     redirect("index.php");
                 } else {
                     $error = "your email or password is wrong";

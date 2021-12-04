@@ -1,6 +1,7 @@
 <?php
 
 include "./admin/includes/connect.php";
+session_start();
 $sql = "SELECT * FROM categories";
 $result = mysqli_query($conn, $sql);
 $categories  = mysqli_fetch_all($result, MYSQLI_ASSOC);
