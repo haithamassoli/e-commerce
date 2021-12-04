@@ -18,7 +18,7 @@ function redirect($url)
 }
 
 // end function 
-$conn = new mysqli('localhost', 'root', '','e_commerce2');
+$conn = new mysqli('localhost', 'root', '','e_commerce');
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
@@ -228,7 +228,14 @@ if (isset($_GET['do'])) {
               <div class="col-md-8">
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input type="text" name="user_gender" class="form-control col-9 mb-2" placeholder="Gender" style="border: 1px solid #dce7f1 !important;">
+                    <!-- <input type="text" name="user_gender" class="form-control col-9 mb-2" placeholder="Gender" style="border: 1px solid #dce7f1 !important;"> -->
+
+                       <select name="user_gender" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;">
+                      <option >Male</option>
+                      <option>Female </option>
+                      </select>
+
+
                     <div class="form-control-icon col-3">
                     </div>
                     <div style="color:red"><?php echo @$genderError ;  ?></div>
