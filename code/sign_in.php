@@ -1,10 +1,7 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "e_commerce");
-if ($conn) {
-    echo "connected";
-} else {
-    echo "failed";
-}
+include "./admin/includes/connect.php";
+session_start();
+//$_SESSION["type"] 0 => user, 1 => admin, 2 => super admin
 function redirect($url)
 {
     if (!headers_sent()) {
@@ -48,7 +45,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $users  = mysqli_fetch_all($result, MYSQLI_ASSOC);
             foreach ($users as $user) {
                 if ($email == $user["user_email"] && $password == $user["user_password"]) {
-                    redirect("welcome.php");
+                    $_SESSION["type"] = 0;
+                    $_SESSION["user_id"]=$user['user_id'];
+                    redirect("index.php");
+                } else {
+                    $error = "your email or password is wrong";
+                }
+            }
+        } else {
+            $error = "your email isnt exist please register";
+        }
+    }
+    if ($check == 1) {
+        $check_exist = "SELECT * FROM admins WHERE admin_email = '$email'";
+        $result = mysqli_query($conn, $check_exist);
+        $data = mysqli_fetch_array($result, MYSQLI_NUM);
+        if ($check_exist) {
+            $sql = "SELECT * FROM admins WHERE admin_email = '$email'";
+            $result = mysqli_query($conn, $sql);
+            $admins  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            foreach ($admins as $admin) {
+                if ($email == $admin["admin_email"] && $password == $admin["admin_password"] && $admin["admin_type"] == 1) {
+                    $_SESSION["type"] = 2;
+                    redirect("index.php");
+                } elseif ($email == $admin["admin_email"] && $password == $admin["admin_password"] && $admin["admin_type"] == 0) {
+                    $_SESSION["type"] = 1;
+                    redirect("index.php");
                 } else {
                     $error = "your email or password is wrong";
                 }
@@ -106,6 +128,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <script src="js/signing.js"></script>
 </body>
-<!-- This templates was made by Colorlib (https://colorlib.com) -->
 
 </html>
