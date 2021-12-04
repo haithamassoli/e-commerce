@@ -1,4 +1,6 @@
-<?php include "./includes/header.php"; ?>
+<?php include "./includes/header.php";
+ include "./includes/connect.php";
+?>
 
 <?php
 function redirect($url)
@@ -18,11 +20,12 @@ function redirect($url)
 }
 
 // end function 
-$conn = new mysqli('localhost', 'root', '', 'e_commerce');
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+
+// $conn = new mysqli('localhost', 'root', '', 'e_commerce');
+
+// if ($conn->connect_error) {
+//   die("Connection failed: " . $conn->connect_error);
+// }
 // echo "Connected successfully";
 $sql = "SELECT * FROM users ";
 $result = mysqli_query($conn, $sql);
@@ -158,7 +161,7 @@ if (isset($_GET['do'])) {
     }
   }
 ?>
-  <div class="col-md-6 col-12">
+  <div class="col-md-6 col-12 offset-3">
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">Manage Users</h4>
@@ -222,19 +225,31 @@ if (isset($_GET['do'])) {
                     </div>
                   </div>
                 </div>
+
+
                 <div class="col-md-4">
                   <label>Gender</label>
                 </div>
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="text" name="user_gender" class="form-control col-9 mb-2" placeholder="Gender" style="border: 1px solid #dce7f1 !important;">
+                      <!-- <input type="password" name="user_password" class="form-control col-9 mb-2" placeholder="Password" style="border: 1px solid #dce7f1 !important;"> -->
+
+                      <select name="user_gender" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;">
+                      <option >Male</option>
+                      <option>Female </option>
+                      </select>
+
+
                       <div class="form-control-icon col-3">
                       </div>
                       <div style="color:red"><?php echo @$genderError;  ?></div>
                     </div>
                   </div>
                 </div>
+
+
+
                 <div class="form-group col-md-8 offset-md-4">
                   <div class='form-check'>
                     <div class="checkbox">
