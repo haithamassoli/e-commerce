@@ -1,6 +1,6 @@
 <?php
-
 include "./admin/includes/connect.php";
+include "./admin/includes/functions.php";
 session_start();
 $sql = "SELECT * FROM categories";
 $result = mysqli_query($conn, $sql);
@@ -9,8 +9,8 @@ $categories  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $sql1 = "SELECT * FROM products";
 $result = mysqli_query($conn, $sql1);
 $product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -246,11 +246,11 @@ $product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 					<img src="images/icons/icon-close2.png" alt="CLOSE">
 				</button>
 
-				<form class="wrap-search-header flex-w p-l-15">
+				<form class="wrap-search-header flex-w p-l-15" method="post">
 					<button class="flex-c-m trans-04">
 						<i class="zmdi zmdi-search"></i>
 					</button>
-					<input class="plh3" type="text" name="search" placeholder="Search...">
+					<input class="plh3" type="search" name="search" placeholder="Search...">
 				</form>
 			</div>
 		</div>
@@ -1168,3 +1168,40 @@ $product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 </body>
 
 </html>
+<?php if (isset($_POST["search"])) {
+	if (!empty($_POST["search"])) {
+		$search_array = array();
+		$search = $_POST["search"];
+		$sql1 = "SELECT  product_id
+							FROM products
+							WHERE product_name  LIKE '%{$search}%'";
+		$result = mysqli_query($conn, $sql1);
+		print_r($result);
+		$products  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		if ($result->num_rows > 0) {
+			// print_r($result);
+
+			// redirect("shop.php");
+			foreach ($products as $product) {
+				$product_id = $product['product_id'];
+				// $product_search_name = $product["product_name"];
+				$sql = "SELECT * FROM products WHERE product_id=$product_id";
+				$result = mysqli_query($conn, $sql);
+				$product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+				foreach ($product as $array) {
+					array_push($search_array, $array["product_id"]);
+				}
+				// echo "ahmad";
+			}
+			$_SESSION["search"] = $search_array;
+		}
+		redirect("search.php");
+	}
+}
+
+// echo "<select>";
+// foreach($products as $key=>$value){
+// 	echo "<option>".$;
+// }
+// echo "</select>";
+?>
