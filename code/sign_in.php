@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             foreach ($users as $user) {
                 if ($email == $user["user_email"] && $password == $user["user_password"]) {
                     $_SESSION["type"] = 0;
+                    $_SESSION["user_id"]=$user['user_id'];
                     redirect("index.php");
                 } else {
                     $error = "your email or password is wrong";

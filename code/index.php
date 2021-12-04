@@ -1,7 +1,8 @@
 <?php
-
-include "./admin/includes/connect.php";
 session_start();
+print_r($_SESSION);
+include "./admin/includes/connect.php";
+
 $sql = "SELECT * FROM categories";
 $result = mysqli_query($conn, $sql);
 $categories  = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -68,7 +69,7 @@ $product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<a href="profile.php" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
 
