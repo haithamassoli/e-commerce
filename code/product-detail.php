@@ -72,14 +72,18 @@ if (isset($_POST["add_to_cart"])) {
 		} else {
 			$item_array = array(
 				'product_id' => $_POST['add_to_cart_id'],
-				'quantity' => 1
+				'quantity' => 1,
+				'product_name' => $_POST['product_name'],
+				'product_image' => $_POST['product_image']
 			);
 			$_SESSION["cart"][$_POST['add_to_cart_id']] = $item_array;
 		}
 	} else {
 		$item_array = array(
 			'product_id' => $_POST['add_to_cart_id'],
-			'quantity' => 1
+			'quantity' => 1,
+			'product_name' => $_POST['product_name'],
+			'product_image' => $_POST['product_image']
 		);
 		$_SESSION["cart"][$_POST['add_to_cart_id']] = $item_array;
 	}
@@ -248,8 +252,12 @@ if (isset($_POST["add_to_cart"])) {
 										</div>
 									</div>
 									<form method="POST">
+										<?php
+										?>
 										<a href="product-detail.php?id=<?php echo $row["product_id"];  ?>">
 											<input type="hidden" name="add_to_cart_id" value="<?php echo $_GET['id']; ?>">
+											<input type="hidden" name="product_name" value="<?php echo $product[0]['product_name']; ?>">
+											<input type="hidden" name="product_image" value="<?php echo $product[0]['product_main_image']; ?>">
 											<button type="submit" name="add_to_cart" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 												Add to cart
 											</button>

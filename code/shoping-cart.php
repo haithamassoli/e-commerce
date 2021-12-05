@@ -1,6 +1,10 @@
 <?php
 session_start();
 include "./includes/header.php";
+echo "<pre>";
+print_r($_SESSION['cart'][11]);
+echo "</pre>";
+// $sql = "SELECT * FROM products WHERE product_id = {$_SESSION['cart']} "
 ?>
 <!-- breadcrumb -->
 <div class="container mt-5">
