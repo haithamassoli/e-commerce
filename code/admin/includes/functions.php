@@ -14,3 +14,12 @@ function redirect($url)
         exit;
     }
 }
+
+function getAllFrom($field, $table, $where = NULL, $and = NULL, $orderfield, $ordering = "DESC")
+{
+    global $conn;
+    $getAll = ("SELECT $field FROM $table $where $and ORDER BY $orderfield $ordering");
+    $result = mysqli_query($conn, $getAll);
+    $all = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $all;
+}
