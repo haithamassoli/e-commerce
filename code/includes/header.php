@@ -221,24 +221,26 @@ $total = 0;
 
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
-					<?php foreach ($_SESSION['cart'] as $key => $value) { ?>
-						<li class="header-cart-item flex-w flex-t m-b-12">
-							<div class="header-cart-item-img">
-								<img src="<?php echo $value['product_image']; ?>" alt="IMG">
-							</div>
+					<?php if (isset($_SESSION['cart'])) {
+						foreach ($_SESSION['cart'] as $key => $value) { ?>
+							<li class="header-cart-item flex-w flex-t m-b-12">
+								<div class="header-cart-item-img">
+									<img src="<?php echo $value['product_image']; ?>" alt="IMG">
+								</div>
 
-							<div class="header-cart-item-txt p-t-8">
-								<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-									<?php echo $value['product_name'] . " " . $value['color'] . " " . $value['size']; ?>
-								</a>
+								<div class="header-cart-item-txt p-t-8">
+									<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+										<?php echo $value['product_name'] . " " . $value['color'] . " " . $value['size']; ?>
+									</a>
 
-								<span class="header-cart-item-info">
-									<?php echo $value['quantity'] . " x $" . $value['product_price'];
-									$total += $value['product_price'] * $value['quantity']; ?>
-								</span>
-							</div>
-						</li>
-					<?php } ?>
+									<span class="header-cart-item-info">
+										<?php echo $value['quantity'] . " x $" . $value['product_price'];
+										$total += $value['product_price'] * $value['quantity']; ?>
+									</span>
+								</div>
+							</li>
+					<?php }
+					} ?>
 				</ul>
 
 				<div class="w-full">
