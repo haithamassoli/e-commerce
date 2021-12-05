@@ -24,9 +24,15 @@ e-commerce.
 3. Visual Studio Code.
 4. Git & Github.
 5. XMAPP
+6. Zoom
 
 ## Installation
-An updated version of any Browser connected to an internet connection only needs to open this project.
+Download Xampp on your computer to view this project.
+
+## References
+1- PHP Documentation : www.php.net/docs.php
+2- W3Schools PHP Tutorial : www.w3schools.com/php
+3- Udemy PHP online course.
 
 ## Wireframe
 
