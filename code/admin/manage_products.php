@@ -16,8 +16,6 @@ function redirect($url)
 }
 //header
 include "./includes/header.php";
-//connect
-include('includes/connect.php');
 //select product from database
 $sql = "SELECT * FROM products INNER JOIN categories ON categories.category_id = products.product_categorie_id";
 $result = mysqli_query($conn, $sql);

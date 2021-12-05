@@ -1,3 +1,7 @@
+<?php
+require("includes/connect.php");
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,12 +48,16 @@
             <li>
               <a class="active" href="./index.php"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
             </li>
-            <li>
-              <a href="manage_admins.php"><span class="icon document" aria-hidden="true"></span>Admin</a>
-            </li>
-            <li>
-              <a href="manage_users.php"><span class="icon document" aria-hidden="true"></span>Users</a>
-            </li>
+            <?php
+            if ($_SESSION["type"] == 2) {
+              echo '<li>
+                                <a href="manage_admins.php"><span class="icon document" aria-hidden="true"></span>Admin</a>
+                              </li>
+                              <li>
+                                <a href="manage_users.php"><span class="icon document" aria-hidden="true"></span>Users</a>
+                              </li>';
+            }
+            ?>
             </li>
             <li>
             <li>
@@ -63,66 +71,42 @@
             <li>
               <a href="manage_comments.php"><span class="icon paper" aria-hidden="true"></span>Comments</a>
             </li>
+            <li>
+              <a href="../index.php"><span class="icon paper" aria-hidden="true"></span>webisite</a>
+            </li>
             </li>
           </ul>
-          <span class="system-menu__title">system</span>
-          <ul class="sidebar-body-menu">
-            <li>
-              <a href="appearance.html"><span class="icon edit" aria-hidden="true"></span>Appearance</a>
-            </li>
-            <li>
-              <a class="show-cat-btn" href="##">
-                <span class="icon category" aria-hidden="true"></span>Extentions
-                <span class="category__btn transparent-btn" title="Open list">
-                  <span class="sr-only">Open list</span>
-                  <span class="icon arrow-down" aria-hidden="true"></span>
-                </span>
-              </a>
-              <ul class="cat-sub-menu">
-                <li>
-                  <a href="extention-01.html">Extentions-01</a>
-                </li>
-                <li>
-                  <a href="extention-02.html">Extentions-02</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a class="show-cat-btn" href="##">
-                <span class="icon user-3" aria-hidden="true"></span>Users
-                <span class="category__btn transparent-btn" title="Open list">
-                  <span class="sr-only">Open list</span>
-                  <span class="icon arrow-down" aria-hidden="true"></span>
-                </span>
-              </a>
-              <ul class="cat-sub-menu">
-                <li>
-                  <a href="users-01.html">Users-01</a>
-                </li>
-                <li>
-                  <a href="users-02.html">Users-02</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="##"><span class="icon setting" aria-hidden="true"></span>Settings</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="sidebar-footer">
-        <a href="##" class="sidebar-user">
-          <span class="sidebar-user-img">
-            <picture>
-              <source srcset="./img/avatar/avatar-illustrated-01.webp" type="image/webp"><img src="./img/avatar/avatar-illustrated-01.png" alt="User name">
-            </picture>
-          </span>
-          <div class="sidebar-user-info">
-            <span class="sidebar-user__title">Nafisa Sh.</span>
-            <span class="sidebar-user__subtitle">Support manager</span>
-          </div>
-        </a>
-      </div>
+          <?php
+          if ($_SESSION["type"] == 2)
+            echo '<div class="sidebar-footer" style="margin-top: 265px;">
+            <a href="##" class="sidebar-user">
+              <span class="sidebar-user-img">
+                <picture>
+                  <source srcset="./img/avatar/avatar-illustrated-01.webp" type="image/webp"><img src="./img/avatar/avatar-illustrated-01.png" alt="User name">
+                </picture>
+              </span>
+              <div class="sidebar-user-info">
+                <span class="sidebar-user__title">Nafisa Sh.</span>
+                <span class="sidebar-user__subtitle">Support manager</span>
+              </div>
+            </a>
+          </div>';
+          else {
+            echo '<div class="sidebar-footer" style="margin-top: 370px;">
+            <a href="##" class="sidebar-user">
+              <span class="sidebar-user-img">
+                <picture>
+                  <source srcset="./img/avatar/avatar-illustrated-01.webp" type="image/webp"><img src="./img/avatar/avatar-illustrated-01.png" alt="User name">
+                </picture>
+              </span>
+              <div class="sidebar-user-info">
+                <span class="sidebar-user__title">Nafisa Sh.</span>
+                <span class="sidebar-user__subtitle">Support manager</span>
+              </div>
+            </a>
+          </div>';
+          }
+          ?>
     </aside>
     <div class="main-wrapper">
       <!-- ! Main nav -->

@@ -1,7 +1,6 @@
 <?php
 ob_start();
 include "./includes/header.php";
-require "./includes/connect.php";
 // select all comments
 $sql = "SELECT * FROM categories";
 $result = mysqli_query($conn, $sql);
