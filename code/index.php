@@ -291,5 +291,5 @@ $cat  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 
 
-<?php //include("includes/footer.php");
+<?php include("includes/footer.php");
 ?>
