@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     redirect("index.php");
                 } elseif ($email == $admin["admin_email"] && $password == $admin["admin_password"] && $admin["admin_type"] == 0) {
                     $_SESSION["type"] = 1;
-                    $_SESSION["admin_id"] = $user['user_id'];
+                    $_SESSION["admin_id"] = $user['admin_id'];
                     redirect("index.php");
                 } else {
                     $error = "your email or password is wrong";
