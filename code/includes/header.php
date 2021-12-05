@@ -44,7 +44,7 @@ $total = 0;
 
 <body class="animsition">
 	<!-- Header -->
-	<header>
+	<header class="header-v2">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<div class="wrap-menu-desktop">
