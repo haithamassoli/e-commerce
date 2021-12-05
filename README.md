@@ -30,8 +30,8 @@ This Project is an E_commerce website that sells clothes and accessories for wom
 Download Xampp on your computer to view this project.
 
 ## References
-1- PHP Documentation: www.php.net/docs.php
-2- W3Schools PHP Tutorial: www.w3schools.com/php
+1- PHP Documentation: www.php.net/docs.php.
+2- W3Schools PHP Tutorial: www.w3schools.com/php.
 3- Udemy PHP online course.
 
 ## Wireframe
