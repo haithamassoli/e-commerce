@@ -75,21 +75,21 @@
 					<div class="wrap-icon-header flex-w flex-r-m">
 						<?php if (!isset($_SESSION['type'])) { ?>
 							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								LOGIN
+								<a href="sign_in.php">LOGIN</a>
 							</div>
 						<?php } elseif ($_SESSION['type'] == 0) { ?>
 							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								Profile
+								<a href="profile.php">Profile</a>
 							</div>
 							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								Logout
+								<a href="logout.php">Logout</a>
 							</div>
 						<?php } elseif ($_SESSION['type'] == 0 || $_SESSION['type'] == 2) { ?>
 							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								DashBoard
+								<a href="admin/index.php">DashBoard</a>
 							</div>
 							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								Logout
+								<a href="logout.php">Logout</a>
 							</div>
 						<?php } ?>
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
