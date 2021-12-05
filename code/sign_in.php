@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             foreach ($users as $user) {
                 if ($email == $user["user_email"] && $password == $user["user_password"]) {
                     $_SESSION["type"] = 0;
-                    $_SESSION["user_id"]=$user['user_id'];
+                    $_SESSION["user_id"] = $user['user_id'];
                     redirect("index.php");
                 } else {
                     $error = "your email or password is wrong";
@@ -67,9 +67,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             foreach ($admins as $admin) {
                 if ($email == $admin["admin_email"] && $password == $admin["admin_password"] && $admin["admin_type"] == 1) {
                     $_SESSION["type"] = 2;
+                    $_SESSION["super_admin_id"] = $user['admin_id'];
                     redirect("index.php");
                 } elseif ($email == $admin["admin_email"] && $password == $admin["admin_password"] && $admin["admin_type"] == 0) {
                     $_SESSION["type"] = 1;
+                    $_SESSION["admin_id"] = $user['user_id'];
                     redirect("index.php");
                 } else {
                     $error = "your email or password is wrong";
