@@ -1,9 +1,68 @@
 <?php
+session_start();
+function redirect($url)
+{
+    if (!headers_sent()) {
+        header('Location: ' . $url);
+        exit;
+    } else {
+        echo '<script type="text/javascript">';
+        echo 'window.location.href="' . $url . '";';
+        echo '</script>';
+        echo '<noscript>';
+        echo '<meta http-equiv="refresh" content="0;url=' . $url . '" />';
+        echo '</noscript>';
+        exit;
+    }
+}
 require('admin/includes/connect.php');
-$sql = "SELECT * FROM products INNER JOIN categories ON categories.category_id = products.product_categorie_id";
+//select products
+$sql = "SELECT * FROM products";
 $result = mysqli_query($conn,$sql);
 $product  = mysqli_fetch_all($result,MYSQLI_ASSOC);
-include ("admin/includes/connect.php");
+//select comments
+$sql = "SELECT * FROM comments INNER JOIN users ON comments.comment_user_id = users.user_id";
+$result = mysqli_query($conn,$sql);
+$comments  = mysqli_fetch_all($result,MYSQLI_ASSOC);
+
+@$comment_product_id  = $_GET["id"];
+@$user_id = $_SESSION["user_id"];
+@$comment = $_POST["review"];
+@$rating = $_POST["rating"];
+
+// @$product_rate = $_POST["product_rate"];
+@$image = $_FILES["image"];
+//review
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	$check = 1;
+	// Check file size
+	if ($image["size"] > 500000 || $image["size"] == 0) {
+	  $imageError = "Sorry, your file is too large.";
+	  $check      = 0;
+	  }
+	// Check if image file is a actual image or fake image
+	$check_if_image = getimagesize($image["tmp_name"]);
+	if ($check_if_image == false) {
+	    $imageError = "File is not an image.";
+	    $check = 0;
+	}
+	if ($check == 1) {
+		$image_folder = "uploads/";
+		$target_file  = $image_folder . uniqid() . basename($image["name"]);
+		move_uploaded_file($image["tmp_name"], $target_file);
+		$sql = "INSERT INTO `comments` (`comment`, `comment_image`, 
+		`comment_product_id`,`comment_user_id`,`comment_rate`)
+		VALUES ('$comment','$target_file',$comment_product_id,$user_id,$rating)";            
+		if (mysqli_query($conn, $sql)) {
+			echo "New record created successfully";
+		} else {
+			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		}
+			$conn->close();
+			// redirect("product-detail.php");
+	}
+		
+}
 
 ?>
 <!DOCTYPE html>
@@ -542,10 +601,6 @@ include ("admin/includes/connect.php");
 						</li>
 
 						<li class="nav-item p-b-10">
-							<a class="nav-link" data-toggle="tab" href="#information" role="tab">Additional information</a>
-						</li>
-
-						<li class="nav-item p-b-10">
 							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
 						</li>
 					</ul>
@@ -560,82 +615,24 @@ include ("admin/includes/connect.php");
 							</div>
 						</div>
 
-						<!-- - -->
-						<div class="tab-pane fade" id="information" role="tabpanel">
-							<div class="row">
-								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
-									<ul class="p-lr-28 p-lr-15-sm">
-										<li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Weight
-											</span>
-
-											<span class="stext-102 cl6 size-206">
-												0.79 kg
-											</span>
-										</li>
-
-										<li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Dimensions
-											</span>
-
-											<span class="stext-102 cl6 size-206">
-												110 x 33 x 100 cm
-											</span>
-										</li>
-
-										<li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Materials
-											</span>
-
-											<span class="stext-102 cl6 size-206">
-												60% cotton
-											</span>
-										</li>
-
-										<li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Color
-											</span>
-
-											<span class="stext-102 cl6 size-206">
-												Black, Blue, Grey, Green, Red, White
-											</span>
-										</li>
-
-										<li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Size
-											</span>
-
-											<span class="stext-102 cl6 size-206">
-												XL, L, M, S
-											</span>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-
+						
+						<?php foreach($comments as $key => $row){ ?>
 						<!-- - -->
 						<div class="tab-pane fade" id="reviews" role="tabpanel">
 							<div class="row">
 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
 									<div class="p-b-30 m-lr-15-sm">
-										<!-- Review -->
+										<!-- Review --> 
 										<div class="flex-w flex-t p-b-68">
 											<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-												<img src="images/avatar-01.jpg" alt="AVATAR">
-											</div>
-
+												<img src="<?php  echo $row["user_image"];  ?>" alt="AVATAR">
+											</div>											
 											<div class="size-207">
+												
 												<div class="flex-w flex-sb-m p-b-17">
 													<span class="mtext-107 cl2 p-r-20">
-														Ariana Grande
+													<?php  echo $row["user_name"];  ?>
 													</span>
-
 													<span class="fs-18 cl11">
 														<i class="zmdi zmdi-star"></i>
 														<i class="zmdi zmdi-star"></i>
@@ -644,22 +641,19 @@ include ("admin/includes/connect.php");
 														<i class="zmdi zmdi-star-half"></i>
 													</span>
 												</div>
-
+												
 												<p class="stext-102 cl6">
-													Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos
+													<?php  echo $row["comment"];  ?>
 												</p>
 											</div>
+											<?php } ?> 
 										</div>
 
 										<!-- Add review -->
-										<form class="w-full">
+										<form class="w-full" enctype="multipart/form-data" method="POST">
 											<h5 class="mtext-108 cl2 p-b-7">
 												Add a review
 											</h5>
-
-											<p class="stext-102 cl6">
-												Your email address will not be published. Required fields are marked *
-											</p>
 
 											<div class="flex-w flex-m p-t-50 p-b-23">
 												<span class="stext-102 cl3 m-r-16">
@@ -681,25 +675,20 @@ include ("admin/includes/connect.php");
 													<label class="stext-102 cl3" for="review">Your review</label>
 													<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
 												</div>
-
-												<div class="col-sm-6 p-b-5">
-													<label class="stext-102 cl3" for="name">Name</label>
-													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name">
-												</div>
-
-												<div class="col-sm-6 p-b-5">
-													<label class="stext-102 cl3" for="email">Email</label>
-													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email">
-												</div>
 											</div>
-
-											<button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
+											
+											<div class="file-upload-wrapper" data-text="Select your file!">
+												<input name="image" type="file" class="file-upload-field" value="">
+											</div>
+											</div>
+												<button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10" value="submit" name="submit">
 												Submit
 											</button>
 										</form>
 									</div>
 								</div>
 							</div>
+						 
 						</div>
 					</div>
 				</div>
@@ -1397,7 +1386,11 @@ include ("admin/includes/connect.php");
 				ps.update();
 			})
 		});
+		$("form").on("change", ".file-upload-field", function(){ 
+    $(this).parent(".file-upload-wrapper").attr("data-text",         $(this).val().replace(/.*(\/|\\)/, '') );
+});
 	</script>
+	
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
