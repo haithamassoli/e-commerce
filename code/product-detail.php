@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "./includes/header.php";
 function redirect($url)
 {
 	if (!headers_sent()) {
@@ -101,7 +101,7 @@ if (isset($_POST["add_to_cart"])) {
 	}
 }
 ?>
-<?php include "./includes/header.php"; ?>
+
 
 <!-- breadcrumb -->
 <div class="container mt-5">
