@@ -2,7 +2,36 @@
 include "./includes/header.php";
 $sql = "SELECT * FROM admins ";
 $result = mysqli_query($conn, $sql);
-echo $result["num_rows"];
+$num_of_users = $result->num_rows;
+?>
+<?php
+$sql = "SELECT * FROM unique_visitors";
+$result = mysqli_query($conn, $sql);
+$num_of_visitors = $result->num_rows;
+$visitors = mysqli_fetch_all($result);
+?>
+<?php
+if (isset($_SESSION['type'])) {
+  if ($_SESSION["type"] == 2) {
+    $id = $_SESSION["super_admin_id"];
+  } else {
+    $id = $_SESSION["admin_id"];
+  }
+
+  $sql    = "SELECT * FROM admins WHERE admin_id=$id ";
+  $result = mysqli_query($conn, $sql);
+  $admins = mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+?>
+<?php
+$sql = "SELECT * FROM (
+  SELECT *
+  FROM `comments`
+  ORDER BY `comment_id` DESC
+  LIMIT 5
+) AS `comments` ORDER by comment_id ASC";
+$result = mysqli_query($conn, $sql);
+$last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 <!-- ! Main -->
 <main class="main users chart-page" id="skip-target">
@@ -11,18 +40,12 @@ echo $result["num_rows"];
     <div class="row stat-cards">
       <div class="col-md-6 col-xl-3">
         <article class="stat-cards-item">
-          <div class="stat-cards-icon primary">
-            <i data-feather="bar-chart-2" aria-hidden="true"></i>
+          <div class="stat-cards-icon warning">
+            <i data-feather="file" aria-hidden="true"></i>
           </div>
           <div class="stat-cards-info">
-            <p class="stat-cards-info__num"></p>
-            <p class="stat-cards-info__title">Total visits</p>
-            <p class="stat-cards-info__progress">
-              <span class="stat-cards-info__profit success">
-                <i data-feather="trending-up" aria-hidden="true"></i>4.07%
-              </span>
-              Last month
-            </p>
+            <p class="stat-cards-info__num"><?php echo $num_of_users ?></p>
+            <p class="stat-cards-info__title">Total signed users</p>
           </div>
         </article>
       </div>
@@ -32,304 +55,52 @@ echo $result["num_rows"];
             <i data-feather="file" aria-hidden="true"></i>
           </div>
           <div class="stat-cards-info">
-            <p class="stat-cards-info__num"></p>
-            <p class="stat-cards-info__title">Total visits</p>
-            <p class="stat-cards-info__progress">
-              <span class="stat-cards-info__profit success">
-                <i data-feather="trending-up" aria-hidden="true"></i>0.24%
-              </span>
-              Last month
-            </p>
+            <p class="stat-cards-info__num"><?php echo $num_of_visitors ?></p>
+            <p class="stat-cards-info__title">Number of visitors</p>
           </div>
         </article>
       </div>
-      <div class="col-md-6 col-xl-3">
-        <article class="stat-cards-item">
-          <div class="stat-cards-icon purple">
-            <i data-feather="file" aria-hidden="true"></i>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="users-table table-wrapper">
+            <table class="posts-table">
+              <thead>
+                <tr class="users-table-info">
+                  <th>image</th>
+                  <th>comment</th>
+                  <th>user_id</th>
+                  <th>product_id</th>
+                  <th>date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($last_comments as $comment) {
+                ?>
+                  <tr>
+                    <td>
+                      <div class="categories-table-img">
+                        <img src="<?php echo $comment['comment_image'] ?>" alt="avc">
+                      </div>
+                      </label>
+                    </td>
+                    <td>
+                      <?php echo $comment['comment'] ?>
+                    </td>
+                    <td>
+                      <div class="pages-table-img">
+                        <?php echo $comment['comment_user_id'] ?>
+                      </div>
+                    </td>
+                    <td><span class="badge-pending"><?php echo $comment['comment_product_id'] ?></span></td>
+                    <td><?php echo $comment['comment_date'] ?></td>
+                  </tr>
+                <?php } ?>
+              </tbody>
+            </table>
           </div>
-          <div class="stat-cards-info">
-            <p class="stat-cards-info__num">1478 286</p>
-            <p class="stat-cards-info__title">Total visits</p>
-            <p class="stat-cards-info__progress">
-              <span class="stat-cards-info__profit danger">
-                <i data-feather="trending-down" aria-hidden="true"></i>1.64%
-              </span>
-              Last month
-            </p>
-          </div>
-        </article>
-      </div>
-      <div class="col-md-6 col-xl-3">
-        <article class="stat-cards-item">
-          <div class="stat-cards-icon success">
-            <i data-feather="feather" aria-hidden="true"></i>
-          </div>
-          <div class="stat-cards-info">
-            <p class="stat-cards-info__num">1478 286</p>
-            <p class="stat-cards-info__title">Total visits</p>
-            <p class="stat-cards-info__progress">
-              <span class="stat-cards-info__profit warning">
-                <i data-feather="trending-up" aria-hidden="true"></i>0.00%
-              </span>
-              Last month
-            </p>
-          </div>
-        </article>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="users-table table-wrapper">
-          <table class="posts-table">
-            <thead>
-              <tr class="users-table-info">
-                <th>
-                  <label class="users-table__checkbox ms-20">
-                    <input type="checkbox" class="check-all">Thumbnail
-                  </label>
-                </th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Status</th>
-                <th>Date</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <label class="users-table__checkbox">
-                    <input type="checkbox" class="check">
-                    <div class="categories-table-img">
-                      <picture>
-                        <source srcset="./img/categories/01.webp" type="image/webp"><img src="./img/categories/01.jpg" alt="category">
-                      </picture>
-                    </div>
-                  </label>
-                </td>
-                <td>
-                  Starting your traveling blog with Vasco
-                </td>
-                <td>
-                  <div class="pages-table-img">
-                    <picture>
-                      <source srcset="./img/avatar/avatar-face-04.webp" type="image/webp"><img src="./img/avatar/avatar-face-04.png" alt="User Name">
-                    </picture>
-                    Jenny Wilson
-                  </div>
-                </td>
-                <td><span class="badge-pending">Pending</span></td>
-                <td>17.04.2021</td>
-                <td>
-                  <span class="p-relative">
-                    <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                      <div class="sr-only">More info</div>
-                      <i data-feather="more-horizontal" aria-hidden="true"></i>
-                    </button>
-                    <ul class="users-item-dropdown dropdown">
-                      <li><a href="##">Edit</a></li>
-                      <li><a href="##">Quick edit</a></li>
-                      <li><a href="##">Trash</a></li>
-                    </ul>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label class="users-table__checkbox">
-                    <input type="checkbox" class="check">
-                    <div class="categories-table-img">
-                      <picture>
-                        <source srcset="./img/categories/02.webp" type="image/webp"><img src="./img/categories/02.jpg" alt="category">
-                      </picture>
-                    </div>
-                  </label>
-                </td>
-                <td>
-                  Start a blog to reach your creative peak
-                </td>
-                <td>
-                  <div class="pages-table-img">
-                    <picture>
-                      <source srcset="./img/avatar/avatar-face-03.webp" type="image/webp"><img src="./img/avatar/avatar-face-03.png" alt="User Name">
-                    </picture>
-                    Annette Black
-                  </div>
-                </td>
-                <td><span class="badge-pending">Pending</span></td>
-                <td>23.04.2021</td>
-                <td>
-                  <span class="p-relative">
-                    <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                      <div class="sr-only">More info</div>
-                      <i data-feather="more-horizontal" aria-hidden="true"></i>
-                    </button>
-                    <ul class="users-item-dropdown dropdown">
-                      <li><a href="##">Edit</a></li>
-                      <li><a href="##">Quick edit</a></li>
-                      <li><a href="##">Trash</a></li>
-                    </ul>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label class="users-table__checkbox">
-                    <input type="checkbox" class="check">
-                    <div class="categories-table-img">
-                      <picture>
-                        <source srcset="./img/categories/03.webp" type="image/webp"><img src="./img/categories/03.jpg" alt="category">
-                      </picture>
-                    </div>
-                  </label>
-                </td>
-                <td>
-                  Helping a local business reinvent itself
-                </td>
-                <td>
-                  <div class="pages-table-img">
-                    <picture>
-                      <source srcset="./img/avatar/avatar-face-02.webp" type="image/webp"><img src="./img/avatar/avatar-face-02.png" alt="User Name">
-                    </picture>
-                    Kathryn Murphy
-                  </div>
-                </td>
-                <td><span class="badge-active">Active</span></td>
-                <td>17.04.2021</td>
-                <td>
-                  <span class="p-relative">
-                    <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                      <div class="sr-only">More info</div>
-                      <i data-feather="more-horizontal" aria-hidden="true"></i>
-                    </button>
-                    <ul class="users-item-dropdown dropdown">
-                      <li><a href="##">Edit</a></li>
-                      <li><a href="##">Quick edit</a></li>
-                      <li><a href="##">Trash</a></li>
-                    </ul>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label class="users-table__checkbox">
-                    <input type="checkbox" class="check">
-                    <div class="categories-table-img">
-                      <picture>
-                        <source srcset="./img/categories/04.webp" type="image/webp"><img src="./img/categories/04.jpg" alt="category">
-                      </picture>
-                    </div>
-                  </label>
-                </td>
-                <td>
-                  Caring is the new marketing
-                </td>
-                <td>
-                  <div class="pages-table-img">
-                    <picture>
-                      <source srcset="./img/avatar/avatar-face-05.webp" type="image/webp"><img src="./img/avatar/avatar-face-05.png" alt="User Name">
-                    </picture>
-                    Guy Hawkins
-                  </div>
-                </td>
-                <td><span class="badge-active">Active</span></td>
-                <td>17.04.2021</td>
-                <td>
-                  <span class="p-relative">
-                    <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                      <div class="sr-only">More info</div>
-                      <i data-feather="more-horizontal" aria-hidden="true"></i>
-                    </button>
-                    <ul class="users-item-dropdown dropdown">
-                      <li><a href="##">Edit</a></li>
-                      <li><a href="##">Quick edit</a></li>
-                      <li><a href="##">Trash</a></li>
-                    </ul>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label class="users-table__checkbox">
-                    <input type="checkbox" class="check">
-                    <div class="categories-table-img">
-                      <picture>
-                        <source srcset="./img/categories/01.webp" type="image/webp"><img src="./img/categories/01.jpg" alt="category">
-                      </picture>
-                    </div>
-                  </label>
-                </td>
-                <td>
-                  How to build a loyal community online and offline
-                </td>
-                <td>
-                  <div class="pages-table-img">
-                    <picture>
-                      <source srcset="./img/avatar/avatar-face-03.webp" type="image/webp"><img src="./img/avatar/avatar-face-03.png" alt="User Name">
-                    </picture>
-                    Robert Fox
-                  </div>
-                </td>
-                <td><span class="badge-active">Active</span></td>
-                <td>17.04.2021</td>
-                <td>
-                  <span class="p-relative">
-                    <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                      <div class="sr-only">More info</div>
-                      <i data-feather="more-horizontal" aria-hidden="true"></i>
-                    </button>
-                    <ul class="users-item-dropdown dropdown">
-                      <li><a href="##">Edit</a></li>
-                      <li><a href="##">Quick edit</a></li>
-                      <li><a href="##">Trash</a></li>
-                    </ul>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label class="users-table__checkbox">
-                    <input type="checkbox" class="check">
-                    <div class="categories-table-img">
-                      <picture>
-                        <source srcset="./img/categories/03.webp" type="image/webp"><img src="./img/categories/03.jpg" alt="category">
-                      </picture>
-                    </div>
-                  </label>
-                </td>
-                <td>
-                  How to build a loyal community online and offline
-                </td>
-                <td>
-                  <div class="pages-table-img">
-                    <picture>
-                      <source srcset="./img/avatar/avatar-face-03.webp" type="image/webp"><img src="./img/avatar/avatar-face-03.png" alt="User Name">
-                    </picture>
-                    Robert Fox
-                  </div>
-                </td>
-                <td><span class="badge-active">Active</span></td>
-                <td>17.04.2021</td>
-                <td>
-                  <span class="p-relative">
-                    <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                      <div class="sr-only">More info</div>
-                      <i data-feather="more-horizontal" aria-hidden="true"></i>
-                    </button>
-                    <ul class="users-item-dropdown dropdown">
-                      <li><a href="##">Edit</a></li>
-                      <li><a href="##">Quick edit</a></li>
-                      <li><a href="##">Trash</a></li>
-                    </ul>
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
-  </div>
 </main>
 <?php include "./includes/footer.php"; ?>
