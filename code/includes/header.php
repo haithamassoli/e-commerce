@@ -1,5 +1,6 @@
 <?php
 session_start();
+$total = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,23 +78,23 @@ session_start();
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
 						<?php if (!isset($_SESSION['type'])) { ?>
-							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								<a href="sign_in.php">LOGIN</a>
-							</div>
+							<li class="cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+								<a href="sign_in.php" class="cl1">Login</a>
+							</li>
 						<?php } elseif ($_SESSION['type'] == 0) { ?>
-							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								<a href="profile.php">Profile</a>
-							</div>
-							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								<a href="logout.php">Logout</a>
-							</div>
+							<li class="cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+								<a href="profile.php" class="cl1">Profile</a>
+							</li>
+							<li class="cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+								<a href="logout.php" class="cl1">Logout</a>
+							</li>
 						<?php } elseif ($_SESSION['type'] == 1 || $_SESSION['type'] == 2) { ?>
-							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								<a href="admin/index.php">DashBoard</a>
-							</div>
-							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								<a href="logout.php">Logout</a>
-							</div>
+							<li class="cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+								<a href="admin/index.php" class="cl1">DashBoard</a>
+							</li>
+							<li class="cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+								<a href="logout.php" class="cl1">Logout</a>
+							</li>
 						<?php } ?>
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
@@ -147,9 +148,6 @@ session_start();
 			<ul class="main-menu-m">
 				<li>
 					<a href="index.php">Home</a>
-					<span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span>
 				</li>
 
 				<li>
@@ -163,6 +161,25 @@ session_start();
 				<li>
 					<a href="contact.php">Contact</a>
 				</li>
+				<?php if (!isset($_SESSION['type'])) { ?>
+					<li>
+						<a href="sign_in.php">LOGIN</a>
+					</li>
+				<?php } elseif ($_SESSION['type'] == 0) { ?>
+					<li>
+						<a href="profile.php">Profile</a>
+					</li>
+					<li>
+						<a href="logout.php">Logout</a>
+					</li>
+				<?php } elseif ($_SESSION['type'] == 1 || $_SESSION['type'] == 2) { ?>
+					<li>
+						<a href="admin/index.php">DashBoard</a>
+					</li>
+					<li>
+						<a href="logout.php">Logout</a>
+					</li>
+				<?php } ?>
 			</ul>
 		</div>
 
@@ -212,7 +229,8 @@ session_start();
 								</a>
 
 								<span class="header-cart-item-info">
-									<?php echo $value['quantity'] . " x $" . $value['product_price']; ?>
+									<?php echo $value['quantity'] . " x $" . $value['product_price'];
+									$total += $value['product_price'] * $value['quantity']; ?>
 								</span>
 							</div>
 						</li>
@@ -221,7 +239,7 @@ session_start();
 
 				<div class="w-full">
 					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
+						Total: $<?php echo $total; ?>
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
