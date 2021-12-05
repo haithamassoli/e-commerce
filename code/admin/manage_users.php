@@ -1,5 +1,4 @@
 <?php include "./includes/header.php";
- include "./includes/connect.php";
 ?>
 
 <?php
@@ -19,18 +18,9 @@ function redirect($url)
   }
 }
 
-// end function 
-
-// $conn = new mysqli('localhost', 'root', '', 'e_commerce');
-
-// if ($conn->connect_error) {
-//   die("Connection failed: " . $conn->connect_error);
-// }
-// echo "Connected successfully";
 $sql = "SELECT * FROM users ";
 $result = mysqli_query($conn, $sql);
 $users  = mysqli_fetch_all($result, MYSQLI_ASSOC);
-// print_r($users);
 //delete
 if (isset($_GET['delete'])) {
   $id = $_GET['delete'];
@@ -233,23 +223,16 @@ if (isset($_GET['do'])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <!-- <input type="password" name="user_password" class="form-control col-9 mb-2" placeholder="Password" style="border: 1px solid #dce7f1 !important;"> -->
-
                       <select name="user_gender" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;">
-                      <option >Male</option>
-                      <option>Female </option>
+                        <option>Male</option>
+                        <option>Female </option>
                       </select>
-
-
                       <div class="form-control-icon col-3">
                       </div>
                       <div style="color:red"><?php echo @$genderError;  ?></div>
                     </div>
                   </div>
                 </div>
-
-
-
                 <div class="form-group col-md-8 offset-md-4">
                   <div class='form-check'>
                     <div class="checkbox">

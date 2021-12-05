@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2021 at 11:05 PM
+-- Generation Time: Dec 05, 2021 at 08:36 AM
 -- Server version: 10.4.21-MariaDB
--- PHP Version: 7.3.31
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,14 +35,6 @@ CREATE TABLE `admins` (
   `admin_type` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `admins`
---
-
-INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_email`, `admin_password`, `admin_type`) VALUES
-(1, 'Sarah', 'sara_hab@gmail.com', '12345', 0),
-(2, 'Donaldsa', 'sara.ahabash@gmail.com', '7777', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -61,9 +53,11 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`category_id`, `category_name`, `category_description`, `category_image`) VALUES
-(1, 'women', NULL, 'images/banner-01.jpg'),
-(2, 'Men', NULL, 'images/banner-02.jpg'),
-(3, 'Accessories', NULL, 'images/banner-03.jpg');
+(5, 'Women', 'New Trend', 'images/women.jpg'),
+(6, 'Men', 'New Trend ', 'images/man.jpg'),
+(8, 'Bags', 'Spring 2018', 'images/bag.jpg'),
+(9, 'Accessories', 'Spring 2018', 'images/belt.jpg'),
+(10, 'Accessories', 'wotch', 'images/whatch.jpg');
 
 -- --------------------------------------------------------
 
@@ -109,7 +103,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `product_description`, `product_price`, `product_quantity`, `product_rate`, `product_main_image`, `product_desc_image_1`, `product_desc_image_2`, `product_desc_image_3`, `product_tag`, `product_categorie_id`, `product_nd_color_image`, `product_thd_color_image`, `product_fourth_color_image`) VALUES
-(51, 'ffffffffffffff', 'ffffffff', '22', 444, NULL, 'uploads/61abdf2b6bbaebanner-04.jpg', 'uploads/61abdf2b6bbbabg-01.jpg', 'uploads/61abdf2b6bbbdbanner-05.jpg', 'uploads/61abdf2b6bbbfbanner-06.jpg', 'sfffffyyyyyyyyyyyyyy', 2, 'uploads/61abdf2b6bbc1banner-02.jpg', 'uploads/61abdf2b6bbc3about-02.jpg', 'uploads/61abdf2b6bbc5gallery-06.jpg');
+(10, 't-shirts', 'summer', '20', 4, NULL, 'images/product-01.jpg', NULL, NULL, NULL, 'sales', 5, NULL, NULL, NULL),
+(11, 'jeans', 'summer', '30', 3, NULL, 'images/product-02.jpg', NULL, NULL, NULL, 'sales', 5, NULL, NULL, NULL),
+(12, 'jeans', 'summmer', '10', 3, NULL, 'images/product-03.jpg', NULL, NULL, NULL, 'sales', 6, NULL, NULL, NULL),
+(13, 'Couat', 'Winter', '50', 2, NULL, 'images/product-04.jpg', NULL, NULL, NULL, 'sales', 5, NULL, NULL, NULL),
+(14, 't-shirts', 'summer', '34', 44, NULL, 'images/product-05.jpg', NULL, NULL, NULL, 'new', 5, NULL, NULL, NULL),
+(15, 'wotch', 'accessorise', '23', 3, NULL, 'images/product-06.jpg', NULL, NULL, NULL, 'new', 9, NULL, NULL, NULL),
+(16, 't-shirt', 'summer', '39', 3, NULL, 'images/product-01.jpg', NULL, NULL, NULL, 'women', 5, NULL, NULL, NULL),
+(17, 'jeans', 'winter', '33', 3, NULL, 'images/product-03.jpg', NULL, NULL, NULL, 'men', 6, NULL, NULL, NULL),
+(18, 'shoes', 'spoet', '66', 8, NULL, 'images/product-09.jpg', NULL, NULL, NULL, 'shoes', 6, NULL, NULL, NULL),
+(20, 'wotch', 'wotches', '99', 9, NULL, 'images/product-06.jpg', NULL, NULL, NULL, 'watches', 9, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -134,7 +137,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_password`, `user_mobile`, `user_location`, `user_image`, `user_gender`, `user_creation_date`) VALUES
-(2, 'ali', 'ali@gmail.com', 'Aa123456', NULL, NULL, 'uploads/61a96980bfe2fdiscord.png', 'male', '2021-12-03 00:49:04');
+(20, 'jana', 'jana@gmail.com', '23445', 2147483647, 'salt', ' uploads/user_image/61aa000157291avatar.png', 'female', '2021-12-03 10:49:01'),
+(22, 'FM', 'fm@gmail.com', '7890-', 2147483647, 'salt', ' uploads/user_image/61aa0056164f8avatar.png', 'female', '2021-12-03 10:54:03'),
+(23, 'lana', 'lana@test.com', '7890-87', 2147483647, 'amman', ' uploads/user_image/61aa00785aa8bavatar.png', 'female', '2021-12-03 11:08:11'),
+(26, 'admin', 'admint@test.com', 'errrrrrrrrrr', 2147483647, 'salt', ' uploads/user_image/61ab99ed9a21cavatar.png', 'Male', '2021-12-03 11:39:30');
 
 --
 -- Indexes for dumped tables
@@ -182,13 +188,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -200,13 +206,13 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables

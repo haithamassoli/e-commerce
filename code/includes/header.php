@@ -84,7 +84,7 @@
 							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
 								<a href="logout.php">Logout</a>
 							</div>
-						<?php } elseif ($_SESSION['type'] == 0 || $_SESSION['type'] == 2) { ?>
+						<?php } elseif ($_SESSION['type'] == 1 || $_SESSION['type'] == 2) { ?>
 							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
 								<a href="admin/index.php">DashBoard</a>
 							</div>

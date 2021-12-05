@@ -1,5 +1,4 @@
 <?php include "./includes/header.php";
-require "./includes/connect.php";
 // select all comments
 $sql = "SELECT comments.*, products.product_name, users.user_name, users.user_image FROM comments INNER JOIN products ON products.product_id = comments.comment_product_id INNER JOIN users ON users.user_id = comments.comment_user_id";
 $result = mysqli_query($conn, $sql);
