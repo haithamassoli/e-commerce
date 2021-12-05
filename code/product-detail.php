@@ -231,7 +231,6 @@ if (isset($_POST["add_to_cart"])) {
 											<option>Red</option>
 											<option>Blue</option>
 											<option>White</option>
-											<option>Grey</option>
 										</select>
 										<div class="dropDownSelect2"></div>
 									</div>
@@ -457,3 +456,20 @@ if (isset($_POST["add_to_cart"])) {
 		</div>
 	</section>
 	<?php include "./includes/footer.php"; ?>
+	<script>
+        
+    let y = document.getElementById("mydiv");
+    y.style.background='blue';
+
+    let color=['red','green','blue'];
+    let count =0;
+    y.addEventListener('click',function(event){
+        event.target.style.background=color[count];
+    count++;
+    if (count == color.length){
+            count = 0;
+        }
+    }
+    );
+
+</script>
