@@ -1,6 +1,6 @@
 <?php
 include("includes/header.php");
-include "./admin/includes/connect.php";
+include("admin/includes/connect.php");
 ?>
 <?php
 

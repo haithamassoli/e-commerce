@@ -1,5 +1,6 @@
 <?php
 require("includes/connect.php");
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,12 +48,16 @@ require("includes/connect.php");
             <li>
               <a class="active" href="./index.php"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
             </li>
-            <li>
-              <a href="manage_admins.php"><span class="icon document" aria-hidden="true"></span>Admin</a>
-            </li>
-            <li>
-              <a href="manage_users.php"><span class="icon document" aria-hidden="true"></span>Users</a>
-            </li>
+            <?php
+            if ($_SESSION["type"] == 2) {
+              echo '<li>
+                                <a href="manage_admins.php"><span class="icon document" aria-hidden="true"></span>Admin</a>
+                              </li>
+                              <li>
+                                <a href="manage_users.php"><span class="icon document" aria-hidden="true"></span>Users</a>
+                              </li>';
+            }
+            ?>
             </li>
             <li>
             <li>
@@ -66,9 +71,14 @@ require("includes/connect.php");
             <li>
               <a href="manage_comments.php"><span class="icon paper" aria-hidden="true"></span>Comments</a>
             </li>
+            <li>
+              <a href="../index.php"><span class="icon paper" aria-hidden="true"></span>webisite</a>
+            </li>
             </li>
           </ul>
-          <div class="sidebar-footer" style="margin-top: 288px;">
+          <?php
+          if ($_SESSION["type"] == 2)
+            echo '<div class="sidebar-footer" style="margin-top: 265px;">
             <a href="##" class="sidebar-user">
               <span class="sidebar-user-img">
                 <picture>
@@ -80,7 +90,23 @@ require("includes/connect.php");
                 <span class="sidebar-user__subtitle">Support manager</span>
               </div>
             </a>
-          </div>
+          </div>';
+          else {
+            echo '<div class="sidebar-footer" style="margin-top: 370px;">
+            <a href="##" class="sidebar-user">
+              <span class="sidebar-user-img">
+                <picture>
+                  <source srcset="./img/avatar/avatar-illustrated-01.webp" type="image/webp"><img src="./img/avatar/avatar-illustrated-01.png" alt="User name">
+                </picture>
+              </span>
+              <div class="sidebar-user-info">
+                <span class="sidebar-user__title">Nafisa Sh.</span>
+                <span class="sidebar-user__subtitle">Support manager</span>
+              </div>
+            </a>
+          </div>';
+          }
+          ?>
     </aside>
     <div class="main-wrapper">
       <!-- ! Main nav -->
