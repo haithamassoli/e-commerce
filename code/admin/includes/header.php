@@ -45,10 +45,10 @@
               <a class="active" href="./index.php"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
             </li>
             <li>
-              <a href="./manage_admins.php"><span class="icon document" aria-hidden="true"></span>Admin</a>
+              <a href="manage_admins.php"><span class="icon document" aria-hidden="true"></span>Admin</a>
             </li>
             <li>
-              <a href="./manage_users.php"><span class="icon document" aria-hidden="true"></span>Users</a>
+              <a href="manage_users.php"><span class="icon document" aria-hidden="true"></span>Users</a>
             </li>
             </li>
             <li>
@@ -58,10 +58,10 @@
             </li>
             <li>
             <li>
-              <a href="./manage_products.php"><span class="icon image" aria-hidden="true"></span>Products</a>
+              <a href="manage_products.php"><span class="icon image" aria-hidden="true"></span>Products</a>
             </li>
             <li>
-              <a href="./manage_comments.php"><span class="icon paper" aria-hidden="true"></span>Comments</a>
+              <a href="manage_comments.php"><span class="icon paper" aria-hidden="true"></span>Comments</a>
             </li>
             </li>
           </ul>
