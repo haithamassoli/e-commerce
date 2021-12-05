@@ -2,7 +2,6 @@
 include "./includes/header.php";
 $sql = "SELECT * FROM admins ";
 $result = mysqli_query($conn, $sql);
-echo $result["num_rows"];
 ?>
 <!-- ! Main -->
 <main class="main users chart-page" id="skip-target">
