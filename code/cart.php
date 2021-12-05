@@ -1,5 +1,3 @@
-</div>
-</div>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -122,7 +120,7 @@
         <hr class="my-2">
         <div class="row pt-3 pb-5 mb-2">
             <div class="col-sm-6 mb-3"><a class="btn btn-style-1 btn-secondary btn-block" href="#"><i class="fe-icon-refresh-ccw"></i>&nbsp;Update Cart</a></div>
-            <div class="col-sm-6 mb-3"><a class="btn btn-style-1 btn-primary btn-block" href="checkout-address.html"><i class="fe-icon-credit-card"></i>&nbsp;Checkout</a></div>
+            <div class="col-sm-6 mb-3"><a class="btn btn-style-1 btn-primary btn-block" href="checkout-address.php"><i class="fe-icon-credit-card"></i>&nbsp;Checkout</a></div>
         </div>
 </body>
 
