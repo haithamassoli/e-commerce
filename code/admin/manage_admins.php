@@ -72,23 +72,17 @@ if (isset($_GET['do'])) {
         $check = 0;
         $passwordErr = "The password shouldn't be empty!";
       }
-      if ($admin_type == "") {
-        $check = 0;
-        $typeErr = "The type shouldn't be empty!";
+      if ($admin_type == "0") {
+        $admin_type = 0;
+      } else {
+        $admin_type = 1;
       }
-      /* elseif(!$admin_type==1 || $admin_type==0){
-        $admin_type = $_POST["admin_type"];
-      }
-      else {
-        $typeErr=" The type value should be 0 or 1 ";
-      } */
-
-      if ($admin_type != '0' || '1') {
-        $typeErr = " The type value should be 0 or 1 ";
-      }
-
+      $image = ($_FILES["admin_image"]);
+      $image_folder = "uploads/admin_image/";
+      $target_file = $image_folder . uniqid() . basename($image["name"]);
+      move_uploaded_file($image["tmp_name"], $target_file);
       if ($check == 1) {
-        $sql2 = "UPDATE admins SET admin_name = '$admin_name', admin_email='$admin_email', admin_password = '$admin_password' , admin_type='$admin_type' WHERE admin_id = '$id'";
+        $sql2 = "UPDATE admins SET admin_name = '$admin_name', admin_email='$admin_email', admin_password = '$admin_password' , admin_type='$admin_type', admin_image='$target_file'  WHERE admin_id = '$id'";
         if ($conn->query($sql2) === TRUE) {
           echo "New record created successfully";
         } else {
@@ -127,7 +121,7 @@ if (isset($_GET['do'])) {
         $check = 0;
         $passwordErr = "The password shouldn't be empty!";
       }
-      if ($admin_type == "") {
+      /* if ($admin_type == "") {
         $check = 0;
         $typeErr = "The type shouldn't be empty!";
       }
@@ -136,11 +130,13 @@ if (isset($_GET['do'])) {
       } else {
         $typeErr = " The type value should be 0 or 1 ";
         $check = 0;
-      }
-
-
+      }*/
+      $image = ($_FILES["admin_image"]);
+      $image_folder = "uploads/admin_image/";
+      $target_file = $image_folder . uniqid() . basename($image["name"]);
+      move_uploaded_file($image["tmp_name"], $target_file);
       if ($check == 1) {
-        $sql = "INSERT INTO `admins` (`admin_name`,`admin_email`,`admin_password`, `admin_type`) VALUES ('$admin_name','$admin_email','$admin_password','$admin_type')";
+        $sql = "INSERT INTO `admins` (`admin_name`,`admin_email`,`admin_password`, `admin_type`,`admin_image`) VALUES ('$admin_name','$admin_email','$admin_password','$admin_type','$target_file')";
         if (mysqli_query($conn, $sql)) {
           echo "New record created successfully";
         } else {
@@ -225,22 +221,30 @@ if (isset($_GET['do'])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input name="admin_type" type="number" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" placeholder="Type" value="<?php if ($do == "edit") {
-                                                                                                                                                                        echo $row['admin_type'];
-                                                                                                                                                                      } ?>">
+
+                      <select name="admin_type" class="form-control col-9 mb-2" value="<?php if ($do == "edit") {
+                                                                                          echo $row['admin_type'];
+                                                                                        } ?>" style="border: 1px solid #dce7f1 !important;">
+                        <option value="0">Admin</option>
+                        <option value="1">SuperAdmin </option>
+                      </select>
+
+                      <div class="form-control-icon col-3">
+                        <i class="bi bi-phone" style="position: absolute; top:-10px; left: -20px;"></i>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group has-icon-left">
+                    <div class="position-relative row justify-content-center align-items-center d-flex">
+                      <input name="admin_image" type="file" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" placeholder="Type">
 
                       <div class="form-control-icon col-3">
                         <i class="bi bi-phone" style="position: absolute; top:-10px; left: -20px;"></i>
                       </div>
                       <div style="color:red"><?php echo @$typeErr;  ?></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group col-md-8 offset-md-4">
-                  <div class='form-check'>
-                    <div class="checkbox">
-                      <input type="checkbox" id="checkbox2" class='form-check-input' checked>
-                      <label for="checkbox2">Remember Me</label>
                     </div>
                   </div>
                 </div>
@@ -307,8 +311,11 @@ if (!isset($_GET['do'])) { ?>
                         </div>
                       </label>
                     </td>
-                    <td>
-                      <?php echo isset($admin['admin_name']) ? $admin['admin_name'] : ''; ?>
+                    <td class="px-6 py-4">
+                      <div class="text-sm text-gray-900 flex justify-center items-center">
+                        <img src=<?php echo isset($admin['admin_image']) ? $admin['admin_image'] : ''; ?> class="mr-3" width="50px" alt="">
+                        <?php echo $admin["admin_name"]; ?>
+                      </div>
                     </td>
                     <td>
                       <div class="pages-table-img">

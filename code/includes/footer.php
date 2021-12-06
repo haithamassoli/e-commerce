@@ -136,8 +136,7 @@
 				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				Copyright &copy;<script>
 					document.write(new Date().getFullYear());
-				</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
-				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a>Colorlib</a> &amp; distributed by <a>ThemeWagon</a>
 
 			</p>
 		</div>
@@ -312,6 +311,10 @@
 <script src="js/map-custom.js"></script>
 <!--===============================================================================================-->
 <script src="js/main.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
 
 </body>
 
