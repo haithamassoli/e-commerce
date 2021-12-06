@@ -72,19 +72,10 @@ if (isset($_GET['do'])) {
         $check = 0;
         $passwordErr = "The password shouldn't be empty!";
       }
-      if ($admin_type == "") {
-        $check = 0;
-        $typeErr = "The type shouldn't be empty!";
-      }
-      /* elseif(!$admin_type==1 || $admin_type==0){
-        $admin_type = $_POST["admin_type"];
-      }
-      else {
-        $typeErr=" The type value should be 0 or 1 ";
-      } */
-
-      if ($admin_type != '0' || '1') {
-        $typeErr = " The type value should be 0 or 1 ";
+      if ($admin_type == "0") {
+        $admin_type = 0;
+      } else {
+        $admin_type = 1;
       }
       $image = ($_FILES["admin_image"]);
       $image_folder = "uploads/admin_image/";
@@ -130,7 +121,7 @@ if (isset($_GET['do'])) {
         $check = 0;
         $passwordErr = "The password shouldn't be empty!";
       }
-      if ($admin_type == "") {
+      /* if ($admin_type == "") {
         $check = 0;
         $typeErr = "The type shouldn't be empty!";
       }
@@ -139,11 +130,17 @@ if (isset($_GET['do'])) {
       } else {
         $typeErr = " The type value should be 0 or 1 ";
         $check = 0;
+<<<<<<< HEAD
+      } */
+
+
+=======
       }
       $image = ($_FILES["admin_image"]);
       $image_folder = "uploads/admin_image/";
       $target_file = $image_folder . uniqid() . basename($image["name"]);
       move_uploaded_file($image["tmp_name"], $target_file);
+>>>>>>> 0d430894aec45a1a34c7211927a52f3172d70983
       if ($check == 1) {
         $sql = "INSERT INTO `admins` (`admin_name`,`admin_email`,`admin_password`, `admin_type`,`admin_image`) VALUES ('$admin_name','$admin_email','$admin_password','$admin_type','$target_file')";
         if (mysqli_query($conn, $sql)) {
@@ -230,14 +227,18 @@ if (isset($_GET['do'])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input name="admin_type" type="number" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" placeholder="Type" value="<?php if ($do == "edit") {
-                                                                                                                                                                        echo $row['admin_type'];
-                                                                                                                                                                      } ?>">
+
+                      <select name="admin_type" class="form-control col-9 mb-2" value="<?php if ($do == "edit") {
+                                                                                          echo $row['admin_type'];
+                                                                                        } ?>" style="border: 1px solid #dce7f1 !important;">
+                        <option value="0">Admin</option>
+                        <option value="1">SuperAdmin </option>
+                      </select>
 
                       <div class="form-control-icon col-3">
                         <i class="bi bi-phone" style="position: absolute; top:-10px; left: -20px;"></i>
                       </div>
-                      <div style="color:red"><?php echo @$typeErr;  ?></div>
+
                     </div>
                   </div>
                 </div>

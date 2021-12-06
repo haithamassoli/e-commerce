@@ -1,7 +1,11 @@
+<<<<<<< HEAD
+session_start();
+=======
 <?php
 session_start();
 $total = 0;
 ?>
+>>>>>>> 0d430894aec45a1a34c7211927a52f3172d70983
 <!DOCTYPE html>
 <html lang="en">
 
@@ -101,8 +105,8 @@ $total = 0;
 						</div>
 
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php if (isset($_SESSION['cart'])) {
-																																																													print_r(count($_SESSION['cart']));
-																																																												}; ?>">
+																																		print_r(count($_SESSION['cart']));
+																																	}; ?>">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
@@ -128,8 +132,8 @@ $total = 0;
 				</div>
 
 				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?php if (isset($_SESSION['cart'])) {
-																																																											print_r(count($_SESSION['cart']));
-																																																										}; ?>">
+																																print_r(count($_SESSION['cart']));
+																															}; ?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
