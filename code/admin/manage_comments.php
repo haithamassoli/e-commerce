@@ -127,4 +127,9 @@ if (isset($_GET["do"])) {
   </div>
 </div>
 <!-- end table -->
+<?php
+if (!isset($_SESSION["type"]) || $_SESSION["type"] == 0) {
+  header('location:../index.php');
+}
+?>
 <?php include "./includes/footer.php"; ?>

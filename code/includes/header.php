@@ -40,7 +40,7 @@ include "./admin/includes/connect.php";
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" href="styling.css">
+	<link rel="stylesheet" href="./css/styling.css">
 	<!--===============================================================================================-->
 </head>
 
@@ -102,14 +102,14 @@ include "./admin/includes/connect.php";
 							</li>
 						<?php } ?>
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<i class="zmdi zmdi-search"></i>
+							<!-- <i class="zmdi zmdi-search"></i> -->
 						</div>
 
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php if (isset($_SESSION['cart'])) {
-																																																													print_r(count($_SESSION['cart']));
-																																																												} else {
-																																																													echo 0;
-																																																												}; ?>">
+																																		print_r(count($_SESSION['cart']));
+																																	} else {
+																																		echo 0;
+																																	}; ?>">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
@@ -130,15 +130,15 @@ include "./admin/includes/connect.php";
 
 			<!-- Icon header -->
 			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+				<!-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
 					<i class="zmdi zmdi-search"></i>
-				</div>
+				</div> -->
 
 				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?php if (isset($_SESSION['cart'])) {
-																																																											print_r(count($_SESSION['cart']));
-																																																										} else {
-																																																											echo 0;
-																																																										}; ?>">
+																																print_r(count($_SESSION['cart']));
+																															} else {
+																																echo 0;
+																															}; ?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
@@ -199,7 +199,7 @@ include "./admin/includes/connect.php";
 			</ul>
 		</div>
 
-		<!-- Modal Search -->
+		<!-- Modal Search
 		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
 			<div class="container-search-header">
 				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
@@ -212,9 +212,8 @@ include "./admin/includes/connect.php";
 					</button>
 					<input class="plh3" type="search" name="search" placeholder="Search...">
 				</form>
-				<?php $_SESSION[""] ?>
 			</div>
-		</div>
+		</div> -->
 	</header>
 
 	<!-- Cart -->
