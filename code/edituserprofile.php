@@ -1,9 +1,4 @@
 <?php
-if (!isset($_SESSION["user_id"]) || $_SESSION["user_id"] == 0) {
-    header('location:index.php');
-}
-?>
-<?php
 session_start();
 $image     = "";
 $name      = "";
@@ -237,4 +232,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- End Form -->
 <?php
 $conn->close();
+?>
+<?php
+if (!isset($_SESSION["user_id"]) || $_SESSION["user_id"] == 0) {
+    header('location:index.php');
+}
 ?>
