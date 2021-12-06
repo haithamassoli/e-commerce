@@ -1,23 +1,37 @@
 <?php
+ob_start(); // Output Buffering Start
 include "./includes/header.php";
 $total = 0;
-echo "<pre>";
-print_r($_SESSION['cart']);
 
-echo "</pre>";
-// if (isset($_POST)) {
-// 	if (isset($_SESSION["cart"])) {
-// 		foreach ($_SESSION['cart'] as $key => $value) {
-// 			$items = array_column($_SESSION["cart"], 'product_id');
-// 			$size = array_column($_SESSION["cart"], 'size');
-// 			$color = array_column($_SESSION["cart"], 'color');
-// 			if (in_array($value['product_id'], $items) && in_array($value['color'], $color)  && in_array($value['size'], $size)) {
-// 				$_SESSION["cart"][$value['product_id'] . $value['color'] . $value['size']]["quantity"] = $_POST['product_id'];
-// 			}
-// 		}
-// 	}
-// }
-// $sql = "SELECT * FROM products WHERE product_id = {$_SESSION['cart']} "
+if (isset($_GET['delete'])) {
+	$del = $_GET['delete'];
+	if (isset($_SESSION['cart'])) {
+		foreach ($_SESSION['cart'] as $key => $value) {
+			if ($key == $del) {
+				unset($_SESSION['cart'][$key]);
+				break;
+			}
+		}
+	}
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if (isset($_SESSION['cart'])) {
+		if (isset($_POST['update'])) {
+			foreach ($_SESSION['cart'] as $keys => $value) {
+				foreach ($_POST as $key => $value) {
+					if ($keys == $key) {
+						$_SESSION['cart'][$keys]['quantity'] = $_POST[$key];
+						header("location:shoping-cart.php");
+					}
+				}
+			}
+		}
+		if (isset($_POST['remove'])) {
+			unset($_SESSION['cart']);
+		}
+	}
+}
 ?>
 <!-- breadcrumb -->
 <div class="container">
@@ -50,7 +64,8 @@ echo "</pre>";
 								<th class="column-4">Quantity</th>
 								<th class="column-5">Total</th>
 							</tr>
-							<?php if (isset($_SESSION["cart"])) {
+							<?php
+							if (isset($_SESSION["cart"])) {
 								foreach ($_SESSION['cart'] as $key => $value) { ?>
 									<tr class="table_row">
 										<td class="column-1">
@@ -65,15 +80,16 @@ echo "</pre>";
 												<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
 													<i class="fs-16 zmdi zmdi-minus"></i>
 												</div>
-												<input class="mtext-104 cl3 txt-center num-product" type="number" name="product_id" value="1">
+												<input class="mtext-104 cl3 txt-center num-product" type="number" min="1" name="<?php echo $value['product_id'] . $value['size']; ?>" value="<?php echo $value['quantity']; ?>">
 
 												<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 													<i class="fs-16 zmdi zmdi-plus"></i>
 												</div>
 											</div>
 										</td>
-										<td class="column-5">$ <?php $total += $value['product_price'] * $value['quantity'];
-																						echo $value['product_price'] * $value['quantity']; ?></td>
+										<td class="column-5"> $ <?php $total += $value['product_price'] * $value['quantity'];
+																						echo $value['product_price'] * $value['quantity']; ?><a href="shoping-cart.php?delete=<?php echo $value['product_id'] . $value['size'] ?>"><button class="ml-4" type="button" name="<?php echo "removeItem" . $value['product_id'] . $value['size'] ?>"><i style="display: block;" class="far fa-trash-alt fa-lg"></i></button></a>
+										</td>
 									</tr>
 							<?php }
 							} else {
@@ -87,7 +103,7 @@ echo "</pre>";
 						<div class="flex-w flex-m m-r-20 m-tb-5">
 							<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
 
-							<div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
 								Apply coupon
 							</div>
 						</div>
@@ -95,6 +111,18 @@ echo "</pre>";
 						<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
 							<button name="update" type="submit">
 								Update Cart
+							</button>
+						</div>
+						<style>
+							.deleteCart {
+								border-radius: 50%;
+							}
+						</style>
+						<div class="flex-c-m stext-101 cl2 p-2 trans-04 pointer m-tb-10 deleteCart">
+							<button name="remove" type="submit">
+								<div style="display: flex; align-items:center;">
+									<i style="display: block;" class="far fa-trash-alt fa-lg"></i><span class="ml-3">Delete All</span>
+								</div>
 							</button>
 						</div>
 					</div>
@@ -189,3 +217,5 @@ echo "</pre>";
 	</div>
 </form>
 <?php include "./includes/footer.php"; ?>
+<?php ob_end_flush(); // Release The Output
+?>
