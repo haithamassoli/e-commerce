@@ -1,9 +1,12 @@
 <?php
-session_start();
 include "./includes/header.php";
+$total = 0;
+if (isset($_POST)) {
+}
+// $sql = "SELECT * FROM products WHERE product_id = {$_SESSION['cart']} "
 ?>
 <!-- breadcrumb -->
-<div class="container mt-5">
+<div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
 		<a href="index.php" class="stext-109 cl8 hov-cl1 trans-04">
 			Home
@@ -18,8 +21,9 @@ include "./includes/header.php";
 
 
 <!-- Shoping Cart -->
-<form class="bg0 p-t-75 p-b-85">
+<form class="bg0 p-t-75 p-b-85" method="POST">
 	<div class="container">
+
 		<div class="row">
 			<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
 				<div class="m-l-25 m-r--38 m-lr-0-xl">
@@ -32,54 +36,31 @@ include "./includes/header.php";
 								<th class="column-4">Quantity</th>
 								<th class="column-5">Total</th>
 							</tr>
-
-							<tr class="table_row">
-								<td class="column-1">
-									<div class="how-itemcart1">
-										<img src="images/item-cart-04.jpg" alt="IMG">
-									</div>
-								</td>
-								<td class="column-2">Fresh Strawberries</td>
-								<td class="column-3">$ 36.00</td>
-								<td class="column-4">
-									<div class="wrap-num-product flex-w m-l-auto m-r-0">
-										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-minus"></i>
+							<?php foreach ($_SESSION['cart'] as $key => $value) { ?>
+								<tr class="table_row">
+									<td class="column-1">
+										<div class="how-itemcart1">
+											<img src="<?php echo $value['product_image']; ?>" alt="IMG">
 										</div>
+									</td>
+									<td class="column-2"><?php echo $value['product_name'] . " " . $value['color'] . " " . $value['size']; ?></td>
+									<td class="column-3">$ <?php echo $value['product_price']; ?></td>
+									<td class="column-4">
+										<div class="wrap-num-product flex-w m-l-auto m-r-0">
+											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+												<i class="fs-16 zmdi zmdi-minus"></i>
+											</div>
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="<?php echo $value['product_id'] . $value['color'] .  $value['size']; ?>" value="1">
 
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
-
-										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-plus"></i>
+											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+												<i class="fs-16 zmdi zmdi-plus"></i>
+											</div>
 										</div>
-									</div>
-								</td>
-								<td class="column-5">$ 36.00</td>
-							</tr>
-
-							<tr class="table_row">
-								<td class="column-1">
-									<div class="how-itemcart1">
-										<img src="images/item-cart-05.jpg" alt="IMG">
-									</div>
-								</td>
-								<td class="column-2">Lightweight Jacket</td>
-								<td class="column-3">$ 16.00</td>
-								<td class="column-4">
-									<div class="wrap-num-product flex-w m-l-auto m-r-0">
-										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-minus"></i>
-										</div>
-
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product2" value="1">
-
-										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-plus"></i>
-										</div>
-									</div>
-								</td>
-								<td class="column-5">$ 16.00</td>
-							</tr>
+									</td>
+									<td class="column-5">$ <?php $total += $value['product_price'] * $value['quantity'];
+																					echo $value['product_price'] * $value['quantity']; ?></td>
+								</tr>
+							<?php } ?>
 						</table>
 					</div>
 
@@ -93,7 +74,9 @@ include "./includes/header.php";
 						</div>
 
 						<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-							Update Cart
+							<button name="update" type="submit">
+								Update Cart
+							</button>
 						</div>
 					</div>
 				</div>
@@ -114,7 +97,9 @@ include "./includes/header.php";
 
 						<div class="size-209">
 							<span class="mtext-110 cl2">
-								$79.65
+								<?php
+								echo "$" . $total;
+								?>
 							</span>
 						</div>
 					</div>
@@ -137,10 +122,10 @@ include "./includes/header.php";
 								</span>
 
 								<div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-									<select class="js-select2" name="time">
+									<select class="js-select2" name="country">
 										<option>Select a country...</option>
-										<option>USA</option>
-										<option>UK</option>
+										<option value="KSA">KSA</option>
+										<option value="JO">JO</option>
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -158,7 +143,6 @@ include "./includes/header.php";
 										Update Totals
 									</div>
 								</div>
-
 							</div>
 						</div>
 					</div>
@@ -172,7 +156,7 @@ include "./includes/header.php";
 
 						<div class="size-209 p-t-1">
 							<span class="mtext-110 cl2">
-								$79.65
+								<?php echo "$" . $total ?>
 							</span>
 						</div>
 					</div>

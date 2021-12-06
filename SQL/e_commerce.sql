@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2021 at 08:36 AM
+-- Generation Time: Dec 06, 2021 at 01:05 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -32,8 +32,16 @@ CREATE TABLE `admins` (
   `admin_name` varchar(255) NOT NULL,
   `admin_email` varchar(255) NOT NULL,
   `admin_password` varchar(255) NOT NULL,
+  `admin_image` varchar(255) NOT NULL,
   `admin_type` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_email`, `admin_password`, `admin_image`, `admin_type`) VALUES
+(1, 'ahmad', 'ahmadabotoimah@gmail.com', 'Aa123456', 'uploads/admin_image/61ad4f6253e223.jpeg', 1);
 
 -- --------------------------------------------------------
 
@@ -117,6 +125,26 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_description`, `pr
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `unique_visitors`
+--
+
+CREATE TABLE `unique_visitors` (
+  `visit_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `visitor_ip` varchar(255) NOT NULL,
+  `visittor_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `unique_visitors`
+--
+
+INSERT INTO `unique_visitors` (`visit_date`, `visitor_ip`, `visittor_id`) VALUES
+('2021-12-05 23:52:41', '::1', 1),
+('2021-12-05 23:59:22', '::2', 4);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -174,6 +202,13 @@ ALTER TABLE `products`
   ADD KEY `product_category` (`product_categorie_id`);
 
 --
+-- Indexes for table `unique_visitors`
+--
+ALTER TABLE `unique_visitors`
+  ADD PRIMARY KEY (`visittor_id`),
+  ADD UNIQUE KEY `visitor_ip` (`visitor_ip`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -188,7 +223,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -207,6 +242,12 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `unique_visitors`
+--
+ALTER TABLE `unique_visitors`
+  MODIFY `visittor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`

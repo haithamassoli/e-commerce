@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 session_start();
+=======
+<?php
+session_start();
+$total = 0;
+?>
+>>>>>>> 0d430894aec45a1a34c7211927a52f3172d70983
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +48,7 @@ session_start();
 
 <body class="animsition">
 	<!-- Header -->
-	<header>
+	<header class="header-v2">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<div class="wrap-menu-desktop">
@@ -75,29 +82,31 @@ session_start();
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
 						<?php if (!isset($_SESSION['type'])) { ?>
-							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								<a href="sign_in.php">LOGIN</a>
-							</div>
+							<li class="cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+								<a href="sign_in.php" class="cl1">Login</a>
+							</li>
 						<?php } elseif ($_SESSION['type'] == 0) { ?>
-							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								<a href="profile.php">Profile</a>
-							</div>
-							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								<a href="logout.php">Logout</a>
-							</div>
+							<li class="cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+								<a href="profile.php" class="cl1">Profile</a>
+							</li>
+							<li class="cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+								<a href="logout.php" class="cl1">Logout</a>
+							</li>
 						<?php } elseif ($_SESSION['type'] == 1 || $_SESSION['type'] == 2) { ?>
-							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								<a href="admin/index.php">DashBoard</a>
-							</div>
-							<div class="cl2 hov-cl1 trans-04 p-l-22 p-r-11" style="cursor: pointer;">
-								<a href="logout.php">Logout</a>
-							</div>
+							<li class="cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+								<a href="admin/index.php" class="cl1">DashBoard</a>
+							</li>
+							<li class="cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+								<a href="logout.php" class="cl1">Logout</a>
+							</li>
 						<?php } ?>
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php if (isset($_SESSION['cart'])) {
+																																		print_r(count($_SESSION['cart']));
+																																	}; ?>">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
@@ -122,7 +131,9 @@ session_start();
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?php if (isset($_SESSION['cart'])) {
+																																print_r(count($_SESSION['cart']));
+																															}; ?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
@@ -142,40 +153,9 @@ session_start();
 
 		<!-- Menu Mobile -->
 		<div class="menu-mobile">
-			<ul class="topbar-mobile">
-				<li>
-					<div class="left-top-bar">
-						Free shipping for standard order over $100
-					</div>
-				</li>
-
-				<li>
-					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							Help & FAQs
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							My Account
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							USD
-						</a>
-					</div>
-				</li>
-			</ul>
-
 			<ul class="main-menu-m">
 				<li>
 					<a href="index.php">Home</a>
-					<span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span>
 				</li>
 
 				<li>
@@ -189,6 +169,25 @@ session_start();
 				<li>
 					<a href="contact.php">Contact</a>
 				</li>
+				<?php if (!isset($_SESSION['type'])) { ?>
+					<li>
+						<a href="sign_in.php">LOGIN</a>
+					</li>
+				<?php } elseif ($_SESSION['type'] == 0) { ?>
+					<li>
+						<a href="profile.php">Profile</a>
+					</li>
+					<li>
+						<a href="logout.php">Logout</a>
+					</li>
+				<?php } elseif ($_SESSION['type'] == 1 || $_SESSION['type'] == 2) { ?>
+					<li>
+						<a href="admin/index.php">DashBoard</a>
+					</li>
+					<li>
+						<a href="logout.php">Logout</a>
+					</li>
+				<?php } ?>
 			</ul>
 		</div>
 
@@ -226,58 +225,31 @@ session_start();
 
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-01.jpg" alt="IMG">
-						</div>
+					<?php if (isset($_SESSION['cart'])) {
+						foreach ($_SESSION['cart'] as $key => $value) { ?>
+							<li class="header-cart-item flex-w flex-t m-b-12">
+								<div class="header-cart-item-img">
+									<img src="<?php echo $value['product_image']; ?>" alt="IMG">
+								</div>
 
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat
-							</a>
+								<div class="header-cart-item-txt p-t-8">
+									<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+										<?php echo $value['product_name'] . " " . $value['color'] . " " . $value['size']; ?>
+									</a>
 
-							<span class="header-cart-item-info">
-								1 x $19.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-02.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-03.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-						</div>
-					</li>
+									<span class="header-cart-item-info">
+										<?php echo $value['quantity'] . " x $" . $value['product_price'];
+										$total += $value['product_price'] * $value['quantity']; ?>
+									</span>
+								</div>
+							</li>
+					<?php }
+					} ?>
 				</ul>
 
 				<div class="w-full">
 					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
+						Total: $<?php echo $total; ?>
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
