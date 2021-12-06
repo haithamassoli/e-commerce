@@ -1,9 +1,4 @@
 <?php
-if (!isset($_SESSION["type"]) || $_SESSION["type"] == 0) {
-  header('location:../index.php');
-}
-?>
-<?php
 include "./includes/header.php";
 $sql = "SELECT * FROM admins ";
 $result = mysqli_query($conn, $sql);
@@ -108,4 +103,9 @@ $last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </div>
     </div>
 </main>
+<?php
+if (!isset($_SESSION["type"]) || $_SESSION["type"] == 0) {
+  header('location:../index.php');
+}
+?>
 <?php include "./includes/footer.php"; ?>

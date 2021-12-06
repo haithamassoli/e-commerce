@@ -1,9 +1,4 @@
 <?php
-if (!isset($_SESSION["type"]) || $_SESSION["type"] == 0) {
-  header('location:../index.php');
-}
-?>
-<?php
 ob_start();
 include "./includes/header.php";
 // select all comments
@@ -189,5 +184,10 @@ if (isset($_GET["do"])) {
   </div>
 <?php } ?>
 <!-- end table -->
+<?php
+if (!isset($_SESSION["type"]) || $_SESSION["type"] == 0) {
+  header('location:../index.php');
+}
+?>
 <?php include "./includes/footer.php";
 ob_end_flush(); ?>
