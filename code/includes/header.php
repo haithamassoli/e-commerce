@@ -100,7 +100,7 @@ $total = 0;
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php print_r(count($_SESSION['cart'])); ?>">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
@@ -125,7 +125,7 @@ $total = 0;
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?php print_r(count($_SESSION['cart'])); ?>">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
