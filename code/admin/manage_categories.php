@@ -34,7 +34,7 @@ if (isset($_GET["do"])) {
     }
     if ($category_description == "") {
       $checkok = 0;
-      $categoryDescriptionError = "The Category Name shouldn't be empty!";
+      $categoryDescriptionError = "The Category Description shouldn't be empty!";
     }
     if ($category_image["size"] == 0) {
       $check = 0;

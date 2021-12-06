@@ -60,6 +60,7 @@ if (isset($_GET['do'])) {
     $sql = "SELECT * FROM products WHERE product_id =$id";
     $edit = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($edit, MYSQLI_ASSOC);
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $check = 1;
       // Check file size
@@ -91,12 +92,36 @@ if (isset($_GET['do'])) {
         $imageError = "Sorry, your file is too large.";
         $check      = 0;
       }
-      // Check if image file is a actual image or fake image
-      // $check_if_image = getimagesize($image["tmp_name"]);
-      // if ($check_if_image == false) {
-      //     $imageError = "File is not an image.";
-      //     $check = 0;
-      // }
+      //Validation
+      if(isset($product_name)){
+        if ($product_name == "") {
+          $product_nameError = "The product Name shouldn't be empty!";
+          $check = 0;
+        }
+      }
+      if(isset($product_description)){
+      if ($product_description == "") {
+        $check = 0;
+        $product_descriptionError = "The product description shouldn't be empty!";
+      }
+    }
+    if(isset($product_price)){
+      if ($product_price == "") {
+        $check = 0;
+        $product_priceError = "The product price shouldn't be empty!";
+      }}
+      if(isset($product_quantity)){
+      if ($product_quantity == "") {
+        $check = 0;
+        $product_quantityError = "The product quantity shouldn't be empty!";
+      }}
+      if(isset($product_tag)){
+      if ($product_tag == "") {
+        $check = 0;
+        $product_tagError = "The product tag shouldn't be empty!";
+      }}
+
+
       if ($check == 1) {
         $image_folder = "admin/uploads/";
         $target_file  = $image_folder . uniqid() . basename($image["name"]);
@@ -150,6 +175,35 @@ if (isset($_GET['do'])) {
         $imageError = "Sorry, your file is too large.";
         $check      = 0;
       }
+      //Validation
+      if(isset($product_name)){
+        if ($product_name == "") {
+          $product_nameError = "The product Name shouldn't be empty!";
+          $check = 0;
+        }
+      }
+      if(isset($product_description)){
+      if ($product_description == "") {
+        $check = 0;
+        $product_descriptionError = "The product description shouldn't be empty!";
+      }
+    }
+    if(isset($product_price)){
+      if ($product_price == "") {
+        $check = 0;
+        $product_priceError = "The product price shouldn't be empty!";
+      }}
+      if(isset($product_quantity)){
+      if ($product_quantity == "") {
+        $check = 0;
+        $product_quantityError = "The product quantity shouldn't be empty!";
+      }}
+      if(isset($product_tag)){
+      if ($product_tag == "") {
+        $check = 0;
+        $product_tagError = "The product tag shouldn't be empty!";
+      }}
+
       // // Check if image file is a actual image or fake image
       // $check_if_image = getimagesize($image["tmp_name"]);
       // if ($check_if_image == false) {
@@ -207,18 +261,23 @@ if (isset($_GET['do'])) {
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
                       <input type="text" name="product_name" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <div id="emailerr" class="form-text" style='color:red;'>
+                      <?php if(isset($product_nameError)){ echo $product_nameError; }  ?>
+                    </div>
                       <div class="form-control-icon col-3 "></div>
                     </div>
+                  </div> 
                   </div>
                   <div class="col-md-4">
-                    <label>
-                      product_description
-                    </label>
+                    <label> product_description</label>
                   </div>
                   <div class="col-md-8">
                     <div class="form-group has-icon-left">
                       <div class="position-relative row justify-content-center align-items-center d-flex">
                         <input type="text" name="product_description" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                        <div id="emailerr" class="form-text" style='color:red;'>
+                        <?php if(isset($product_descriptionError)){ echo $product_descriptionError; }  ?>
+                      </div>
                         <div class="form-control-icon col-3 "></div>
                       </div>
                     </div>
@@ -230,106 +289,14 @@ if (isset($_GET['do'])) {
                     <div class="form-group has-icon-left">
                       <div class="position-relative row justify-content-center align-items-center d-flex">
                         <input type="number" name="product_price" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                        <div id="emailerr" class="form-text" style='color:red;'>
+                        <?php if(isset($product_priceError)){ echo $product_priceError; }  ?>
+                      </div>
                         <div class="form-control-icon col-3 "></div>
                       </div>
                     </div>
                   </div>
-                  <<<<<<< HEAD <div class="col-md-4">
-                    <label>product_quantity</label>
-                </div>
-                <div class="col-md-8">
-                  <div class="form-group has-icon-left">
-                    <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="number" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                      <div class="form-control-icon col-3 "></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <label>product_rate</label>
-                </div>
-                <div class="col-md-8">
-                  <div class="form-group has-icon-left">
-                    <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="text" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                      <div class="form-control-icon col-3 "></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <label>product_desc_image_1</label>
-                </div>
-                <div class="col-md-8">
-                  <div class="form-group has-icon-left">
-                    <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="text" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                      <div class="form-control-icon col-3 "></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <label>product_desc_image_2</label>
-                </div>
-                <div class="col-md-8">
-                  <div class="form-group has-icon-left">
-                    <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="text" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                      <div class="form-control-icon col-3 "></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <label>product_desc_image_3</label>
-                </div>
-                <div class="col-md-8">
-                  <div class="form-group has-icon-left">
-                    <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="text" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                      <div class="form-control-icon col-3 "></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <label>product_tag</label>
-                </div>
-                <div class="col-md-8">
-                  <div class="form-group has-icon-left">
-                    <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="text" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                      <div class="form-control-icon col-3 "></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <label>product_size</label>
-                </div>
-                <div class="col-md-8">
-                  <div class="form-group has-icon-left">
-                    <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="text" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                      <div class="form-control-icon col-3 "></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <label>product_color</label>
-                </div>
-                <div class="col-md-8">
-                  <div class="form-group has-icon-left">
-                    <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="text" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                      <div class="form-control-icon col-3 "></div>
-                    </div>
-                  </div>
-                </div>
 
-
-                <div class="col-12 d-flex justify-content-end">
-                  <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                  <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                </div>
-                =======
-              </div>
               <div class="col-md-4">
                 <label>product_quantity</label>
               </div>
@@ -337,6 +304,9 @@ if (isset($_GET['do'])) {
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
                     <input type="number" name="product_quantity" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                    <div id="emailerr" class="form-text" style='color:red;'>
+                    <?php if(isset($product_nameError)){ echo $product_nameError; }  ?>
+                  </div>
                     <div class="form-control-icon col-3 "></div>
                   </div>
                 </div>
@@ -348,6 +318,8 @@ if (isset($_GET['do'])) {
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
                     <input name="mainimage" class="mt-2 p-2" type="file" />
+                    <div id="emailerr" class="form-text" style='color:red;'>
+                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
                     <div class="form-control-icon col-3 "></div>
                   </div>
                 </div>
@@ -359,6 +331,8 @@ if (isset($_GET['do'])) {
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
                     <input name="image1" class="mt-2 p-2" type="file" />
+                    <div id="emailerr" class="form-text" style='color:red;'>
+                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
                     <div class="form-control-icon col-3 "></div>
                   </div>
                 </div>
@@ -370,6 +344,8 @@ if (isset($_GET['do'])) {
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
                     <input name="image2" class="mt-2 p-2" type="file" />
+                    <div id="emailerr" class="form-text" style='color:red;'>
+                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
                     <div class="form-control-icon col-3 "></div>
                   </div>
                 </div>
@@ -381,39 +357,47 @@ if (isset($_GET['do'])) {
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
                     <input name="image3" class="mt-2 p-2" type="file" />
+                    <div id="emailerr" class="form-text" style='color:red;'>
+                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
                     <div class="form-control-icon col-3 "></div>
                   </div>
                 </div>
               </div>
               <div class="col-md-4">
-                <label> product image color option 1</label>
+                <label> product image 4</label>
               </div>
               <div class="col-md-8">
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
                     <input name="image4" class="mt-2 p-2" type="file" />
+                    <div id="emailerr" class="form-text" style='color:red;'>
+                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
                     <div class="form-control-icon col-3 "></div>
                   </div>
                 </div>
               </div>
               <div class="col-md-4">
-                <label> product image color option 2</label>
+                <label> product image 5</label>
               </div>
               <div class="col-md-8">
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
                     <input name="image5" class="mt-2 p-2" type="file" />
+                    <div id="emailerr" class="form-text" style='color:red;'>
+                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
                     <div class="form-control-icon col-3 "></div>
                   </div>
                 </div>
               </div>
               <div class="col-md-4">
-                <label> product image color option 3</label>
+                <label> product image 6</label>
               </div>
               <div class="col-md-8">
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
                     <input name="image6" class="mt-2 p-2" type="file" />
+                    <div id="emailerr" class="form-text" style='color:red;'>
+                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
                     <div class="form-control-icon col-3 "></div>
                   </div>
                 </div>
@@ -425,6 +409,8 @@ if (isset($_GET['do'])) {
                 <div class="form-group has-icon-left">
                   <div class="position-relative row justify-content-center align-items-center d-flex">
                     <input type="text" name="product_tag" placeholder="Separate Tags With Comma (,)" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                    <div id="emailerr" class="form-text" style='color:red;'>
+                    <?php if(isset($product_tagError)){ echo $product_tagError; }  ?></div>
                     <div class="form-control-icon col-3 "></div>
                   </div>
                 </div>

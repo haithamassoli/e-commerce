@@ -9,7 +9,7 @@ if (isset($_SESSION["type"])) {
   } else {
     @$id = $_SESSION["admin_id"];
   }
-  $sql    = "SELECT * FROM admins WHERE admin_id=$id ";
+  $sql    = "SELECT * FROM admins WHERE admin_id=$id";
   $result = mysqli_query($conn, $sql);
   $admins = mysqli_fetch_all($result, MYSQLI_ASSOC);
   // echo $admins[0]["admin_image"];

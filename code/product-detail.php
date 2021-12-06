@@ -19,70 +19,91 @@ function redirect($url)
 require('admin/includes/connect.php');
 
 //select products
-$sql = "SELECT * FROM products INNER JOIN categories ON products.product_categorie_id = categories.category_id WHERE product_id = {$_GET['id']}";
-$result = mysqli_query($conn, $sql);
-$product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-//select comments
-$sql = "SELECT * FROM comments INNER JOIN users ON comments.comment_user_id = users.user_id";
-$result = mysqli_query($conn, $sql);
-$comments  = mysqli_fetch_all($result, MYSQLI_ASSOC);
-//select related
-$sql = "SELECT * FROM products WHERE product_tag='related'";
-$result = mysqli_query($conn, $sql);
-$related  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+if (isset($_GET["id"])) {
+	@$comment_product_id  = $_GET["id"];
+	@$user_id = $_SESSION["user_id"];
+	@$comment = $_POST["review"];
+	@$rating = $_POST["rating"];
 
-@$comment_product_id  = $_GET["id"];
-@$user_id = $_SESSION["user_id"];
-@$comment = $_POST["review"];
-@$rating = $_POST["rating"];
+	// @$product_rate = $_POST["product_rate"];
+	@$image = $_FILES["image"];
+	$sql = "SELECT * FROM products INNER JOIN categories ON products.product_categorie_id = categories.category_id WHERE product_id = {$_GET['id']}";
+	$result = mysqli_query($conn, $sql);
+	$product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-// @$product_rate = $_POST["product_rate"];
-@$image = $_FILES["image"];
-//review
-if (isset($_POST["submit"])) {
-	$check = 1;
-	// Check file size
-	if ($image["size"] > 500000 || $image["size"] == 0) {
-		$imageError = "Sorry, your file is too large.";
-		$check      = 0;
-	}
-	// Check if image file is a actual image or fake image
-	$check_if_image = getimagesize($image["tmp_name"]);
-	if ($check_if_image == false) {
-		$imageError = "File is not an image.";
-		$check = 0;
-	}
-	if ($check == 1) {
-		$image_folder = "uploads/";
-		$target_file  = $image_folder . uniqid() . basename($image["name"]);
-		move_uploaded_file($image["tmp_name"], $target_file);
-		$sql = "INSERT INTO `comments` (`comment`, `comment_image`, 
+	//select comments
+	$sql = "SELECT * FROM comments INNER JOIN users ON comments.comment_user_id = users.user_id";
+	$result = mysqli_query($conn, $sql);
+	$comments  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+	$result = mysqli_query($conn, $sql);
+	$comments  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+	//select related
+	$sql = "SELECT * FROM products WHERE product_tag='related'";
+	$result = mysqli_query($conn, $sql);
+	$related  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
+	//review
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		if (isset($_POST["submit"])) {
+			$check = 1;
+			// Check file size
+			if ($image["size"] > 500000 || $image["size"] == 0) {
+				$imageError = "Sorry, your file is too large.";
+				$check      = 0;
+			}
+			// Check if image file is a actual image or fake image
+			$check_if_image = getimagesize($image["tmp_name"]);
+			if ($check_if_image == false) {
+				$imageError = "File is not an image.";
+				$check = 0;
+			}
+			if ($check == 1) {
+				$image_folder = "uploads/";
+				$target_file  = $image_folder . uniqid() . basename($image["name"]);
+				move_uploaded_file($image["tmp_name"], $target_file);
+				$sql = "INSERT INTO `comments` (`comment`, `comment_image`, 
 		`comment_product_id`,`comment_user_id`,`comment_rate`)
 		VALUES ('$comment','$target_file',$comment_product_id,$user_id,$rating)";
-		if (mysqli_query($conn, $sql)) {
-			echo "New record created successfully";
-		} else {
-			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				if (mysqli_query($conn, $sql)) {
+					echo "New record created successfully";
+				} else {
+					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				}
+				$conn->close();
+				redirect("product-detail.php?id={$comment_product_id}");
+			}
 		}
-		$conn->close();
-		// redirect("product-detail.php");
 	}
-}
-// add to cart
-if (isset($_POST["add_to_cart"])) {
-	$ok = 1;
-	if ($_POST['size'] == 0) {
-		$sizeError = "you must choose size!";
-		$ok = 0;
-	}
-	if ($ok == 1) {
-		if (isset($_SESSION['cart'])) {
-			$items = array_column($_SESSION["cart"], 'product_id');
-			$size = array_column($_SESSION["cart"], 'size');
-			if (in_array($_POST['add_to_cart_id'], $items)  && in_array($_POST['size'], $size)) {
-				$_SESSION["cart"][$_POST['add_to_cart_id']  . $_POST['size']]["quantity"] += $_POST['num-product'];
-				header("location:product-detail.php?id={$_GET['id']}");
+	// add to cart
+	if (isset($_POST["add_to_cart"])) {
+		$ok = 1;
+		if ($_POST['size'] == 0) {
+			$sizeError = "you must choose size!";
+			$ok = 0;
+		}
+		if ($ok == 1) {
+			if (isset($_SESSION['cart'])) {
+				$items = array_column($_SESSION["cart"], 'product_id');
+				$size = array_column($_SESSION["cart"], 'size');
+				if (in_array($_POST['add_to_cart_id'], $items)  && in_array($_POST['size'], $size)) {
+					$_SESSION["cart"][$_POST['add_to_cart_id']  . $_POST['size']]["quantity"] += $_POST['num-product'];
+					header("location:product-detail.php?id={$_GET['id']}");
+				} else {
+					$item_array = array(
+						'product_id' => $_POST['add_to_cart_id'],
+						'product_price' => $_POST['product_price'],
+						'quantity' => $_POST['num-product'],
+						'product_name' => $_POST['product_name'],
+						'product_image' => $_POST['product_image'],
+						'size' => $_POST['size']
+					);
+					$_SESSION["cart"][$_POST['add_to_cart_id'] . $_POST['size']] = $item_array;
+					header("location:product-detail.php?id={$_GET['id']}");
+				}
 			} else {
 				$item_array = array(
 					'product_id' => $_POST['add_to_cart_id'],
@@ -95,17 +116,6 @@ if (isset($_POST["add_to_cart"])) {
 				$_SESSION["cart"][$_POST['add_to_cart_id'] . $_POST['size']] = $item_array;
 				header("location:product-detail.php?id={$_GET['id']}");
 			}
-		} else {
-			$item_array = array(
-				'product_id' => $_POST['add_to_cart_id'],
-				'product_price' => $_POST['product_price'],
-				'quantity' => $_POST['num-product'],
-				'product_name' => $_POST['product_name'],
-				'product_image' => $_POST['product_image'],
-				'size' => $_POST['size']
-			);
-			$_SESSION["cart"][$_POST['add_to_cart_id'] . $_POST['size']] = $item_array;
-			header("location:product-detail.php?id={$_GET['id']}");
 		}
 	}
 }
@@ -316,13 +326,14 @@ if (isset($_POST["add_to_cart"])) {
 							</div>
 						</div>
 
-						<?php foreach ($comments as $key => $row) { ?>
-							<!-- - -->
-							<div class="tab-pane fade" id="reviews" role="tabpanel">
-								<div class="row">
-									<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
-										<div class="p-b-30 m-lr-15-sm">
-											<!-- Review -->
+
+						<!-- - -->
+						<div class="tab-pane fade" id="reviews" role="tabpanel">
+							<div class="row">
+								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
+									<div class="p-b-30 m-lr-15-sm">
+										<!-- Review -->
+										<?php foreach ($comments as  $row) { ?>
 											<div class="flex-w flex-t p-b-68">
 												<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
 													<img src="<?php echo $row["user_image"];  ?>" alt="AVATAR">
@@ -343,57 +354,70 @@ if (isset($_POST["add_to_cart"])) {
 														<span class="fs-18 cl11">
 															<?php
 															for ($r = 1; $r <= $row["comment_rate"]; $r++) {
-																echo '<i class="fas fa-star"></i>';
+																echo '<i class="zmdi zmdi-star"></i>';
 															}
 															for ($e = 1; $e <= 5 - $row["comment_rate"]; $e++) {
-																echo '<i class="far fa-star"></i>';
+																echo '<i class="item-rating pointer zmdi zmdi-star-outline"></i>';
 															}
 															?>
 															<input class="dis-none" type="number" name="rating">
 														</span>
-
 													</div>
 													<p class="stext-102 cl6">
 														<?php echo $row["comment"];  ?>
 													</p>
 												</div>
 											</div>
+										<?php } ?>
+										<!-- Add review -->
+										<?php
+										if (isset($_SESSION['type'])) {
+											if ($_SESSION['type'] == 0) {
+										?>
+												<form class="w-full" enctype="multipart/form-data" method="POST">
+													<h5 class="mtext-108 cl2 p-b-7">
+														Add a review
+													</h5>
 
-											<!-- Add review -->
-											<form class="w-full" enctype="multipart/form-data" method="POST">
-												<h5 class="mtext-108 cl2 p-b-7">
-													Add a review
-												</h5>
+													<div class="flex-w flex-m p-t-50 p-b-23">
+														<span class="stext-102 cl3 m-r-16">
+															Your Rating
+														</span>
+														<span class="wrap-rating fs-18 cl11 pointer">
+															<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+															<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+															<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+															<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+															<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+															<input class="dis-none" type="number" name="rating">
+														</span>
+													</div>
 
-												<div class="flex-w flex-m p-t-50 p-b-23">
-													<span class="stext-102 cl3 m-r-16">
-														Your Rating
-													</span>
-													<span class="wrap-rating fs-18 cl11 pointer">
-														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-														<input class="dis-none" type="number" name="rating">
-													</span>
-												</div>
+													<div class="file-upload-wrapper" data-text="Select your file!">
 
-												<div class="file-upload-wrapper" data-text="Select your file!">
-													<input name="image" type="file" class="file-upload-field" value="">
-												</div>
-										</div>
-										<button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10" value="submit" name="submit">
-											Submit
-										</button>
-										</form>
+														<div class="row p-b-25">
+															<div class="col-12 p-b-5">
+																<label class="stext-102 cl3" for="review">Your review</label>
+																<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
+															</div>
+															<input name="image" type="file" class="file-upload-field" value="">
+
+														</div>
+													</div>
 									</div>
+									<button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10" value="submit" name="submit">
+										Submit
+									</button>
+									</form>
+							<?php }
+										} ?>
 								</div>
 							</div>
-						<?php } ?>
+						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 		</div>
 		</div>
@@ -458,8 +482,11 @@ if (isset($_POST["add_to_cart"])) {
 					<?php } ?>
 				</div>
 			</div>
+
+
+
 		</div>
 	</section>
-	<?php include "./includes/footer.php"; ?>
-	<?php ob_end_flush(); // Release The Output
+	<?php include "./includes/footer.php";
+	ob_end_flush(); // Release The Output
 	?>
