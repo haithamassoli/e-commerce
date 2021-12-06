@@ -205,25 +205,25 @@ include "./admin/includes/connect.php";
 			?>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php
-																			if ($val["product_tag"] == "women") {
-																				echo "women";
-																			}
-																			if ($val["product_tag"] == "watches") {
-																				echo "watches";
-																			}
-																			if ($val["product_tag"] == "shoes") {
-																				echo "shoes";
-																			}
-																			if ($val["product_tag"] == "sales") {
-																				echo "sales";
-																			}
-																			if ($val["product_tag"] == "new") {
-																				echo "new";
-																			}
-																			if ($val["product_tag"] == "men") {
-																				echo "men";
-																			}
-																			?>">
+																																		if ($val["product_tag"] == "women") {
+																																			echo "women";
+																																		}
+																																		if ($val["product_tag"] == "watches") {
+																																			echo "watches";
+																																		}
+																																		if ($val["product_tag"] == "shoes") {
+																																			echo "shoes";
+																																		}
+																																		if ($val["product_tag"] == "sales") {
+																																			echo "sales";
+																																		}
+																																		if ($val["product_tag"] == "new") {
+																																			echo "new";
+																																		}
+																																		if ($val["product_tag"] == "men") {
+																																			echo "men";
+																																		}
+																																		?>">
 					<!-- Block2 -->
 					<div class="block2">
 						<a href="product-detail.php?id=<?php echo $val['product_id']; ?>">

@@ -40,10 +40,7 @@ if (isset($_GET["id"])) {
 		redirect("index.php");
 	}
 	//select comments
-	$sql = "SELECT * FROM comments INNER JOIN users ON comments.comment_user_id = users.user_id";
-	$result = mysqli_query($conn, $sql);
-	$comments  = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
+	$sql = "SELECT * FROM comments INNER JOIN products ON comments.comment_product_id = products.product_id INNER JOIN users ON comments.comment_user_id = users.user_id WHERE products.product_id = {$_GET['id']}";
 	$result = mysqli_query($conn, $sql);
 	$comments  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
@@ -69,7 +66,7 @@ if (isset($_GET["id"])) {
 			VALUES ('$comment',$comment_product_id,$user_id,$rating)";
 			}
 			if (mysqli_query($conn, $sql)) {
-				echo "New record created successfully";
+				redirect("product-detail.php?id={$comment_product_id}");
 			} else {
 				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 			}
@@ -82,7 +79,7 @@ if (isset($_GET["id"])) {
 			VALUES ('$comment','$target_file',$comment_product_id,$user_id,$rating)";
 
 				if (mysqli_query($conn, $sql)) {
-					echo "New record created successfully";
+					redirect("product-detail.php?id={$comment_product_id}");
 				} else {
 					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 				}
