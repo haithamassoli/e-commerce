@@ -88,6 +88,9 @@ include("admin/includes/connect.php")
 							<li class="cl2 hov-cl1 trans-04 p-l-22 p-r-11">
 								<a href="sign_in.php" class="cl1">Login</a>
 							</li>
+							<li class="cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+								<a href="sign_up.php" class="cl1">Sign Up</a>
+							</li>
 						<?php } elseif ($_SESSION['type'] == 0) { ?>
 							<li class="cl2 hov-cl1 trans-04 p-l-22 p-r-11">
 								<a href="profile.php" class="cl1">Profile</a>
@@ -108,8 +111,10 @@ include("admin/includes/connect.php")
 						</div>
 
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php if (isset($_SESSION['cart'])) {
-																																		print_r(count($_SESSION['cart']));
-																																	}; ?>">
+																																																													print_r(count($_SESSION['cart']));
+																																																												} else {
+																																																													echo 0;
+																																																												}; ?>">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
@@ -135,8 +140,10 @@ include("admin/includes/connect.php")
 				</div>
 
 				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?php if (isset($_SESSION['cart'])) {
-																																print_r(count($_SESSION['cart']));
-																															}; ?>">
+																																																											print_r(count($_SESSION['cart']));
+																																																										} else {
+																																																											echo 0;
+																																																										}; ?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
@@ -174,7 +181,10 @@ include("admin/includes/connect.php")
 				</li>
 				<?php if (!isset($_SESSION['type'])) { ?>
 					<li>
-						<a href="sign_in.php">LOGIN</a>
+						<a href="sign_in.php">Login</a>
+					</li>
+					<li>
+						<a href="sign_up.php">Sign Up</a>
 					</li>
 				<?php } elseif ($_SESSION['type'] == 0) { ?>
 					<li>
@@ -237,12 +247,12 @@ include("admin/includes/connect.php")
 
 								<div class="header-cart-item-txt p-t-8">
 									<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-										<?php echo $value['product_name'] . " " . $value['color'] . " " . $value['size']; ?>
+										<?php echo $value['product_name'] . " " . $value['size']; ?>
 									</a>
 
 									<span class="header-cart-item-info">
 										<?php echo $value['quantity'] . " x $" . $value['product_price'];
-										$total += $value['product_price'] * $value['quantity']; ?>
+										$total += (int)$value['product_price'] * (int)$value['quantity']; ?>
 									</span>
 								</div>
 							</li>

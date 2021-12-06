@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Output Buffering Start
 include "./includes/header.php";
 function redirect($url)
 {
@@ -18,9 +19,10 @@ function redirect($url)
 require('admin/includes/connect.php');
 
 //select products
-$sql = "SELECT * FROM products WHERE product_id = {$_GET['id']}";
+$sql = "SELECT * FROM products INNER JOIN categories ON products.product_categorie_id = categories.category_id WHERE product_id = {$_GET['id']}";
 $result = mysqli_query($conn, $sql);
 $product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 //select comments
 $sql = "SELECT * FROM comments INNER JOIN users ON comments.comment_user_id = users.user_id";
 $result = mysqli_query($conn, $sql);
@@ -69,12 +71,30 @@ if (isset($_POST["submit"])) {
 }
 // add to cart
 if (isset($_POST["add_to_cart"])) {
-	if (isset($_SESSION['cart'])) {
-		$items = array_column($_SESSION["cart"], 'product_id');
-		$size = array_column($_SESSION["cart"], 'size');
-		$color = array_column($_SESSION["cart"], 'color');
-		if (in_array($_POST['add_to_cart_id'], $items) && in_array($_POST['color'], $color)  && in_array($_POST['size'], $size)) {
-			$_SESSION["cart"][$_POST['add_to_cart_id'] . $_POST['color'] . $_POST['size']]["quantity"] += $_POST['num-product'];
+	$ok = 1;
+	if ($_POST['size'] == 0) {
+		$sizeError = "you must choose size!";
+		$ok = 0;
+	}
+	if ($ok == 1) {
+		if (isset($_SESSION['cart'])) {
+			$items = array_column($_SESSION["cart"], 'product_id');
+			$size = array_column($_SESSION["cart"], 'size');
+			if (in_array($_POST['add_to_cart_id'], $items)  && in_array($_POST['size'], $size)) {
+				$_SESSION["cart"][$_POST['add_to_cart_id']  . $_POST['size']]["quantity"] += $_POST['num-product'];
+				header("location:product-detail.php?id={$_GET['id']}");
+			} else {
+				$item_array = array(
+					'product_id' => $_POST['add_to_cart_id'],
+					'product_price' => $_POST['product_price'],
+					'quantity' => $_POST['num-product'],
+					'product_name' => $_POST['product_name'],
+					'product_image' => $_POST['product_image'],
+					'size' => $_POST['size']
+				);
+				$_SESSION["cart"][$_POST['add_to_cart_id'] . $_POST['size']] = $item_array;
+				header("location:product-detail.php?id={$_GET['id']}");
+			}
 		} else {
 			$item_array = array(
 				'product_id' => $_POST['add_to_cart_id'],
@@ -82,22 +102,11 @@ if (isset($_POST["add_to_cart"])) {
 				'quantity' => $_POST['num-product'],
 				'product_name' => $_POST['product_name'],
 				'product_image' => $_POST['product_image'],
-				'color' => $_POST['color'],
 				'size' => $_POST['size']
 			);
-			$_SESSION["cart"][$_POST['add_to_cart_id'] . $_POST['color'] . $_POST['size']] = $item_array;
+			$_SESSION["cart"][$_POST['add_to_cart_id'] . $_POST['size']] = $item_array;
+			header("location:product-detail.php?id={$_GET['id']}");
 		}
-	} else {
-		$item_array = array(
-			'product_id' => $_POST['add_to_cart_id'],
-			'product_price' => $_POST['product_price'],
-			'quantity' => $_POST['num-product'],
-			'product_name' => $_POST['product_name'],
-			'product_image' => $_POST['product_image'],
-			'color' => $_POST['color'],
-			'size' => $_POST['size']
-		);
-		$_SESSION["cart"][$_POST['add_to_cart_id'] . $_POST['color'] . $_POST['size']] = $item_array;
 	}
 }
 ?>
@@ -112,12 +121,12 @@ if (isset($_POST["add_to_cart"])) {
 		</a>
 
 		<a href="shop.php" class="stext-109 cl8 hov-cl1 trans-04">
-			Men
+			<?php echo $product[0]['category_name'] ?>
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 		</a>
 
 		<span class="stext-109 cl4">
-			Lightweight Jacket
+			<?php echo $product[0]['product_name'] ?>
 		</span>
 	</div>
 </div>
@@ -133,7 +142,6 @@ if (isset($_POST["add_to_cart"])) {
 						<div class="wrap-slick3 flex-sb flex-w">
 							<div class="wrap-slick3-dots"></div>
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
 							<div class="slick3 gallery-lb">
 								<div class="item-slick3" data-thumb="<?php echo 'admin/' . $row["product_main_image"]; ?>">
 									<div class="wrap-pic-w pos-relative">
@@ -221,7 +229,7 @@ if (isset($_POST["add_to_cart"])) {
 									<div class="size-204 respon6-next">
 										<div class="rs1-select2 bor8 bg0">
 											<select class="js-select2" name="size">
-												<option>Choose an option</option>
+												<option value="0">Choose an option</option>
 												<option value="S">Size S</option>
 												<option value="M">Size M</option>
 												<option value="L">Size L</option>
@@ -229,28 +237,9 @@ if (isset($_POST["add_to_cart"])) {
 											</select>
 											<div class="dropDownSelect2"></div>
 										</div>
+										<span class="text-danger"><?php echo isset($sizeError) ? $sizeError : ""; ?></span>
 									</div>
 								</div>
-
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-203 flex-c-m respon6">
-										Color
-									</div>
-
-									<div class="size-204 respon6-next">
-										<div class="rs1-select2 bor8 bg0">
-											<select class="js-select2" name="color">
-												<option>Choose an option</option>
-												<option value="Red">Red</option>
-												<option value="Blue">Blue</option>
-												<option value="White">White</option>
-												<option value="Gray">Grey</option>
-											</select>
-											<div class="dropDownSelect2"></div>
-										</div>
-									</div>
-								</div>
-
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-204 flex-w flex-m respon6-next">
 										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
@@ -472,6 +461,8 @@ if (isset($_POST["add_to_cart"])) {
 		</div>
 	</section>
 	<?php include "./includes/footer.php"; ?>
+	<?php ob_end_flush(); // Release The Output
+	?>
 	<script>
 		let y = document.getElementById("mydiv");
 		y.style.background = 'blue';
