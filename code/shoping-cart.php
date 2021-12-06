@@ -5,18 +5,18 @@ echo "<pre>";
 print_r($_SESSION['cart']);
 
 echo "</pre>";
-if (isset($_POST)) {
-	if (isset($_SESSION["cart"])) {
-		foreach ($_SESSION['cart'] as $key => $value) {
-			$items = array_column($_SESSION["cart"], 'product_id');
-			$size = array_column($_SESSION["cart"], 'size');
-			$color = array_column($_SESSION["cart"], 'color');
-			if (in_array($value['product_id'], $items) && in_array($value['color'], $color)  && in_array($value['size'], $size)) {
-				$_SESSION["cart"][$value['product_id'] . $value['color'] . $value['size']]["quantity"] = $_POST['product_id'];
-			}
-		}
-	}
-}
+// if (isset($_POST)) {
+// 	if (isset($_SESSION["cart"])) {
+// 		foreach ($_SESSION['cart'] as $key => $value) {
+// 			$items = array_column($_SESSION["cart"], 'product_id');
+// 			$size = array_column($_SESSION["cart"], 'size');
+// 			$color = array_column($_SESSION["cart"], 'color');
+// 			if (in_array($value['product_id'], $items) && in_array($value['color'], $color)  && in_array($value['size'], $size)) {
+// 				$_SESSION["cart"][$value['product_id'] . $value['color'] . $value['size']]["quantity"] = $_POST['product_id'];
+// 			}
+// 		}
+// 	}
+// }
 // $sql = "SELECT * FROM products WHERE product_id = {$_SESSION['cart']} "
 ?>
 <!-- breadcrumb -->
@@ -58,7 +58,7 @@ if (isset($_POST)) {
 												<img src="<?php echo $value['product_image']; ?>" alt="IMG">
 											</div>
 										</td>
-										<td class="column-2"><?php echo $value['product_name'] . " " . $value['color'] . " " . $value['size']; ?></td>
+										<td class="column-2"><?php echo $value['product_name'] .  " " . $value['size']; ?></td>
 										<td class="column-3">$ <?php echo $value['product_price']; ?></td>
 										<td class="column-4">
 											<div class="wrap-num-product flex-w m-l-auto m-r-0">
@@ -77,8 +77,9 @@ if (isset($_POST)) {
 									</tr>
 							<?php }
 							} else {
-								echo "no item in cart";
+								echo	'<div class="text-center h2 mb-5">no item in cart</div>';
 							} ?>
+
 						</table>
 					</div>
 
