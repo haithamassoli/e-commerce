@@ -35,7 +35,7 @@ Download Xampp on your computer to view this project.
 3. Udemy PHP online course.
 
 ## Wireframe
-https://github.com/haithamassoli/e-commerce/tree/secondBranch
+https://drive.google.com/file/d/1vcw2CGQvwJDIpPJ0io6hPVTJCkJ0vli5/view
 
 ## Mockup
 
