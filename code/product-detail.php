@@ -74,7 +74,7 @@ if (isset($_POST["add_to_cart"])) {
 		$size = array_column($_SESSION["cart"], 'size');
 		$color = array_column($_SESSION["cart"], 'color');
 		if (in_array($_POST['add_to_cart_id'], $items) && in_array($_POST['color'], $color)  && in_array($_POST['size'], $size)) {
-			$_SESSION["cart"][$_POST['add_to_cart_id'] . $_POST['color'] . $_POST['size']]["quantity"] += $_POST['num-product'];
+			$_SESSION["cart"][$_POST['add_to_cart_id'] . $_POST['color'] . $_POST['size']]["quantity"] = $_POST['num-product'];
 		} else {
 			$item_array = array(
 				'product_id' => $_POST['add_to_cart_id'],

@@ -235,7 +235,7 @@ $total = 0;
 
 									<span class="header-cart-item-info">
 										<?php echo $value['quantity'] . " x $" . $value['product_price'];
-										$total += $value['product_price'] * $value['quantity']; ?>
+										$total += (int)$value['product_price'] * (int)$value['quantity']; ?>
 									</span>
 								</div>
 							</li>
