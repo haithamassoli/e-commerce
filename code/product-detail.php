@@ -51,23 +51,29 @@ if (isset($_GET["id"])) {
 		if (isset($_POST["submit"])) {
 			$check = 1;
 			// Check file size
-			if ($image["size"] > 500000 || $image["size"] == 0) {
+			if ($image["size"] > 500000) {
 				$imageError = "Sorry, your file is too large.";
 				$check      = 0;
 			}
 			// Check if image file is a actual image or fake image
-			$check_if_image = getimagesize($image["tmp_name"]);
-			if ($check_if_image == false) {
-				$imageError = "File is not an image.";
-				$check = 0;
+			if ($check == 1 && $image["size"] == 0) {
+				$sql = "INSERT INTO `comments` (`comment`, 
+			`comment_product_id`,`comment_user_id`,`comment_rate`)
+			VALUES ('$comment',$comment_product_id,$user_id,$rating)";
 			}
-			if ($check == 1) {
+			if (mysqli_query($conn, $sql)) {
+				echo "New record created successfully";
+			} else {
+				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			}
+			if ($check == 1 && $image["size"] != 0) {
 				$image_folder = "uploads/";
 				$target_file  = $image_folder . uniqid() . basename($image["name"]);
 				move_uploaded_file($image["tmp_name"], $target_file);
 				$sql = "INSERT INTO `comments` (`comment`, `comment_image`, 
-		`comment_product_id`,`comment_user_id`,`comment_rate`)
-		VALUES ('$comment','$target_file',$comment_product_id,$user_id,$rating)";
+			`comment_product_id`,`comment_user_id`,`comment_rate`)
+			VALUES ('$comment','$target_file',$comment_product_id,$user_id,$rating)";
+
 				if (mysqli_query($conn, $sql)) {
 					echo "New record created successfully";
 				} else {
@@ -365,6 +371,11 @@ if (isset($_GET["id"])) {
 													</div>
 													<p class="stext-102 cl6">
 														<?php echo $row["comment"];  ?>
+													</p>
+													<p class="stext-102 cl6">
+														<?php if ($row["comment_image"] != Null) { ?>
+															<img src="<?php echo $row["comment_image"];  ?>" style='width:300px; height:200px; ' alt="">
+														<?php } ?>
 													</p>
 												</div>
 											</div>

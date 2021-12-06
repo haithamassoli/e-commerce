@@ -93,37 +93,40 @@ if (isset($_GET['do'])) {
         $check      = 0;
       }
       //Validation
-      if(isset($product_name)){
+      if (isset($product_name)) {
         if ($product_name == "") {
           $product_nameError = "The product Name shouldn't be empty!";
           $check = 0;
         }
       }
-      if(isset($product_description)){
-      if ($product_description == "") {
-        $check = 0;
-        $product_descriptionError = "The product description shouldn't be empty!";
+      if (isset($product_description)) {
+        if ($product_description == "") {
+          $check = 0;
+          $product_descriptionError = "The product description shouldn't be empty!";
+        }
       }
-    }
-    if(isset($product_price)){
-      if ($product_price == "") {
-        $check = 0;
-        $product_priceError = "The product price shouldn't be empty!";
-      }}
-      if(isset($product_quantity)){
-      if ($product_quantity == "") {
-        $check = 0;
-        $product_quantityError = "The product quantity shouldn't be empty!";
-      }}
-      if(isset($product_tag)){
-      if ($product_tag == "") {
-        $check = 0;
-        $product_tagError = "The product tag shouldn't be empty!";
-      }}
+      if (isset($product_price)) {
+        if ($product_price == "") {
+          $check = 0;
+          $product_priceError = "The product price shouldn't be empty!";
+        }
+      }
+      if (isset($product_quantity)) {
+        if ($product_quantity == "") {
+          $check = 0;
+          $product_quantityError = "The product quantity shouldn't be empty!";
+        }
+      }
+      if (isset($product_tag)) {
+        if ($product_tag == "") {
+          $check = 0;
+          $product_tagError = "The product tag shouldn't be empty!";
+        }
+      }
 
 
       if ($check == 1) {
-        $image_folder = "admin/uploads/";
+        $image_folder = "uploads/";
         $target_file  = $image_folder . uniqid() . basename($image["name"]);
         $target_file1 = $image_folder . uniqid() . basename($image1["name"]);
         $target_file2 = $image_folder . uniqid() . basename($image2["name"]);
@@ -176,33 +179,36 @@ if (isset($_GET['do'])) {
         $check      = 0;
       }
       //Validation
-      if(isset($product_name)){
+      if (isset($product_name)) {
         if ($product_name == "") {
           $product_nameError = "The product Name shouldn't be empty!";
           $check = 0;
         }
       }
-      if(isset($product_description)){
-      if ($product_description == "") {
-        $check = 0;
-        $product_descriptionError = "The product description shouldn't be empty!";
+      if (isset($product_description)) {
+        if ($product_description == "") {
+          $check = 0;
+          $product_descriptionError = "The product description shouldn't be empty!";
+        }
       }
-    }
-    if(isset($product_price)){
-      if ($product_price == "") {
-        $check = 0;
-        $product_priceError = "The product price shouldn't be empty!";
-      }}
-      if(isset($product_quantity)){
-      if ($product_quantity == "") {
-        $check = 0;
-        $product_quantityError = "The product quantity shouldn't be empty!";
-      }}
-      if(isset($product_tag)){
-      if ($product_tag == "") {
-        $check = 0;
-        $product_tagError = "The product tag shouldn't be empty!";
-      }}
+      if (isset($product_price)) {
+        if ($product_price == "") {
+          $check = 0;
+          $product_priceError = "The product price shouldn't be empty!";
+        }
+      }
+      if (isset($product_quantity)) {
+        if ($product_quantity == "") {
+          $check = 0;
+          $product_quantityError = "The product quantity shouldn't be empty!";
+        }
+      }
+      if (isset($product_tag)) {
+        if ($product_tag == "") {
+          $check = 0;
+          $product_tagError = "The product tag shouldn't be empty!";
+        }
+      }
 
       // // Check if image file is a actual image or fake image
       // $check_if_image = getimagesize($image["tmp_name"]);
@@ -262,180 +268,204 @@ if (isset($_GET['do'])) {
                     <div class="position-relative row justify-content-center align-items-center d-flex">
                       <input type="text" name="product_name" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
                       <div id="emailerr" class="form-text" style='color:red;'>
-                      <?php if(isset($product_nameError)){ echo $product_nameError; }  ?>
-                    </div>
+                        <?php if (isset($product_nameError)) {
+                          echo $product_nameError;
+                        }  ?>
+                      </div>
                       <div class="form-control-icon col-3 "></div>
                     </div>
-                  </div> 
                   </div>
-                  <div class="col-md-4">
-                    <label> product_description</label>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="form-group has-icon-left">
-                      <div class="position-relative row justify-content-center align-items-center d-flex">
-                        <input type="text" name="product_description" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                        <div id="emailerr" class="form-text" style='color:red;'>
-                        <?php if(isset($product_descriptionError)){ echo $product_descriptionError; }  ?>
+                </div>
+                <div class="col-md-4">
+                  <label> product_description</label>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group has-icon-left">
+                    <div class="position-relative row justify-content-center align-items-center d-flex">
+                      <input type="text" name="product_description" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <div id="emailerr" class="form-text" style='color:red;'>
+                        <?php if (isset($product_descriptionError)) {
+                          echo $product_descriptionError;
+                        }  ?>
                       </div>
-                        <div class="form-control-icon col-3 "></div>
-                      </div>
+                      <div class="form-control-icon col-3 "></div>
                     </div>
                   </div>
-                  <div class="col-md-4">
-                    <label>product_price</label>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="form-group has-icon-left">
-                      <div class="position-relative row justify-content-center align-items-center d-flex">
-                        <input type="number" name="product_price" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                        <div id="emailerr" class="form-text" style='color:red;'>
-                        <?php if(isset($product_priceError)){ echo $product_priceError; }  ?>
+                </div>
+                <div class="col-md-4">
+                  <label>product_price</label>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group has-icon-left">
+                    <div class="position-relative row justify-content-center align-items-center d-flex">
+                      <input type="number" name="product_price" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <div id="emailerr" class="form-text" style='color:red;'>
+                        <?php if (isset($product_priceError)) {
+                          echo $product_priceError;
+                        }  ?>
                       </div>
-                        <div class="form-control-icon col-3 "></div>
-                      </div>
+                      <div class="form-control-icon col-3 "></div>
                     </div>
                   </div>
+                </div>
 
-              <div class="col-md-4">
-                <label>product_quantity</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input type="number" name="product_quantity" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                    <div id="emailerr" class="form-text" style='color:red;'>
-                    <?php if(isset($product_nameError)){ echo $product_nameError; }  ?>
-                  </div>
-                    <div class="form-control-icon col-3 "></div>
+                <div class="col-md-4">
+                  <label>product_quantity</label>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group has-icon-left">
+                    <div class="position-relative row justify-content-center align-items-center d-flex">
+                      <input type="number" name="product_quantity" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <div id="emailerr" class="form-text" style='color:red;'>
+                        <?php if (isset($product_nameError)) {
+                          echo $product_nameError;
+                        }  ?>
+                      </div>
+                      <div class="form-control-icon col-3 "></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <label>product image</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input name="mainimage" class="mt-2 p-2" type="file" />
-                    <div id="emailerr" class="form-text" style='color:red;'>
-                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
-                    <div class="form-control-icon col-3 "></div>
+                <div class="col-md-4">
+                  <label>product image</label>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group has-icon-left">
+                    <div class="position-relative row justify-content-center align-items-center d-flex">
+                      <input name="mainimage" class="mt-2 p-2" type="file" />
+                      <div id="emailerr" class="form-text" style='color:red;'>
+                        <?php if (isset($imageError)) {
+                          echo $imageError;
+                        }  ?></div>
+                      <div class="form-control-icon col-3 "></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <label>product image_1</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input name="image1" class="mt-2 p-2" type="file" />
-                    <div id="emailerr" class="form-text" style='color:red;'>
-                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
-                    <div class="form-control-icon col-3 "></div>
+                <div class="col-md-4">
+                  <label>product image_1</label>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group has-icon-left">
+                    <div class="position-relative row justify-content-center align-items-center d-flex">
+                      <input name="image1" class="mt-2 p-2" type="file" />
+                      <div id="emailerr" class="form-text" style='color:red;'>
+                        <?php if (isset($imageError)) {
+                          echo $imageError;
+                        }  ?></div>
+                      <div class="form-control-icon col-3 "></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <label>product image_2</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input name="image2" class="mt-2 p-2" type="file" />
-                    <div id="emailerr" class="form-text" style='color:red;'>
-                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
-                    <div class="form-control-icon col-3 "></div>
+                <div class="col-md-4">
+                  <label>product image_2</label>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group has-icon-left">
+                    <div class="position-relative row justify-content-center align-items-center d-flex">
+                      <input name="image2" class="mt-2 p-2" type="file" />
+                      <div id="emailerr" class="form-text" style='color:red;'>
+                        <?php if (isset($imageError)) {
+                          echo $imageError;
+                        }  ?></div>
+                      <div class="form-control-icon col-3 "></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <label>product image_3</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input name="image3" class="mt-2 p-2" type="file" />
-                    <div id="emailerr" class="form-text" style='color:red;'>
-                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
-                    <div class="form-control-icon col-3 "></div>
+                <div class="col-md-4">
+                  <label>product image_3</label>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group has-icon-left">
+                    <div class="position-relative row justify-content-center align-items-center d-flex">
+                      <input name="image3" class="mt-2 p-2" type="file" />
+                      <div id="emailerr" class="form-text" style='color:red;'>
+                        <?php if (isset($imageError)) {
+                          echo $imageError;
+                        }  ?></div>
+                      <div class="form-control-icon col-3 "></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <label> product image 4</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input name="image4" class="mt-2 p-2" type="file" />
-                    <div id="emailerr" class="form-text" style='color:red;'>
-                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
-                    <div class="form-control-icon col-3 "></div>
+                <div class="col-md-4">
+                  <label> product image 4</label>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group has-icon-left">
+                    <div class="position-relative row justify-content-center align-items-center d-flex">
+                      <input name="image4" class="mt-2 p-2" type="file" />
+                      <div id="emailerr" class="form-text" style='color:red;'>
+                        <?php if (isset($imageError)) {
+                          echo $imageError;
+                        }  ?></div>
+                      <div class="form-control-icon col-3 "></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <label> product image 5</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input name="image5" class="mt-2 p-2" type="file" />
-                    <div id="emailerr" class="form-text" style='color:red;'>
-                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
-                    <div class="form-control-icon col-3 "></div>
+                <div class="col-md-4">
+                  <label> product image 5</label>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group has-icon-left">
+                    <div class="position-relative row justify-content-center align-items-center d-flex">
+                      <input name="image5" class="mt-2 p-2" type="file" />
+                      <div id="emailerr" class="form-text" style='color:red;'>
+                        <?php if (isset($imageError)) {
+                          echo $imageError;
+                        }  ?></div>
+                      <div class="form-control-icon col-3 "></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <label> product image 6</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input name="image6" class="mt-2 p-2" type="file" />
-                    <div id="emailerr" class="form-text" style='color:red;'>
-                    <?php if(isset($imageError)){ echo $imageError; }  ?></div>
-                    <div class="form-control-icon col-3 "></div>
+                <div class="col-md-4">
+                  <label> product image 6</label>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group has-icon-left">
+                    <div class="position-relative row justify-content-center align-items-center d-flex">
+                      <input name="image6" class="mt-2 p-2" type="file" />
+                      <div id="emailerr" class="form-text" style='color:red;'>
+                        <?php if (isset($imageError)) {
+                          echo $imageError;
+                        }  ?></div>
+                      <div class="form-control-icon col-3 "></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <label>product_tag</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative row justify-content-center align-items-center d-flex">
-                    <input type="text" name="product_tag" placeholder="Separate Tags With Comma (,)" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                    <div id="emailerr" class="form-text" style='color:red;'>
-                    <?php if(isset($product_tagError)){ echo $product_tagError; }  ?></div>
-                    <div class="form-control-icon col-3 "></div>
+                <div class="col-md-4">
+                  <label>product_tag</label>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group has-icon-left">
+                    <div class="position-relative row justify-content-center align-items-center d-flex">
+                      <input type="text" name="product_tag" placeholder="Separate Tags With Comma (,)" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <div id="emailerr" class="form-text" style='color:red;'>
+                        <?php if (isset($product_tagError)) {
+                          echo $product_tagError;
+                        }  ?></div>
+                      <div class="form-control-icon col-3 "></div>
+                    </div>
                   </div>
                 </div>
+                <div class="col-md-4">
+                  <label>categorie</label>
+                </div>
+                <div class="col-md-8">
+                  <select name="categorieid">
+                    <?php
+                    $sql = "SELECT * FROM categories";
+                    $result = mysqli_query($conn, $sql);
+                    $categories  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                    foreach ($categories as $categorie) { ?>
+                      <option value="<?php echo $categorie['category_id']  ?>">
+                        <?php echo $categorie["category_name"]; ?>
+                      </option>
+                    <?php  } ?>
+                  </select>
+                </div>
+                <div class="col-12 d-flex justify-content-end">
+                  <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                  <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                </div>
               </div>
-              <div class="col-md-4">
-                <label>categorie</label>
-              </div>
-              <div class="col-md-8">
-                <select name="categorieid">
-                  <?php
-                  $sql = "SELECT * FROM categories";
-                  $result = mysqli_query($conn, $sql);
-                  $categories  = mysqli_fetch_all($result, MYSQLI_ASSOC);
-                  foreach ($categories as $categorie) { ?>
-                    <option value="<?php echo $categorie['category_id']  ?>">
-                      <?php echo $categorie["category_name"]; ?>
-                    </option>
-                  <?php  } ?>
-                </select>
-              </div>
-              <div class="col-12 d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-              </div>
-            </div>
           </form>
         </div>
       </div>
@@ -444,87 +474,6 @@ if (isset($_GET['do'])) {
   <!-- end form -->
 <?php }
 if (!isset($_GET['do'])) { ?>
-  <!-- start table -->
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="users-table table-wrapper">
-        <table class="table table-striped" id="table1">
-
-          <thead>
-            <tr class="users-table-info">
-              <th>
-                <label class="users-table__checkbox ms-20">
-                  <input type="checkbox" class="check-all">product_main_image
-                </label>
-              </th>
-              <th>product_name</th>
-              <th>product_description</th>
-              <th>product_price</th>
-              <th>product_quantity </th>
-              <th>product_rate</th>
-              <th>product_desc_image_1</th>
-              <th>product_desc_image_2</th>
-              <th>product_desc_image_3</th>
-              <th>product_tag</th>
-              <th>product_categorie_id</th>
-              <th>product_admin_id </th>
-              <th>product_user_id </th>
-              <th> </th>
-
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach ($product as $key => $row) { ?>
-              <tr>
-                <td>
-                  <label class="users-table__checkbox">
-                    <input type="checkbox" class="check">
-                    <div class="categories-table-img">
-                      <picture>
-                        <source srcset="<?php echo $row['product_main_image'];  ?>" type="image/webp"><img src="<?php echo $product['product_main_image']; ?>" alt="category">
-                      </picture>
-                    </div>
-                  </label>
-                </td>
-                <td>
-                  <?php echo $row['product_name'];
-                  echo $row['product_id']; ?>
-                </td>
-                <td>
-                  <?php echo $row['product_description']; ?>
-                </td>
-                <td><span class="badge-pending"><?php echo $row['product_price']; ?></span></td>
-                <td><?php echo $row['product_quantity']; ?></td>
-                <td><?php echo $row['product_rate']; ?></td>
-                <td><?php echo $row['product_desc_image_1']; ?></td>
-                <td><?php echo $row['product_desc_image_2']; ?></td>
-                <td><?php echo $row['product_desc_image_3']; ?></td>
-                <td><?php echo $row['product_tag']; ?></td>
-                <td><?php echo $row['product_categorie_id']; ?></td>
-                <td><?php echo $row['product_admin_id']; ?></td>
-                <td><?php echo $row['product_user_id']; ?></td>
-                <td>
-                  <span class="p-relative">
-                    <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                      <div class="sr-only">More info</div>
-                      <i data-feather="more-horizontal" aria-hidden="true"></i>
-                    </button>
-                    <ul class="users-item-dropdown dropdown">
-                      <li><a href="manage_products.php?do=edit&id=<?php echo $row['product_id'] ?>">Edit</a></li>
-                      <li><a href="##">Quick edit</a></li>
-                      <li><a href="manage_products.php?delete=<?php echo $row['product_id'] ?>">Trash</a></li>
-                    </ul>
-                  </span>
-                </td>
-              </tr>
-            <?php } ?>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  </div>
-
   <!-- end form -->
 <?php
 }
@@ -554,11 +503,11 @@ if (!isset($_GET['do'])) {
                   <th>image_1</th>
                   <th>image_2</th>
                   <th>image_3</th>
-                  <th>color image1</th>
-                  <th>color image2</th>
-                  <th>color image3</th>
+                  <th>image_4</th>
+                  <th>image_5</th>
+                  <th>image_6</th>
                   <th>tag</th>
-                  <th>categorie_id</th>
+                  <th>categorie</th>
                   <th> </th>
 
                 </tr>
@@ -595,8 +544,16 @@ if (!isset($_GET['do'])) {
                     <td><?php echo isset($row['product_tag']) ? $row['product_tag'] : ''; ?></td>
                     <td><?php echo isset($row['product_categorie_id']) ? $row['product_categorie_id'] : ''; ?></td>
                     <td>
-                      <a href="manage_products.php?do=edit&id=<?php echo $row['product_id']; ?>" class="btn btn-secondary">Edit</a>
-                      <a href="manage_products.php?delete=<?php echo $row['product_id']; ?>" class="btn btn-danger">Delete</a>
+                      <span class="p-relative">
+                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                          <div class="sr-only">More info</div>
+                          <i data-feather="more-horizontal" aria-hidden="true"></i>
+                        </button>
+                        <ul class="users-item-dropdown dropdown">
+                          <li><a href="manage_products.php?do=edit&id=<?php echo $row['product_id']; ?>">Edit</a></li>
+                          <li><a href="manage_products.php?delete=<?php echo $row['product_id']; ?>">Trash</a></li>
+                        </ul>
+                      </span>
                     </td>
                   </tr>
                 <?php } ?>
