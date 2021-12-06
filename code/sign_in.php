@@ -1,4 +1,8 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
+    header('location:index.php');
+} ?>
+<?php
 include "./admin/includes/connect.php";
 session_start();
 //$_SESSION["type"] 0 => user, 1 => admin, 2 => super admin

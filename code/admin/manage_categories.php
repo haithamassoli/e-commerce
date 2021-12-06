@@ -1,4 +1,9 @@
 <?php
+if (!isset($_SESSION["type"]) || $_SESSION["type"] == 0) {
+  header('location:../index.php');
+}
+?>
+<?php
 ob_start();
 include "./includes/header.php";
 // select all comments

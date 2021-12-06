@@ -1,4 +1,9 @@
 <?php
+if (!isset($_GET["id"])) {
+	header('location:index.php');
+}
+?>
+<?php
 ob_start(); // Output Buffering Start
 include "./includes/header.php";
 function redirect($url)
@@ -31,7 +36,9 @@ if (isset($_GET["id"])) {
 	$sql = "SELECT * FROM products INNER JOIN categories ON products.product_categorie_id = categories.category_id WHERE product_id = {$_GET['id']}";
 	$result = mysqli_query($conn, $sql);
 	$product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
+	if ($result->num_rows < 1) {
+		redirect("index.php");
+	}
 	//select comments
 	$sql = "SELECT * FROM comments INNER JOIN users ON comments.comment_user_id = users.user_id";
 	$result = mysqli_query($conn, $sql);
