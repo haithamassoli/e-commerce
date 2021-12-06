@@ -5,6 +5,8 @@ $name      = "";
 $email     = "";
 $password  = "";
 $gender    = "";
+$mobile    = "";
+$location  = "";
 
 //Start Function
 function redirect($url)
@@ -36,6 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email    = strtolower($_POST["email"]);
     $password = ($_POST["password"]);
     $gender   = ($_POST["gender"]);
+    $mobile   = ($_POST["mobile"]);
+    $location   = ($_POST["location"]);
 
     // input validation 
     if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
@@ -62,6 +66,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check          = 0;
         $passError      = "The password shouldn't be empty!";
     }
+    if (!preg_match("/^[077|079|078]+[0-9]{7}$/", $mobile)) { //mobile 
+        $mobileError  = "Only letters and white space allowed";
+        $check      = 0;
+    }
+    if ($mobile == "") {
+
+        $check          = 0;
+        $mobileError      = "The mobile shouldn't be empty!";
+    }
+
+
+    if ($location == "") {
+
+        $check              = 0;
+        $locationError      = "The location shouldn't be empty!";
+    }
+
 
     //Image File
     $image_folder   = "admin/uploads/user_image/";
@@ -75,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     move_uploaded_file($image["tmp_name"], $target_file);
     if ($check == 1) {
-        $sql2 = "UPDATE users  SET user_name = '$name', user_email ='$email', user_password='$password', user_gender='$gender' {$image_check} WHERE user_id = '{$_SESSION["user_id"]}'";
+        $sql2 = "UPDATE users  SET user_name = '$name', user_email ='$email', user_mobile='$mobile', user_location='$location', user_password='$password', user_gender='$gender' {$image_check} WHERE user_id = '{$_SESSION["user_id"]}'";
         if ($conn->query($sql2) === TRUE) {
             echo "New record created successfully";
         } else {
@@ -147,7 +168,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <label for="phone">Phone</label>
                                 <input name="mobile" type="text" class="form-control" id="phone" placeholder="Enter phone number" value="<?php echo $user[0]['user_mobile']; ?>">
                             </div>
-                            <div style="color:red"><?php echo @$nameError; ?></div>
+                            <div style="color:red"><?php echo @$mobileError; ?></div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group f ii">
@@ -175,7 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <label for="ciTy">Location</label>
                                 <input name="location" type="text" class="form-control" id="location" placeholder="Enter your Location" value="<?php echo $user[0]['user_location']; ?>">
                             </div>
-                            <div style="color:red"><?php echo @$nameError; ?></div>
+                            <div style="color:red"><?php echo @$locationError; ?></div>
                         </div>
 
                         <div class="row gutters">
