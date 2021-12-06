@@ -1,4 +1,6 @@
-<?php include "./includes/header.php"; ?>
+<?php
+ob_start();
+include "./includes/header.php"; ?>
 <?php
 $admin_name = "";
 $admin_email = "";
@@ -345,4 +347,5 @@ if (!isset($_GET['do'])) { ?>
   </main>
 <?php } ?>
 
-<?php include "./includes/footer.php"; ?>
+<?php include "./includes/footer.php";
+ob_end_flush(); ?>
