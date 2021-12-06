@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error: " . $sql2 . "<br>" . $conn->error;
         }
         $conn->close();
-        redirect("userprofile.php");
+        redirect("profile.php");
     }
 }
 ?>
@@ -101,13 +101,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body class="profile-page">
     <form action="" method="POST" enctype="multipart/form-data">
-        <div class="page-header header-filter" data-parallax="true" style="background-image:url('http://wallpapere.org/wp-content/uploads/2012/02/black-and-white-city-night.png');"></div>
+        <div class="page-header header-filter" data-parallax="true" style="background-image:url('images/product-04.jpg');"></div>
         <div class="main main-raised">
-            <div class="profile-content">
+            <div class="profile-content" style="margin-bottom: 135px;">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 ml-auto mr-auto">
-                            <div class="profile">
+                            <div class="profile" style="text-align: center;">
                                 <div class="avatar">
                                     <img src="<?php echo $user[0]['user_image'] ?>" alt="photo">
                                     <div class="file btn btn-lg btn-primary ck">
@@ -181,7 +181,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="text-right u z">
-                                    <button class="bc" type="submit" id="submit" name="submit" class="btn btn-primary">
+                                    <style>
+                                        .savebtn {
+                                            background-color: #7D7D7D;
+                                        }
+
+                                        .savebtn:hover {
+                                            background-color: #8A2BE2;
+                                        }
+                                    </style>
+                                    <button class="bc savebtn" type="submit" id="submit" name="submit" class="btn btn-primary">
                                         Save
                                     </button>
                                 </div>
@@ -194,15 +203,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         </div>
         </div>
-
-        <footer class="footer text-center ">
-            <p>Made with <a href="https://demos.creative-tim.com/material-kit/index.html" target="_blank">Material Kit</a> by Creative Tim</p>
-        </footer>
-
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
     </form>
 </body>
 <!--start form -->
@@ -210,7 +210,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- End Form -->
 <?php
-
 $conn->close();
-//include('admin/includes/footer.php');
 ?>

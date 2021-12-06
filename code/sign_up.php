@@ -57,14 +57,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check = 0;
         $emailError = "The email shouldn't be empty!";
     }
-    if ($password === $password_confirm) {
+    if ($password != $password_confirm) {
         $passwordConfirmError = "passwords should be the same";
+        $check = 0;
     }
     if ($password_confirm == "") {
         $passwordConfirmError = "passwords should be the same";
+        $check = 0;
     }
-    if ($password = "") {
+    if ($password == "") {
         $passwordError = "cant be empty";
+        $check = 0;
     }
     if ($check == 1) {
         $check_exist = "SELECT * FROM users WHERE user_email = '$email'";

@@ -130,17 +130,11 @@ if (isset($_GET['do'])) {
       } else {
         $typeErr = " The type value should be 0 or 1 ";
         $check = 0;
-<<<<<<< HEAD
-      } */
-
-
-=======
-      }
+      }*/
       $image = ($_FILES["admin_image"]);
       $image_folder = "uploads/admin_image/";
       $target_file = $image_folder . uniqid() . basename($image["name"]);
       move_uploaded_file($image["tmp_name"], $target_file);
->>>>>>> 0d430894aec45a1a34c7211927a52f3172d70983
       if ($check == 1) {
         $sql = "INSERT INTO `admins` (`admin_name`,`admin_email`,`admin_password`, `admin_type`,`admin_image`) VALUES ('$admin_name','$admin_email','$admin_password','$admin_type','$target_file')";
         if (mysqli_query($conn, $sql)) {
