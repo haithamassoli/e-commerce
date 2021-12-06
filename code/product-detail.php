@@ -19,6 +19,10 @@ function redirect($url)
 require('admin/includes/connect.php');
 
 //select products
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 54abce7d00262b002468e78b45fb7e1016e1e18d
 if(isset($_GET["id"])){
 @$comment_product_id  = $_GET["id"];
 @$user_id = $_SESSION["user_id"];
@@ -27,15 +31,33 @@ if(isset($_GET["id"])){
 
 // @$product_rate = $_POST["product_rate"];
 @$image = $_FILES["image"];
+<<<<<<< HEAD
 $sql = "SELECT * FROM products INNER JOIN categories ON products.product_categorie_id = categories.category_id WHERE product_id = {$_GET['id']}";
+=======
+$sql = "SELECT * FROM products WHERE product_id =$comment_product_id";
+=======
+$sql = "SELECT * FROM products INNER JOIN categories ON products.product_categorie_id = categories.category_id WHERE product_id = {$_GET['id']}";
+>>>>>>> 358bb3de82d4e32eaa034744fa152e3e5a69904f
+>>>>>>> 54abce7d00262b002468e78b45fb7e1016e1e18d
 $result = mysqli_query($conn, $sql);
 $product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 //select comments
 $sql = "SELECT * FROM comments INNER JOIN users ON comments.comment_user_id = users.user_id";
+<<<<<<< HEAD
 $result = mysqli_query($conn,$sql);
 $comments  = mysqli_fetch_all($result,MYSQLI_ASSOC);
 
+=======
+<<<<<<< HEAD
+$result = mysqli_query($conn,$sql);
+$comments  = mysqli_fetch_all($result,MYSQLI_ASSOC);
+
+=======
+$result = mysqli_query($conn, $sql);
+$comments  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+>>>>>>> 358bb3de82d4e32eaa034744fa152e3e5a69904f
+>>>>>>> 54abce7d00262b002468e78b45fb7e1016e1e18d
 //select related
 $sql = "SELECT * FROM products WHERE product_tag='related'";
 $result = mysqli_query($conn, $sql);
@@ -322,6 +344,10 @@ if (isset($_POST["add_to_cart"])) {
 							</div>
 						</div>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 54abce7d00262b002468e78b45fb7e1016e1e18d
 							
 						<!-- - -->
 						<div class="tab-pane fade" id="reviews" role="tabpanel">
@@ -340,6 +366,28 @@ if (isset($_POST["add_to_cart"])) {
 													<?php  echo $row["user_name"];  ?>
 													</span>
 													<!-- <span class="fs-18 cl11">
+<<<<<<< HEAD
+=======
+=======
+						<?php foreach ($comments as $key => $row) { ?>
+							<!-- - -->
+							<div class="tab-pane fade" id="reviews" role="tabpanel">
+								<div class="row">
+									<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
+										<div class="p-b-30 m-lr-15-sm">
+											<!-- Review -->
+											<div class="flex-w flex-t p-b-68">
+												<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
+													<img src="<?php echo $row["user_image"];  ?>" alt="AVATAR">
+												</div>
+												<div class="size-207">
+													<div class="flex-w flex-sb-m p-b-17">
+														<span class="mtext-107 cl2 p-r-20">
+															<?php echo $row["user_name"];  ?>
+														</span>
+														<!-- <span class="fs-18 cl11">
+>>>>>>> 358bb3de82d4e32eaa034744fa152e3e5a69904f
+>>>>>>> 54abce7d00262b002468e78b45fb7e1016e1e18d
 														<i class="zmdi zmdi-star"></i>
 														<i class="zmdi zmdi-star"></i>
 														<i class="zmdi zmdi-star"></i>
@@ -347,10 +395,15 @@ if (isset($_POST["add_to_cart"])) {
 														<i class="zmdi zmdi-star-half"></i>
 													</span> -->
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 54abce7d00262b002468e78b45fb7e1016e1e18d
 													<span class="fs-18 cl11">
 														<?php 
 															for($r = 1; $r <= $row["comment_rate"]; $r++){
 																echo '<i class="zmdi zmdi-star"></i>';
+<<<<<<< HEAD
 															}
 															for($e = 1; $e <= 5-$row["comment_rate"]; $e++){
 																echo '<i class="item-rating pointer zmdi zmdi-star-outline"></i>';
@@ -359,6 +412,54 @@ if (isset($_POST["add_to_cart"])) {
 														<input class="dis-none" type="number" name="rating">
 													</span>
 												</div>
+=======
+															}
+															for($e = 1; $e <= 5-$row["comment_rate"]; $e++){
+																echo '<i class="item-rating pointer zmdi zmdi-star-outline"></i>';
+															}													
+														?>
+=======
+														<span class="fs-18 cl11">
+															<?php
+															for ($r = 1; $r <= $row["comment_rate"]; $r++) {
+																echo '<i class="fas fa-star"></i>';
+															}
+															for ($e = 1; $e <= 5 - $row["comment_rate"]; $e++) {
+																echo '<i class="far fa-star"></i>';
+															}
+															?>
+															<input class="dis-none" type="number" name="rating">
+														</span>
+
+													</div>
+													<p class="stext-102 cl6">
+														<?php echo $row["comment"];  ?>
+													</p>
+												</div>
+											</div>
+
+											<!-- Add review -->
+											<form class="w-full" enctype="multipart/form-data" method="POST">
+												<h5 class="mtext-108 cl2 p-b-7">
+													Add a review
+												</h5>
+
+												<div class="flex-w flex-m p-t-50 p-b-23">
+													<span class="stext-102 cl3 m-r-16">
+														Your Rating
+													</span>
+													<span class="wrap-rating fs-18 cl11 pointer">
+														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+>>>>>>> 358bb3de82d4e32eaa034744fa152e3e5a69904f
+														<input class="dis-none" type="number" name="rating">
+													</span>
+												</div>
+<<<<<<< HEAD
+>>>>>>> 54abce7d00262b002468e78b45fb7e1016e1e18d
 												<p class="stext-102 cl6">
 													<?php  echo $row["comment"];  ?>
 												</p>
@@ -369,7 +470,11 @@ if (isset($_POST["add_to_cart"])) {
 										<?php 
 										if (isset($_SESSION['type'])){
 											if($_SESSION['type']== 0){
+<<<<<<< HEAD
 										?>
+=======
+										}?>
+>>>>>>> 54abce7d00262b002468e78b45fb7e1016e1e18d
 										<form class="w-full" enctype="multipart/form-data" method="POST">
 											<h5 class="mtext-108 cl2 p-b-7">
 												Add a review
@@ -388,6 +493,11 @@ if (isset($_POST["add_to_cart"])) {
 													<input class="dis-none" type="number" name="rating">
 												</span>
 											</div>
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 358bb3de82d4e32eaa034744fa152e3e5a69904f
+>>>>>>> 54abce7d00262b002468e78b45fb7e1016e1e18d
 
 												<div class="file-upload-wrapper" data-text="Select your file!">
 												
@@ -404,11 +514,23 @@ if (isset($_POST["add_to_cart"])) {
 											Submit
 										</button>
 										</form>
+<<<<<<< HEAD
 										<?php } }?>
 									</div>
 								</div>
 							</div>
 						</div>
+=======
+										<?php } ?>
+									</div>
+								</div>
+							</div>
+<<<<<<< HEAD
+						</div>
+=======
+						<?php } ?>
+>>>>>>> 358bb3de82d4e32eaa034744fa152e3e5a69904f
+>>>>>>> 54abce7d00262b002468e78b45fb7e1016e1e18d
 					</div>
 				</div>
 			</div>
@@ -481,4 +603,27 @@ if (isset($_POST["add_to_cart"])) {
 			
 		</div>
 	</section>
+<<<<<<< HEAD
 	<?php include "./includes/footer.php"; ?>
+=======
+	<?php include "./includes/footer.php"; ?>
+<<<<<<< HEAD
+=======
+	<?php ob_end_flush(); // Release The Output
+	?>
+	<script>
+		let y = document.getElementById("mydiv");
+		y.style.background = 'blue';
+
+		let color = ['red', 'green', 'blue'];
+		let count = 0;
+		y.addEventListener('click', function(event) {
+			event.target.style.background = color[count];
+			count++;
+			if (count == color.length) {
+				count = 0;
+			}
+		});
+	</script>
+>>>>>>> 358bb3de82d4e32eaa034744fa152e3e5a69904f
+>>>>>>> 54abce7d00262b002468e78b45fb7e1016e1e18d

@@ -1,8 +1,22 @@
 <?php
 include "./includes/header.php";
 $total = 0;
-if (isset($_POST)) {
-}
+echo "<pre>";
+print_r($_SESSION['cart']);
+
+echo "</pre>";
+// if (isset($_POST)) {
+// 	if (isset($_SESSION["cart"])) {
+// 		foreach ($_SESSION['cart'] as $key => $value) {
+// 			$items = array_column($_SESSION["cart"], 'product_id');
+// 			$size = array_column($_SESSION["cart"], 'size');
+// 			$color = array_column($_SESSION["cart"], 'color');
+// 			if (in_array($value['product_id'], $items) && in_array($value['color'], $color)  && in_array($value['size'], $size)) {
+// 				$_SESSION["cart"][$value['product_id'] . $value['color'] . $value['size']]["quantity"] = $_POST['product_id'];
+// 			}
+// 		}
+// 	}
+// }
 // $sql = "SELECT * FROM products WHERE product_id = {$_SESSION['cart']} "
 ?>
 <!-- breadcrumb -->
@@ -36,31 +50,36 @@ if (isset($_POST)) {
 								<th class="column-4">Quantity</th>
 								<th class="column-5">Total</th>
 							</tr>
-							<?php foreach ($_SESSION['cart'] as $key => $value) { ?>
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="<?php echo $value['product_image']; ?>" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2"><?php echo $value['product_name'] . " " . $value['color'] . " " . $value['size']; ?></td>
-									<td class="column-3">$ <?php echo $value['product_price']; ?></td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
+							<?php if (isset($_SESSION["cart"])) {
+								foreach ($_SESSION['cart'] as $key => $value) { ?>
+									<tr class="table_row">
+										<td class="column-1">
+											<div class="how-itemcart1">
+												<img src="<?php echo $value['product_image']; ?>" alt="IMG">
 											</div>
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="<?php echo $value['product_id'] . $value['color'] .  $value['size']; ?>" value="1">
+										</td>
+										<td class="column-2"><?php echo $value['product_name'] .  " " . $value['size']; ?></td>
+										<td class="column-3">$ <?php echo $value['product_price']; ?></td>
+										<td class="column-4">
+											<div class="wrap-num-product flex-w m-l-auto m-r-0">
+												<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+													<i class="fs-16 zmdi zmdi-minus"></i>
+												</div>
+												<input class="mtext-104 cl3 txt-center num-product" type="number" name="product_id" value="1">
 
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
+												<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+													<i class="fs-16 zmdi zmdi-plus"></i>
+												</div>
 											</div>
-										</div>
-									</td>
-									<td class="column-5">$ <?php $total += $value['product_price'] * $value['quantity'];
-																					echo $value['product_price'] * $value['quantity']; ?></td>
-								</tr>
-							<?php } ?>
+										</td>
+										<td class="column-5">$ <?php $total += $value['product_price'] * $value['quantity'];
+																						echo $value['product_price'] * $value['quantity']; ?></td>
+									</tr>
+							<?php }
+							} else {
+								echo	'<div class="text-center h2 mb-5">no item in cart</div>';
+							} ?>
+
 						</table>
 					</div>
 
