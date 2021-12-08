@@ -21,28 +21,20 @@ function redirect($url)
     }
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   $img = '<img src="./uploads/61addacec48a1blog-06.jpg">';
+   echo $img ;
     $check               = 1;
     $user_name           = ($_POST["user_name"]);
     $email               = strtolower($_POST["email"]);
     $password            = $_POST['password'];
     $gender              = $_POST['gender'];
     $password_confirm    = $_POST['password_confirm'];
-    $image               = $_FILES["image"];
-    $imageError          = "";
     $emailError          = "";
     $passwordError       = "";
     $passwordConfirmError = "";
     $user_name_Error = "";
     // Check file size
-    if ($image["size"] > 500000 || $image["size"] == 0) {
-        $imageError = "Sorry, your file is too large.";
-        $check     = 0;
-    } // Check if image file is a actual image or fake image
-    $check_if_image = getimagesize($image["tmp_name"]);
-    if ($check_if_image == false) {
-        $imageError = "File is not an image.";
-        $check = 0;
-    }
+   
     if (!preg_match("/^[a-zA-Z-' ]*$/", $user_name)) {
         $user_name_Error = "Only letters and white space allowed";
         $check = 0;
@@ -79,10 +71,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($data[0] > 1) {
             $emailError = "User Already exist go to sign in";
         } else {
-            $image_folder = "uploads/";
-            $target_file = $image_folder . uniqid() . basename($image["name"]);
-            move_uploaded_file($image["tmp_name"], $target_file);
-            $sql = "INSERT INTO `users`( `user_name`, `user_email`, `user_password`,`user_image`, `user_gender`) VALUES ('$user_name','$email','$password','$target_file','$gender')";
+           
+            $sql = "INSERT INTO `users`( `user_name`, `user_email`, `user_password`, `user_gender`) VALUES ('$user_name','$email','$password','$gender')";
             if (mysqli_query($conn, $sql)) {
                 echo "New record created successfully";
             } else {
@@ -109,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- STYLE CSS -->
     <link rel="stylesheet" href="css/signing_style.css">
 </head>
-
+     <img src="" alt="">
 <body>
 
     <div class="wrapper" style="background-image: url('images/bg-registration-form-1.jpg');">
@@ -149,8 +139,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div style="color: red;font-weight:bold;" id="pass2Help"><?php echo @$passwordConfirmError ?></div>
                 </div>
                 <div class="form-wrapper">
-                    <input name="image" type="file" class="form-control" required>
-                    <div style="color: red;font-weight:bold;" id="image"><?php echo @$imageError ?></div>
+                    <!-- <input name="image" type="file" class="form-control" required> -->
+                    <!-- <div style="color: red;font-weight:bold;" id="image"><?php echo @$imageError ?></div> -->
+
+                
                 </div>
                 <button id="signUp_insignup_btn" type="submit" name="btn">Register
                     <i class="zmdi zmdi-arrow-right"></i>
