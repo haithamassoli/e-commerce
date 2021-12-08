@@ -46,22 +46,22 @@ $results_per_page = 12;
 							</div>
 							<ul>
 								<li class="p-b-6">
-									<a href="?sort=rating" class="filter-link stext-106 trans-04">
+									<a href="?sort=rating" class="filter-link stext-106 trans-04 <?php echo isset($_GET['rating']) ? "filter-link-active" : ""; ?>">
 										Rating
 									</a>
 								</li>
 								<li class="p-b-6">
-									<a href="?sort=newness" class="filter-link stext-106 trans-04 filter-link-active">
+									<a href="?sort=newness" class="filter-link stext-106 trans-04 <?php echo isset($_GET['newness']) ? "filter-link-active" : ""; ?>">
 										Newness
 									</a>
 								</li>
 								<li class="p-b-6">
-									<a href="?sort=low" class="filter-link stext-106 trans-04">
+									<a href="?sort=low" class="filter-link stext-106 trans-04 <?php echo isset($_GET['low']) ? "filter-link-active" : ""; ?>">
 										Price: Low to High
 									</a>
 								</li>
 								<li class="p-b-6">
-									<a href="?sort=high" class="filter-link stext-106 trans-04">
+									<a href="?sort=high" class="filter-link stext-106 trans-04 <?php echo isset($_GET['high']) ? "filter-link-active" : ""; ?>">
 										Price: High to Low
 									</a>
 								</li>
@@ -73,32 +73,32 @@ $results_per_page = 12;
 							</div>
 							<ul>
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+									<a href="#" class="filter-link stext-106 trans-04 <?php echo isset($_GET['page']) ? "filter-link-active" : ""; ?>">
 										All
 									</a>
 								</li>
 								<li class="p-b-6">
-									<a href="?sort=50" class="filter-link stext-106 trans-04">
+									<a href="?sort=50" class="filter-link stext-106 trans-04 <?php echo isset($_GET['sort']) && $_GET['sort'] == 50 ? "filter-link-active" : ""; ?>">
 										$0.00 - $50.00
 									</a>
 								</li>
 								<li class="p-b-6">
-									<a href="?sort=100" class="filter-link stext-106 trans-04">
+									<a href="?sort=100" class="filter-link stext-106 trans-04 <?php echo isset($_GET['sort']) && $_GET['sort'] == 100 ? "filter-link-active" : ""; ?>">
 										$50.00 - $100.00
 									</a>
 								</li>
 								<li class="p-b-6">
-									<a href="?sort=150" class="filter-link stext-106 trans-04">
+									<a href="?sort=150" class="filter-link stext-106 trans-04 <?php echo isset($_GET['sort']) && $_GET['sort'] == 150 ? "filter-link-active" : ""; ?>">
 										$100.00 - $150.00
 									</a>
 								</li>
 								<li class="p-b-6">
-									<a href="?sort=200" class="filter-link stext-106 trans-04">
+									<a href="?sort=200" class="filter-link stext-106 trans-04 <?php echo isset($_GET['sort']) && $_GET['sort'] == 200 ? "filter-link-active" : ""; ?>">
 										$150.00 - $200.00
 									</a>
 								</li>
 								<li class="p-b-6">
-									<a href="?sort=200+" class="filter-link stext-106 trans-04">
+									<a href="?sort=200+" class="filter-link stext-106 trans-04 <?php echo isset($_GET['sort']) && $_GET['sort'] == '200+' ? "filter-link-active" : ""; ?>">
 										$200.00+
 									</a>
 								</li>
