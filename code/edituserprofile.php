@@ -132,13 +132,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="row">
                     <div class="col-md-6 ml-auto mr-auto">
                         <div class="profile" style="text-align: center;">
-                            <div class="avatar">
-                                <img src="<?php echo $user[0]['user_image'] ?>" alt="photo" style="margin-top:-90px; border-radius: 50%; width : 180px; height: 180px;">
-                                <div class="file ck">
-                                    <!-- Change Photo -->
-                                    <input name="userimg" type="file" class="form-control" id="exampleInputPassword1">
+                            <label>
+                                <div class="avatar">
+                                    <img src="<?php echo $user[0]['user_image'] ?>" alt="photo" style="margin-top:-90px; border-radius: 50%; width : 180px; height: 180px; cursor:pointer;">
+                                    <div class="file ck" style="position: relative;">
+
+                                        <input name="userimg" type="file" class="form-control" id="exampleInputPassword1" style="display: none;">
+                                        <i class="fas fa-plus fa-3x" style="color: white; cursor:pointer; position:absolute;bottom:80%; right:-70px;"></i>
+
+                                    </div>
+
                                 </div>
-                            </div>
+                            </label>
                             <div class="name">
                                 <h3 class="title"><?php echo $user[0]['user_name'] ?></h3>
                                 <h6 class="created"><?php echo "DATE CREATED: " . $user[0]['user_creation_date'] ?></h6>
