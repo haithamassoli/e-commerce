@@ -158,7 +158,7 @@ if (isset($_GET["do"])) {
                                     <?php echo $value["coupon_status"] ?>
                                 </td>
                                 <td>
-                                    <a href="?do=edit&id=<?php echo $value["coupon_id"] ?>">Edit</a>
+                                    <a href="?do=edit&id=<?php echo $value["coupon_id"] ?>" class="btn btn-success">Edit</a>
                                 </td>
                             </tr>
                         <?php } ?>

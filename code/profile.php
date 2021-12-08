@@ -83,7 +83,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] == 0) {
 					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 						<div class="form-group f2">
 							<label for="Street">Gender</label>
-							<div class="borderDiv"><?php echo $user[0]['user_gender'] ?></div>
+							<div class="borderDiv"><?php echo $user[0]['user_gender'] == 0 ? "Male" : "Female"; ?></div>
 						</div>
 					</div>
 					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">

@@ -22,6 +22,9 @@ function redirect($url)
         exit;
     }
 }
+
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check               = 1;
     $email               = strtolower($_POST["email"]);
@@ -40,18 +43,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check = 0;
         $passwordError = "The email shouldn't be empty!";
     }
+    
     if ($check == 1) {
-        $check_exist = "SELECT * FROM users WHERE user_email = '$email'";
+        $check_exist = "SELECT * FROM admins WHERE admin_email = '$email'";
         $result = mysqli_query($conn, $check_exist);
         $data = mysqli_fetch_array($result, MYSQLI_NUM);
         if ($check_exist) {
-            $sql = "SELECT * FROM users WHERE user_email = '$email'";
+            $sql = "SELECT * FROM admins WHERE admin_email = '$email'";
             $result = mysqli_query($conn, $sql);
-            $users  = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            foreach ($users as $user) {
-                if ($email == $user["user_email"] && $password == $user["user_password"]) {
-                    $_SESSION["type"] = 0;
-                    $_SESSION["user_id"] = $user['user_id'];
+            $admins  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            foreach ($admins as $admin) {
+                // super admin 
+                if ($email == $admin["admin_email"] && $password == $admin["admin_password"] && $admin["admin_type"] == 1) {
+                    $_SESSION["type"] = 2;
+                    $_SESSION["super_admin_id"] = $admin['admin_id'];
+                    redirect("index.php");
+                    // admin 
+                } elseif ($email == $admin["admin_email"] && $password == $admin["admin_password"] && $admin["admin_type"] == 0) {
+                    $_SESSION["type"] = 1;
+                    $_SESSION["admin_id"] = $admin['admin_id'];
                     redirect("index.php");
                 } else {
                     $error = "your email or password is wrong";
@@ -61,9 +71,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $error = "your email isnt exist please register";
         }
     }
-    
 }
+
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -87,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <img src="https://cdn.discordapp.com/attachments/914883219546058815/917071612061319290/registration-form-1.jpg" alt="">
             </div>
             <form method="POST" id="signup_form">
-                <h3 id="login_h3">LogIn Now</h3>
+                <h3 id="login_h3">Admin LogIn</h3>
                 <div style="color: red;font-weight:bold;" id="pass2Help"><?php echo @$error ?></div>
                 <div class="form-wrapper">
                     <input type="email" name="email" placeholder="Email Address" class="form-control" id="signin_email_input" required autofocus auto style="text-transform:lowercase">
@@ -106,9 +117,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button id="signin_insignin_btn" type="submit">LogIn
                     <i class="zmdi zmdi-arrow-right"></i>
                 </button>
-                <div class="dont">
+                <!-- <div class="dont">
                     <span class="dont">Don't have an account? <a class="ms-1 regster-href" href="sign_up.php">Sign up</a> </span>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>

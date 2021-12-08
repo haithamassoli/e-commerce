@@ -165,7 +165,7 @@ if (isset($_GET['do'])) {
           <form class="form form-horizontal" method="POST" enctype="multipart/form-data">
             <div class="form-body">
               <div class="row">
-                <div class="col-md-4">
+                <!-- <div class="col-md-4">
                   <label>Image</label>
                 </div>
                 <div class="col-md-8">
@@ -176,14 +176,16 @@ if (isset($_GET['do'])) {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="col-md-4">
                   <label>Name</label>
                 </div>
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="text" name="user_name" class="form-control col-9 mb-2" placeholder="Name" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <input type="text" name="user_name" class="form-control col-9 mb-2" placeholder="Name" style="border: 1px solid #dce7f1 !important;" id="first-name-icon"    value="<?php if ($do == "edit") {
+                                                                                                                                                                                                                    echo $row['user_name'];
+                                                                                                                                                                                                                  } ?>"   >
                       <div class="form-control-icon col-3 ">
                         <i class="bi bi-person" style="position: absolute; top:-10px; left: -20px;"></i>
                       </div>
@@ -197,7 +199,9 @@ if (isset($_GET['do'])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="email" name="user_email" class="form-control col-9 mb-2" placeholder="Email" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <input type="email" name="user_email" class="form-control col-9 mb-2" placeholder="Email" style="border: 1px solid #dce7f1 !important;" id="first-name-icon"    value="<?php if ($do == "edit") {
+                                                                                                                                                                                                                          echo $row['user_email'];
+                                                                                                                                                                                                                        } ?>">
                       <div class="form-control-icon col-3">
                         <i class="bi bi-envelope" style="position: absolute; top:-10px; left: -20px;"></i>
                       </div>
@@ -211,7 +215,9 @@ if (isset($_GET['do'])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="password" name="user_password" class="form-control col-9 mb-2" placeholder="Password" style="border: 1px solid #dce7f1 !important;">
+                      <input type="password" name="user_password" class="form-control col-9 mb-2" placeholder="Password" style="border: 1px solid #dce7f1 !important;"   value="<?php if ($do == "edit") {
+                                                                                                                                                                                                          echo $row['user_password'];
+                                                                                                                                                                                                        } ?>">
                       <div class="form-control-icon col-3">
                         <i class="bi bi-lock" style="position: absolute; top:-10px; left: -20px;"></i>
                       </div>
@@ -227,7 +233,8 @@ if (isset($_GET['do'])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <select name="user_gender" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;">
+                      <select name="user_gender" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" >
+                    
                         <option>Male</option>
                         <option>Female </option>
                       </select>
@@ -280,11 +287,11 @@ if (!isset($_GET['do'])) { ?>
               </button>
               <thead>
                 <tr class="users-table-info">
-                  <th>
+                  <!-- <th>
                     <label class="users-table__checkbox ms-20">
                       <input type="checkbox" class="check-all">User Image
                     </label>
-                  </th>
+                  </th> -->
                   <th>User Name</th>
                   <th>User Email</th>
                   <th>User Password</th>
@@ -296,12 +303,12 @@ if (!isset($_GET['do'])) { ?>
               <tbody>
                 <?php foreach ($users as $key => $user) { ?>
                   <tr>
-                    <td class="px-6 py-4">
+                  <!-- <td class="px-6 py-4">
                       <div class="text-sm text-gray-900 flex justify-center items-center">
-                        <img src=<?php echo isset($user['user_image']) ? $user['user_image'] : ''; ?> class="mr-3" width="50px" alt="">
+                        <img src="<?php echo  $user['user_image']  ?>" class="mr-3" width="50px" alt="">
                         <?php echo $user["user_name"]; ?>
                       </div>
-                    </td>
+                    </td> -->
                     <td><?php echo isset($user['user_name']) ? $user['user_name'] : ''; ?></td>
                     <td><?php echo isset($user['user_email']) ? $user['user_email'] : ''; ?></td>
                     <td><?php echo isset($user['user_password']) ? $user['user_password'] : ''; ?></td>

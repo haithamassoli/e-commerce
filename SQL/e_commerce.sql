@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2021 at 07:51 PM
+-- Generation Time: Dec 08, 2021 at 11:25 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -41,7 +41,8 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_email`, `admin_password`, `admin_image`, `admin_type`) VALUES
-(2, 'ahmad', 'ahmadabotoimah@gmail.com', 'Aa123456', 'uploads/admin_image/61b0fdb65bde261ae5a2ccca75men-13.jpg', 1);
+(2, 'ahmad', 'ahmadabotoimah@gmail.com', 'Aa123456', 'uploads/admin_image/61b116331d0c9avatar.png', 1),
+(3, 'farah', 'mango@gmail.com', '1234', 'uploads/admin_image/61b1163a1abefavatar.png', 0);
 
 -- --------------------------------------------------------
 
@@ -120,13 +121,6 @@ CREATE TABLE `orders` (
   `order_status` varchar(255) NOT NULL DEFAULT 'preparing',
   `order_user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`order_id`, `order_details`, `order_location`, `order_mobile`, `order_user_name`, `order_date`, `order_total`, `order_status`, `order_user_id`) VALUES
-(44, 'dwfaegsrdt', 'qewarsty', '45474', 'qw45rehytju', '2021-12-08 02:07:49', 'dqwEAFRST', 'arrived', 20);
 
 -- --------------------------------------------------------
 
@@ -241,7 +235,7 @@ CREATE TABLE `users` (
   `user_password` varchar(255) NOT NULL,
   `user_mobile` int(14) DEFAULT NULL,
   `user_location` varchar(255) DEFAULT NULL,
-  `user_image` varchar(255) NOT NULL,
+  `user_image` varchar(255) NOT NULL DEFAULT 'admin\\uploads\\user_image\\61b1067643199avatar.png',
   `user_gender` varchar(255) NOT NULL,
   `user_creation_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -251,8 +245,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_password`, `user_mobile`, `user_location`, `user_image`, `user_gender`, `user_creation_date`) VALUES
-(20, 'Haitham', 'haithamassoli@gmail.com', 'Aa123456', 792851914, 'salt', ' uploads/user_image/61b0fe3297f6261af29c390efbsales-00.jpg', 'Male', '2021-12-03 10:49:01'),
-(28, 'Ahmad', 'ahmad@gmail.com', 'Aa123456', NULL, NULL, ' uploads/user_image/61b0fe54686d061ae59ef38317men-00.jpg', 'Male', '2021-12-08 01:56:14');
+(33, 'farah', 'farah@gmail.com', '1234', 1234567, 'amman', '\n\nadmin\\uploads\\user_image\\61b1067643199avatar.png', 'Male', '2021-12-08 21:16:04'),
+(34, 'admin', 'mango@gmail.com', '1234', NULL, NULL, '\n\nadmin\\uploads\\user_image\\61b1067643199avatar.png', 'Female', '2021-12-08 21:18:31'),
+(35, 'admin', 'farahmangoo@gmail.com', '123', NULL, NULL, 'admin\\uploads\\user_image\\61b1067643199avatar.png', 'femal', '2021-12-08 22:21:51');
 
 --
 -- Indexes for dumped tables
@@ -320,7 +315,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -356,13 +351,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `unique_visitors`
 --
 ALTER TABLE `unique_visitors`
-  MODIFY `visittor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `visittor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Constraints for dumped tables
