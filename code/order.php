@@ -1,6 +1,9 @@
 <?php
-session_start();
-require_once("includes/header.php")
+// session_start();
+require_once("includes/header.php");
+$sql    = "SELECT * FROM orders INNER JOIN users ON orders.order_user_id=users.user_id WHERE order_id=15";
+$result = mysqli_query($conn, $sql);
+$orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
 <?php
@@ -13,6 +16,7 @@ if (isset($_GET['order'])) {
                 <div class="card-body">
                     <article class="card">
                         <div class="card-body row">
+                            <div class="col"> <strong>Order ID:</strong> <br> </div>
                             <div class="col"> <strong>Estimated Delivery time:</strong> <br>1 to 3 days </div>
                             <div class="col"> <strong>Shipping BY:</strong> <br> Coz Store, | <i class="fa fa-phone"></i> 00962792851914 </div>
                             <div class="col"> <strong>Status:</strong> <br> Picked by the courier </div>
@@ -47,7 +51,7 @@ if (isset($_GET['order'])) {
         echo '</article>
             </div>
             <?php require_once("includes/footer.php") ?>';
-    } else if (isset($_SESSION['cart']) == "") { ?>
-            <div style="text-align: center;font-size: 50px;line-height: 12;color: #03a9f4;font-weight: bold;margin-bottom: 393px;">No Current Orders</div>
+    } else if ($result->num_rows == 0) { ?>
+            <div class="text-center h5 mt-5" style="font-size: 50px;line-height: 10;color: red;font-weight: bold;margin-bottom: 469px;">No Current Orders</div>
         <?php }  ?>
         <?php require_once("includes/footer.php") ?>
