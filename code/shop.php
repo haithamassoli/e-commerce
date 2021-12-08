@@ -16,104 +16,123 @@ $tags_unique = array_unique($tagsArray);
 $results_per_page = 12;
 ?>
 <!-- Product -->
-<div class="bg0 p-b-140">
-	<div class="container">
-		<div class="flex-w flex-sb-m p-b-52">
-			<div class=" panel-filter w-full p-t-10">
-				<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-					<div class="filter-col1 p-r-15 p-b-27">
-						<div class="mtext-102 cl2 p-b-15">
-							Sort By
-						</div>
-						<ul>
-							<li class="p-b-6">
-								<a href="?sort=rating" class="filter-link stext-106 trans-04">
-									Rating
-								</a>
-							</li>
-							<li class="p-b-6">
-								<a href="?sort=newness" class="filter-link stext-106 trans-04 filter-link-active">
-									Newness
-								</a>
-							</li>
-							<li class="p-b-6">
-								<a href="?sort=low" class="filter-link stext-106 trans-04">
-									Price: Low to High
-								</a>
-							</li>
-							<li class="p-b-6">
-								<a href="?sort=high" class="filter-link stext-106 trans-04">
-									Price: High to Low
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="filter-col2 p-r-15 p-b-27">
-						<div class="mtext-102 cl2 p-b-15">
-							Price
-						</div>
-						<ul>
-							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-									All
-								</a>
-							</li>
-							<li class="p-b-6">
-								<a href="?sort=50" class="filter-link stext-106 trans-04">
-									$0.00 - $50.00
-								</a>
-							</li>
-							<li class="p-b-6">
-								<a href="?sort=100" class="filter-link stext-106 trans-04">
-									$50.00 - $100.00
-								</a>
-							</li>
-							<li class="p-b-6">
-								<a href="?sort=150" class="filter-link stext-106 trans-04">
-									$100.00 - $150.00
-								</a>
-							</li>
-							<li class="p-b-6">
-								<a href="?sort=200" class="filter-link stext-106 trans-04">
-									$150.00 - $200.00
-								</a>
-							</li>
-							<li class="p-b-6">
-								<a href="?sort=200+" class="filter-link stext-106 trans-04">
-									$200.00+
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="filter-col3 p-b-27">
-						<div class="mtext-102 cl2 p-b-15">
-							Categories
-						</div>
-						<div class="flex-w p-t-4 m-r--5">
-							<?php foreach ($categories as $key => $value) { ?>
-								<a href="?sort=category&id=<?php echo $value['category_id']; ?>" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									<?php echo $value['category_name']; ?>
-								</a>
-							<?php } ?>
-						</div>
-					</div>
-					<div class="filter-col4 p-b-27">
-						<div class="mtext-102 cl2 p-b-15">
-							Tags
-						</div>
+<style>
+	.row {
+		margin-left: 0px;
+	}
 
-						<div class="flex-w p-t-4 m-r--5">
-							<?php foreach ($tags_unique as $key => $value) { ?>
-								<a href="?sort=tag&name=<?php echo $value; ?>" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									<?php echo $value; ?>
-								</a>
-							<?php }
-							?>
+	.containera {
+		width: auto;
+		padding-right: 0px;
+		margin: 0 !important;
+	}
+
+	@media (max-width: 2000px) {
+		.containera {
+			max-width: 100% !important;
+		}
+	}
+</style>
+<div class="bg0">
+	<div class="containera row">
+		<div class="col-lg-3 col-md-4 col-12">
+
+			<div class="flex-w flex-sb-m p-b-52 mt-1">
+				<div class=" panel-filter w-full p-t-10">
+					<div class="row wrap-filter flex-w bg6 w-full p-l-40 p-t-27 p-lr-15-sm">
+						<div class="col-md-12 col-sm-4 col-12 filter-col1 p-r-15 p-b-27">
+							<div class="mtext-102 cl2 p-b-15">
+								Sort By
+							</div>
+							<ul>
+								<li class="p-b-6">
+									<a href="?sort=rating" class="filter-link stext-106 trans-04">
+										Rating
+									</a>
+								</li>
+								<li class="p-b-6">
+									<a href="?sort=newness" class="filter-link stext-106 trans-04 filter-link-active">
+										Newness
+									</a>
+								</li>
+								<li class="p-b-6">
+									<a href="?sort=low" class="filter-link stext-106 trans-04">
+										Price: Low to High
+									</a>
+								</li>
+								<li class="p-b-6">
+									<a href="?sort=high" class="filter-link stext-106 trans-04">
+										Price: High to Low
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-12 col-sm-4 col-12 filter-col2 p-r-15 p-b-27">
+							<div class="mtext-102 cl2 p-b-15">
+								Price
+							</div>
+							<ul>
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+										All
+									</a>
+								</li>
+								<li class="p-b-6">
+									<a href="?sort=50" class="filter-link stext-106 trans-04">
+										$0.00 - $50.00
+									</a>
+								</li>
+								<li class="p-b-6">
+									<a href="?sort=100" class="filter-link stext-106 trans-04">
+										$50.00 - $100.00
+									</a>
+								</li>
+								<li class="p-b-6">
+									<a href="?sort=150" class="filter-link stext-106 trans-04">
+										$100.00 - $150.00
+									</a>
+								</li>
+								<li class="p-b-6">
+									<a href="?sort=200" class="filter-link stext-106 trans-04">
+										$150.00 - $200.00
+									</a>
+								</li>
+								<li class="p-b-6">
+									<a href="?sort=200+" class="filter-link stext-106 trans-04">
+										$200.00+
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-12 col-sm-4 col-12 filter-col3 p-b-27">
+							<div class="mtext-102 cl2 p-b-15">
+								Categories
+							</div>
+							<div class="flex-w p-t-4 m-r--5">
+								<?php foreach ($categories as $key => $value) { ?>
+									<a href="?sort=category&id=<?php echo $value['category_id']; ?>" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+										<?php echo $value['category_name']; ?>
+									</a>
+								<?php } ?>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-4 col-12 filter-col4 p-b-27">
+							<div class="mtext-102 cl2 p-b-15">
+								Tags
+							</div>
+
+							<div class="flex-w p-t-4 m-r--5">
+								<?php foreach ($tags_unique as $key => $value) { ?>
+									<a href="?sort=tag&name=<?php echo $value; ?>" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+										<?php echo $value; ?>
+									</a>
+								<?php }
+								?>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- Filter -->
 		</div>
 
 
@@ -209,30 +228,30 @@ $results_per_page = 12;
 		}
 		?>
 
-		<div class="row isotope-grid">
+		<div class="row col-md-8 ">
 			<?php echo isset($searchError) ? '<h1 style="margin: auto;">' . $searchError . "</h1>" : "";
 			foreach ($product as $val) { ?>
 
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php
-																																		if ($val["product_tag"] == "bag") {
-																																			echo "bag";
-																																		}
-																																		if ($val["product_tag"] == "women") {
-																																			echo "women";
-																																		}
-																																		if ($val["product_tag"] == "shoes") {
-																																			echo "shoes";
-																																		}
-																																		if ($val["product_tag"] == "sales") {
-																																			echo "sales";
-																																		}
-																																		if ($val["product_tag"] == "new") {
-																																			echo "new";
-																																		}
-																																		if ($val["product_tag"] == "men") {
-																																			echo "men";
-																																		}
-																																		?>">
+				<div class="col-sm-6 col-md-4 col-12 col-lg-3 mt-3 p-b-35 isotope-item <?php
+																																								if ($val["product_tag"] == "bag") {
+																																									echo "bag";
+																																								}
+																																								if ($val["product_tag"] == "women") {
+																																									echo "women";
+																																								}
+																																								if ($val["product_tag"] == "shoes") {
+																																									echo "shoes";
+																																								}
+																																								if ($val["product_tag"] == "sales") {
+																																									echo "sales";
+																																								}
+																																								if ($val["product_tag"] == "new") {
+																																									echo "new";
+																																								}
+																																								if ($val["product_tag"] == "men") {
+																																									echo "men";
+																																								}
+																																								?>">
 					<!-- Block2 -->
 					<div class="block2">
 						<a href="product-detail.php?id=<?php echo $val['product_id']; ?>">
