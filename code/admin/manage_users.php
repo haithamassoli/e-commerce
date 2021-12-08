@@ -1,22 +1,26 @@
 <?php include "./includes/header.php";
+
+if (!isset($_SESSION["type"]) || $_SESSION["type"] != 2) {
+  redirect('../index.php');
+}
 ?>
 
 <?php
-function redirect($url)
-{
-  if (!headers_sent()) {
-    header('Location: ' . $url);
-    exit;
-  } else {
-    echo '<script type="text/javascript">';
-    echo 'window.location.href="' . $url . '";';
-    echo '</script>';
-    echo '<noscript>';
-    echo '<meta http-equiv="refresh" content="0;url=' . $url . '" />';
-    echo '</noscript>';
-    exit;
-  }
-}
+// function redirect($url)
+// {
+//   if (!headers_sent()) {
+//     header('Location: ' . $url);
+//     exit;
+//   } else {
+//     echo '<script type="text/javascript">';
+//     echo 'window.location.href="' . $url . '";';
+//     echo '</script>';
+//     echo '<noscript>';
+//     echo '<meta http-equiv="refresh" content="0;url=' . $url . '" />';
+//     echo '</noscript>';
+//     exit;
+//   }
+// }
 
 $sql = "SELECT * FROM users ";
 $result = mysqli_query($conn, $sql);
@@ -151,7 +155,7 @@ if (isset($_GET['do'])) {
     }
   }
 ?>
-  <div class="col-md-6 col-12 offset-3">
+  <div class="col-md-8 mt-5 col-12 offset-md-2">
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">Manage Users</h4>
@@ -257,11 +261,7 @@ if (isset($_GET['do'])) {
 $conn->close();
 ?>
 
-<link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
-<link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-<link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
-<link rel="stylesheet" href="assets/css/app.css">
-<link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+
 
 <?php
 if (!isset($_GET['do'])) { ?>
@@ -285,7 +285,6 @@ if (!isset($_GET['do'])) { ?>
                       <input type="checkbox" class="check-all">User Image
                     </label>
                   </th>
-                  <th>User Id</th>
                   <th>User Name</th>
                   <th>User Email</th>
                   <th>User Password</th>
@@ -303,7 +302,6 @@ if (!isset($_GET['do'])) { ?>
                         <?php echo $user["user_name"]; ?>
                       </div>
                     </td>
-                    <td><?php echo isset($user['user_id']) ? $user['user_id'] : ''; ?></td>
                     <td><?php echo isset($user['user_name']) ? $user['user_name'] : ''; ?></td>
                     <td><?php echo isset($user['user_email']) ? $user['user_email'] : ''; ?></td>
                     <td><?php echo isset($user['user_password']) ? $user['user_password'] : ''; ?></td>
@@ -330,11 +328,7 @@ if (!isset($_GET['do'])) { ?>
     </div>
   </main>
 <?php } ?>
-<?php
-if (!isset($_SESSION["type"]) || $_SESSION["type"] == 0) {
-  header('location:../index.php');
-}
-?>
+
 
 <!-- end table -->
 <?php include "./includes/footer.php"; ?>

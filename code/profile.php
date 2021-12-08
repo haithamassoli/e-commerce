@@ -25,7 +25,6 @@ if (isset($_SESSION['type']) && $_SESSION['type'] == 0) {
 	$sql = "SELECT * FROM users WHERE user_id='{$_SESSION["user_id"]}'";
 	$result = mysqli_query($conn, $sql);
 	$user  = mysqli_fetch_all($result, MYSQLI_ASSOC);
-	//print_r($user); 
 ?>
 	<div class="page-header header-filter" data-parallax="true" style="background-image:url('images/product-04.jpg');"></div>
 	<div class="main main-raised">
@@ -35,7 +34,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] == 0) {
 					<div class="col-md-6 ml-auto mr-auto">
 						<div class="profile" style="text-align: center;">
 							<div class="avatar">
-								<img src="<?php echo $user[0]['user_image'] ?>" alt="photo" style="margin-top:-90px">
+								<img src="<?php echo $user[0]['user_image'] ?>" alt="photo" style="margin-top:-90px; border-radius: 50%; width : 180px; height: 180px;">
 							</div>
 							<div class="name">
 								<h3 class="title"><?php echo $user[0]['user_name'] ?></h3>
@@ -107,14 +106,15 @@ if (isset($_SESSION['type']) && $_SESSION['type'] == 0) {
 					</div> -->
 
 
-					<div class="row gutters">
-						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-							<div class="text-right u">
-								<button type="button" id="submit" name="submit" class="btn btn-primary">
-									<a class="bt" href="edituserprofile.php" style="text-decoration: none;"> Edit Profile </a>
-								</button>
-							</div>
-						</div>
+					<div style="text-align: right;">
+						<button type="button" id="submit" name="submit" class="btn btn-primary">
+							<a class="bt" href="edituserprofile.php" style="text-decoration: none;"> Edit Profile </a>
+						</button>
+					</div>
+					<div>
+						<button type="button" id="submit" name="submit" class="btn btn-primary" style="margin-left: 28px;margin-top: 5px;">
+							<a class="bt" href="order.php" style="text-decoration: none;"> last order </a>
+						</button>
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,11 @@
 <?php
 ob_start();
 include "./includes/header.php";
+
+if (!isset($_SESSION["type"]) || $_SESSION["type"] == 0) {
+  redirect('../index.php');
+}
+
 // select all comments
 $sql = "SELECT * FROM categories";
 $result = mysqli_query($conn, $sql);
@@ -20,7 +25,7 @@ if (isset($_GET["do"])) {
     $id = $_GET["id"];
     $sql = "DELETE FROM categories WHERE category_id = '$id'";
     $result = mysqli_query($conn, $sql);
-    header("location: manage_categories.php");
+    redirect("manage_categories.php");
   }
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category_name = $_POST["category_name"];
@@ -53,18 +58,18 @@ if (isset($_GET["do"])) {
       $id = $_GET["id"];
       $sql = "UPDATE categories SET category_name = '$category_name', category_description = '$category_description', category_image = '$newImage' WHERE category_id = $id";
       $result = mysqli_query($conn, $sql);
-      header("location: manage_categories.php");
+      redirect("manage_categories.php");
     }
     //add
     if ($do == "add" && $check == 1) {
       $sql = "INSERT INTO categories (category_name, category_description, category_image) VALUES ('$category_name', '$category_description', '$newImage')";
       $result = mysqli_query($conn, $sql);
-      header("location: manage_categories.php");
+      redirect("manage_categories.php");
     }
   }
 ?>
   <!-- start form -->
-  <div class="col-md-5 offset-3 col-12">
+  <div class="col-md-8 mt-5 col-12 offset-md-2">
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">Manage Category</h4>
@@ -80,7 +85,7 @@ if (isset($_GET["do"])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input name="category_name" value="<?php echo $do == "edit" ? $row["category_name"] : ""; ?>" type="text" class="form-control col-9 mb-2" placeholder="Name" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <input name="category_name" value="<?php echo $do == "edit" ? $row["category_name"] : ""; ?>" type="text" class="form-control col-9 mb-2" placeholder="Category Name" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
                       <div class="form-control-icon col-3 ">
                         <i class="bi bi-person" style="position: absolute; top:-10px; left: -20px;"></i>
                       </div>
@@ -94,7 +99,7 @@ if (isset($_GET["do"])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input name="category_description" value="<?php echo $do == "edit" ? $row["category_description"] : ""; ?>" type="text" class="form-control col-9 mb-2" placeholder="Name" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <input name="category_description" value="<?php echo $do == "edit" ? $row["category_description"] : ""; ?>" type="text" class="form-control col-9 mb-2" placeholder="Category Description" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
                       <div class="form-control-icon col-3 ">
                         <i class="bi bi-person" style="position: absolute; top:-10px; left: -20px;"></i>
                       </div>
@@ -184,10 +189,6 @@ if (isset($_GET["do"])) {
   </div>
 <?php } ?>
 <!-- end table -->
-<?php
-if (!isset($_SESSION["type"]) || $_SESSION["type"] == 0) {
-  header('location:../index.php');
-}
-?>
+
 <?php include "./includes/footer.php";
 ob_end_flush(); ?>

@@ -15,7 +15,6 @@ include "./admin/includes/connect.php";
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
 	<!--===============================================================================================-->
@@ -36,10 +35,12 @@ include "./admin/includes/connect.php";
 	<link rel="stylesheet" type="text/css" href="vendor/MagnificPopup/magnific-popup.css">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" href="./css/order.css">
 	<link rel="stylesheet" href="./css/styling.css">
 	<!--===============================================================================================-->
 </head>
@@ -53,7 +54,7 @@ include "./admin/includes/connect.php";
 				<nav class="limiter-menu-desktop container">
 
 					<!-- Logo desktop -->
-					<a href="#" class="logo">
+					<a href="index.php" class="logo">
 						<img src="images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
 
@@ -65,7 +66,7 @@ include "./admin/includes/connect.php";
 							</li>
 
 							<li>
-								<a href="shop.php">Shop</a>
+								<a href="shop.php?page=1">Shop</a>
 							</li>
 							<li>
 								<a href="about.php">About</a>
@@ -102,20 +103,17 @@ include "./admin/includes/connect.php";
 							</li>
 						<?php } ?>
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<!-- <i class="zmdi zmdi-search"></i> -->
+							<i class="zmdi zmdi-search"></i>
 						</div>
 
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php if (isset($_SESSION['cart'])) {
-																																		print_r(count($_SESSION['cart']));
-																																	} else {
-																																		echo 0;
-																																	}; ?>">
+																																																													print_r(count($_SESSION['cart']));
+																																																												} else {
+																																																													echo 0;
+																																																												}; ?>">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
-						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
 					</div>
 				</nav>
 			</div>
@@ -130,21 +128,19 @@ include "./admin/includes/connect.php";
 
 			<!-- Icon header -->
 			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
-				<!-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
 					<i class="zmdi zmdi-search"></i>
-				</div> -->
-
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?php if (isset($_SESSION['cart'])) {
-																																print_r(count($_SESSION['cart']));
-																															} else {
-																																echo 0;
-																															}; ?>">
-					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-					<i class="zmdi zmdi-favorite-outline"></i>
-				</a>
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?php if (isset($_SESSION['cart'])) {
+																																																											print_r(count($_SESSION['cart']));
+																																																										} else {
+																																																											echo 0;
+																																																										}; ?>">
+					<i class="zmdi zmdi-shopping-cart"></i>
+
+				</div>
+
 			</div>
 
 			<!-- Button show menu -->
@@ -164,7 +160,7 @@ include "./admin/includes/connect.php";
 				</li>
 
 				<li>
-					<a href="shop.php">Shop</a>
+					<a href="shop.php?page=1">Shop</a>
 				</li>
 
 				<li>
@@ -199,21 +195,21 @@ include "./admin/includes/connect.php";
 			</ul>
 		</div>
 
-		<!-- Modal Search
+		<!-- Modal Search -->
 		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
 			<div class="container-search-header">
 				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
 					<img src="images/icons/icon-close2.png" alt="CLOSE">
 				</button>
 
-				<form action="search.php" class="wrap-search-header flex-w p-l-15" method="GET">
+				<form class="wrap-search-header flex-w p-l-15" method="GET" action="shop.php">
 					<button class="flex-c-m trans-04" type="submit">
 						<i class="zmdi zmdi-search"></i>
 					</button>
 					<input class="plh3" type="search" name="search" placeholder="Search...">
 				</form>
 			</div>
-		</div> -->
+		</div>
 	</header>
 
 	<!-- Cart -->
@@ -237,7 +233,7 @@ include "./admin/includes/connect.php";
 						foreach ($_SESSION['cart'] as $key => $value) { ?>
 							<li class="header-cart-item flex-w flex-t m-b-12">
 								<div class="header-cart-item-img">
-									<img src="<?php echo $value['product_image']; ?>" alt="IMG">
+									<img src="<?php echo 'admin/' . $value['product_image']; ?>" alt="IMG">
 								</div>
 
 								<div class="header-cart-item-txt p-t-8">

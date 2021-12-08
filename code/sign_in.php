@@ -1,5 +1,10 @@
 <?php
 include "./admin/includes/connect.php";
+
+if (isset($_SESSION["type"])) {
+    header('location:../index.php');
+}
+
 session_start();
 //$_SESSION["type"] 0 => user, 1 => admin, 2 => super admin
 function redirect($url)
@@ -125,10 +130,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button id="signin_insignin_btn" type="submit">LogIn
                     <i class="zmdi zmdi-arrow-right"></i>
                 </button>
+                <div class="dont">
+                    <span class="dont">Don't have an account? <a class="ms-1 regster-href" href="sign_up.php">Sign up</a> </span>
+                </div>
             </form>
         </div>
     </div>
-    <script src="js/signing.js"></script>
 </body>
 
 </html>

@@ -2,26 +2,31 @@
 ob_start();
 include "./includes/header.php"; ?>
 <?php
+if (!isset($_SESSION["type"]) || $_SESSION["type"] != 2) {
+  redirect('../index.php');
+}
+?>
+<?php
 $admin_name = "";
 $admin_email = "";
 $admin_password = "";
 $admin_type = "";
 // Function 
-function redirect($url)
-{
-  if (!headers_sent()) {
-    header('Location: ' . $url);
-    exit;
-  } else {
-    echo '<script type="text/javascript">';
-    echo 'window.location.href="' . $url . '";';
-    echo '</script>';
-    echo '<noscript>';
-    echo '<meta http-equiv="refresh" content="0;url=' . $url . '" />';
-    echo '</noscript>';
-    exit;
-  }
-}
+// function redirect($url)
+// {
+//   if (!headers_sent()) {
+//     header('Location: ' . $url);
+//     exit;
+//   } else {
+//     echo '<script type="text/javascript">';
+//     echo 'window.location.href="' . $url . '";';
+//     echo '</script>';
+//     echo '<noscript>';
+//     echo '<meta http-equiv="refresh" content="0;url=' . $url . '" />';
+//     echo '</noscript>';
+//     exit;
+//   }
+// }
 $sql = "SELECT * FROM admins";
 $result = mysqli_query($conn, $sql);
 $admins  = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -82,11 +87,11 @@ if (isset($_GET['do'])) {
       $image = ($_FILES["admin_image"]);
       $image_folder = "uploads/admin_image/";
       $target_file = $image_folder . uniqid() . basename($image["name"]);
-      move_uploaded_file($image["tmp_name"], $target_file);
+      @move_uploaded_file($image["tmp_name"], $target_file);
       if ($check == 1) {
         $sql2 = "UPDATE admins SET admin_name = '$admin_name', admin_email='$admin_email', admin_password = '$admin_password' , admin_type='$admin_type', admin_image='$target_file'  WHERE admin_id = '$id'";
         if ($conn->query($sql2) === TRUE) {
-          echo "New record created successfully";
+          echo "updated";
         } else {
           echo "Error: " . $sql2 . "<br>" . $conn->error;
         }
@@ -154,7 +159,7 @@ if (isset($_GET['do'])) {
 
   <!-- start form -->
 
-  <div class="col-md-6 col-12 offset-3">
+  <div class="col-md-8 mt-5 col-12 offset-md-2">
 
     <div class="card">
       <div class="card-header">
@@ -298,6 +303,7 @@ if (!isset($_GET['do'])) { ?>
                   <th>Admin_Email</th>
                   <th>Admin_Password</th>
                   <th>Type</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -344,11 +350,7 @@ if (!isset($_GET['do'])) { ?>
     </div>
   </main>
 <?php } ?>
-<?php
-if (!isset($_SESSION["type"]) || $_SESSION["type"] == 0) {
-  header('location:../index.php');
-}
-?>
+
 
 <?php include "./includes/footer.php";
 ob_end_flush(); ?>

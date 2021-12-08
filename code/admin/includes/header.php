@@ -1,18 +1,20 @@
 <?php
 require("includes/connect.php");
+require_once("functions.php");
 session_start();
 ?>
 <?php
-if (isset($_SESSION["type"])) {
-  if (@$_SESSION["type"] == 2) {
+if (isset($_SESSION["type"]) && $_SESSION["type"] != 0) {
+  if ($_SESSION["type"] == 2) {
     $id = $_SESSION["super_admin_id"];
   } else {
-    @$id = $_SESSION["admin_id"];
+    $id = $_SESSION["admin_id"];
   }
   $sql    = "SELECT * FROM admins WHERE admin_id=$id";
   $result = mysqli_query($conn, $sql);
-  $admins = mysqli_fetch_all($result, MYSQLI_ASSOC);
-  // echo $admins[0]["admin_image"];
+  @$admins = mysqli_fetch_all($result, MYSQLI_ASSOC);
+} elseif (!isset($_SESSION["type"])) {
+  redirect('../index.php');
 }
 
 ?>
@@ -23,13 +25,14 @@ if (isset($_SESSION["type"])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dahboard COZ SHOP</title>
+  <title>Admin Dahboard</title>
   <!-- Favicon -->
   <link rel="stylesheet" href="./assets/css/bootstrap.css">
   <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
   <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
   <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
   <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <!-- Custom styles -->
   <link rel="stylesheet" href="./assets/css/style.min.css">
 </head>
@@ -85,7 +88,13 @@ if (isset($_SESSION["type"])) {
               <a href="manage_products.php"><span class="icon image" aria-hidden="true"></span>Products</a>
             </li>
             <li>
+              <a href="manage_orders.php"><span class="icon paper" aria-hidden="true"></span>Orders</a>
+            </li>
+            <li>
               <a href="manage_comments.php"><span class="icon paper" aria-hidden="true"></span>Comments</a>
+            <li>
+            <li>
+              <a href="manage_coupons.php"><span class="icon paper" aria-hidden="true"></span>Coupons</a>
             </li>
             <li>
               <a href="../index.php"><span class="icon paper" aria-hidden="true"></span>webisite</a>
@@ -95,7 +104,7 @@ if (isset($_SESSION["type"])) {
           <?php
           if (isset($_SESSION["type"])) {
             if ($_SESSION["type"] == 2)
-              echo '<div class="sidebar-footer" style="margin-top: 265px;">
+              echo '<div class="sidebar-footer" style="margin-top: 70px;">
             <a href="##" class="sidebar-user">
               <span class="sidebar-user-img">
               <img src="' . $admins[0]['admin_image'] . '">
@@ -139,7 +148,9 @@ if (isset($_SESSION["type"])) {
             </button>
             <div class="notification-wrapper">
               <button class="gray-circle-btn dropdown-btn" title="To messages" type="button">
-                <span class="sr-only"></span>
+
+                <!-- <span class="sr-only"></span> -->
+
                 <?php
                 $sql = "SELECT * FROM comments";
                 $result = mysqli_query($conn, $sql);
@@ -147,18 +158,20 @@ if (isset($_SESSION["type"])) {
                 if ($result->num_rows == 0) {
                 ?>
                   <span class="icon notification " aria-hidden="true"></span>
+                  <i class="far fa-bell"></i>
               </button>
             </div>
           <?php } else {
-                  echo '<span class="icon notification active " aria-hidden="true"></span>
+                  echo '<span class=""><i class="notification mt-2 active far fa-bell"></i></span>
+
                   </button>
                   </div>';
                 } ?>
           <div class="nav-user-wrapper">
-            <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button" style="margin-top: 15px;">
+            <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button">
               <span class="sr-only">My profile</span>
               <span class="nav-user-img">
-                <img src="<?php echo $admins[0]['admin_image'] ?>" alt="abcd">
+                <img src="<?php echo  $admins[0]['admin_image'] ?>" alt="abcd">
               </span>
             </button>
             <ul class="users-item-dropdown nav-user-dropdown dropdown">

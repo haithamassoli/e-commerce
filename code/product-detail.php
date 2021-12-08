@@ -36,6 +36,7 @@ if (isset($_GET["id"])) {
 	$sql = "SELECT * FROM products INNER JOIN categories ON products.product_categorie_id = categories.category_id WHERE product_id = {$_GET['id']}";
 	$result = mysqli_query($conn, $sql);
 	$product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+	$related = $product[0]['category_name'];
 	if ($result->num_rows < 1) {
 		redirect("index.php");
 	}
@@ -45,7 +46,7 @@ if (isset($_GET["id"])) {
 	$comments  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 	//select related
-	$sql = "SELECT * FROM products WHERE product_tag='related'";
+	$sql = "SELECT * FROM products WHERE product_tag LIKE '%{$related}%' LIMIT 4";
 	$result = mysqli_query($conn, $sql);
 	$related  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
@@ -133,14 +134,14 @@ if (isset($_GET["id"])) {
 
 
 <!-- breadcrumb -->
-<div class="container mt-5">
+<div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
 		<a href="index.php" class="stext-109 cl8 hov-cl1 trans-04">
 			Home
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 		</a>
 
-		<a href="shop.php" class="stext-109 cl8 hov-cl1 trans-04">
+		<a href="shop.php?page=1" class="stext-109 cl8 hov-cl1 trans-04">
 			<?php echo $product[0]['category_name'] ?>
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 		</a>
@@ -231,8 +232,12 @@ if (isset($_GET["id"])) {
 							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
 							</h4>
 
+							<h4 class="mtext-106 cl2">
+								<?php echo $row["product_name"];  ?>
+							</h4>
+							<br>
 							<span class="mtext-106 cl2">
-								<?php echo $row["product_price"];  ?>
+								<?php echo '$' . $row["product_price"];  ?>
 							</span>
 
 							<p class="stext-102 cl3 p-t-23">
@@ -248,12 +253,17 @@ if (isset($_GET["id"])) {
 
 									<div class="size-204 respon6-next">
 										<div class="rs1-select2 bor8 bg0">
-											<select class="js-select2" name="size">
-												<option value="0">Choose an option</option>
-												<option value="S">Size S</option>
-												<option value="M">Size M</option>
-												<option value="L">Size L</option>
-												<option value="XL">Size XL</option>
+											<select <?php echo $row['product_size'] == "" ? "disabled" : ''; ?> class="js-select2" name="size">
+												<option value="<?php echo $row['product_size'] == "" ? "-" : 0; ?>">Choose an option</option>
+												<?php
+												if ($row['product_size'] != "") {
+													$sizeStr = $row['product_size'];
+													$sizeArr = explode(',', $sizeStr);
+													foreach ($sizeArr as $size) {
+												?>
+														<option value="<?php echo $size; ?>"><?php echo $size; ?></option>
+												<?php }
+												} ?>
 											</select>
 											<div class="dropDownSelect2"></div>
 										</div>
@@ -278,6 +288,8 @@ if (isset($_GET["id"])) {
 											<input type="hidden" name="product_name" value="<?php echo $product[0]['product_name']; ?>">
 											<input type="hidden" name="product_image" value="<?php echo $product[0]['product_main_image']; ?>">
 											<input type="hidden" name="product_price" value="<?php echo $row["product_price"]; ?>">
+											<br>
+											<br>
 											<button type="submit" name="add_to_cart" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 												Add to cart
 											</button>
@@ -287,13 +299,7 @@ if (isset($_GET["id"])) {
 							</div>
 
 							<!--  -->
-							<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-								<div class="flex-m bor9 p-r-10 m-r-11">
-									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-										<i class="zmdi zmdi-favorite"></i>
-									</a>
-								</div>
-
+							<div class="flex-w ml-5 flex-m p-l-100 p-t-40 respon7">
 								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
 									<i class="fa fa-facebook"></i>
 								</a>
@@ -322,7 +328,7 @@ if (isset($_GET["id"])) {
 						</li>
 
 						<li class="nav-item p-b-10">
-							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
+							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (<?php print_r(count($comments)); ?>)</a>
 						</li>
 					</ul>
 
@@ -377,7 +383,7 @@ if (isset($_GET["id"])) {
 														<?php echo $row["comment"];  ?>
 													</p>
 													<p class="stext-102 cl6">
-														<?php if ($row["comment_image"] != Null) { ?>
+														<?php if ($row["comment_image"] != "") { ?>
 															<img src="<?php echo $row["comment_image"];  ?>" style='width:300px; height:200px; ' alt="">
 														<?php } ?>
 													</p>
@@ -433,19 +439,6 @@ if (isset($_GET["id"])) {
 				</div>
 			</div>
 		</div>
-		</div>
-		</div>
-		</div>
-
-		<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
-			<span class="stext-107 cl6 p-lr-25">
-				SKU: JAK-01
-			</span>
-
-			<span class="stext-107 cl6 p-lr-25">
-				Categories: Jacket, Men
-			</span>
-		</div>
 	</section>
 
 
@@ -466,30 +459,19 @@ if (isset($_GET["id"])) {
 						<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 							<!-- Block2 -->
 							<div class="block2">
-								<div class="block2-pic hov-img0">
-									<img src="<?php echo 'admin/' . $row["product_main_image"];  ?>" alt="IMG-PRODUCT">
-
-									<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-										Quick View
-									</a>
-								</div>
-
+								<a href="product-detail.php?id=<?php echo $row["product_id"] ?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<div class="block2-pic hov-img0">
+										<img src="<?php echo 'admin/' . $row["product_main_image"];  ?>" alt="IMG-PRODUCT">
+									</div>
+								</a>
 								<div class="block2-txt flex-w flex-t p-t-14">
 									<div class="block2-txt-child1 flex-col-l ">
-										<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+										<a href="product-detail.php?id=<?php echo $row["product_id"] ?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 											<?php echo $row["product_name"];  ?>
 										</a>
-
 										<span class="stext-105 cl3">
 											<?php echo '$' . $row["product_price"];  ?>
 										</span>
-									</div>
-
-									<div class="block2-txt-child2 flex-r p-t-3">
-										<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-											<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-											<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
-										</a>
 									</div>
 								</div>
 							</div>

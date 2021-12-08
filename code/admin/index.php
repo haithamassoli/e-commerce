@@ -1,6 +1,10 @@
 <?php
 include "./includes/header.php";
-$sql = "SELECT * FROM admins ";
+
+if (!isset($_SESSION["type"]) || $_SESSION["type"] == 0) {
+  redirect('../index.php');
+}
+$sql = "SELECT * FROM users ";
 $result = mysqli_query($conn, $sql);
 $num_of_users = $result->num_rows;
 ?>
@@ -103,9 +107,5 @@ $last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </div>
     </div>
 </main>
-<?php
-if (!isset($_SESSION["type"]) || $_SESSION["type"] == 0) {
-  header('location:../index.php');
-}
-?>
+
 <?php include "./includes/footer.php"; ?>
