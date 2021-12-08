@@ -20,8 +20,9 @@ if (isset($_POST['pay'])) {
   $check = 1;
   $name = ($_POST["name"]);
   $email = strtolower($_POST["email"]);
-  $location = ($_POST["location"]);
-  $mobile   = ($_POST["mobile"]);
+  $location = ($_POST["city"]);
+  echo $location;
+  $mobile   = ($_POST["number"]);
   if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
     $nameError = "Only letters and white space allowed";
     $check = 0;
@@ -38,6 +39,14 @@ if (isset($_POST['pay'])) {
   if ($email == "") {
     $check = 0;
     $emailError = "The email shouldn't be empty!";
+  }
+  if ($location == "") {
+    $check = 0;
+    $locationError = "The location shouldn't be empty!";
+  }
+  if ($mobile == "") {
+    $check = 0;
+    $mobileError = "The mobile shouldn't be empty!";
   }
   if ($check == 1) {
     foreach ($_SESSION['cart'] as $key => $val) {
@@ -179,44 +188,37 @@ if (isset($_POST['pay'])) {
             <div class="form-row">
               <div class="col-md-6 mb-4">
                 <label for="validationCustom01">Full Name</label>
-                <input type="text" name="name" class="form-control" value="<?php echo $users[0]['user_name'] ?>" required>
-                <div class="valid-feedback">
+                <input type="text" name="name" class="form-control" value="<?php echo $users[0]['user_name'] ?>">
+                <div class="valid-feedback text-danger">
+                  <?php echo isset($nameError) ? $nameError : ""; ?>
 
                 </div>
               </div>
               <div class="col-md-6 mb-4">
                 <label for="validationCustom01">Email</label>
-                <input type="email" name="email" class="form-control" value="<?php echo $users[0]['user_email']; ?>" required>
-                <div class="valid-feedback">
-
+                <input type="email" name="email" class="form-control" value="<?php echo $users[0]['user_email']; ?>">
+                <div class="valid-feedback text-danger">
+                  <?php echo isset($emailError) ? $emailError : ""; ?>
                 </div>
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-6 mb-4">
                 <label for="validationCustom03">Mobile</label>
-                <input type="number" name="number" class="form-control" value="<?php echo isset($users[0]['user_mobile']) ? $users[0]['user_mobile'] : ""; ?>" placeholder="Mobile" required>
-                <div class="invalid-feedback">
-
+                <input type="number" name="number" class="form-control" value="<?php echo isset($users[0]['user_mobile']) ? $users[0]['user_mobile'] : ""; ?>" placeholder="Mobile">
+                <div class=" text-danger">
+                  <?php echo isset($mobileError) ? $mobileError : ""; ?>
                 </div>
               </div>
               <div class="col-md-6 mb-4">
                 <label for="validationCustom04">City</label>
-                <input type="text" name="city" class="form-control" value="<?php echo isset($users[0]['user_location']) ? $users[0]['user_location'] : ""; ?>" placeholder="City" required>
-                <div class="invalid-feedback">
-
+                <input type="text" name="city" class="form-control" value="<?php echo isset($users[0]['user_location']) ? $users[0]['user_location'] : ""; ?>" placeholder="City">
+                <div class="text-danger">
+                  <?php echo isset($locationError) ? $locationError : ""; ?>
                 </div>
               </div>
             </div>
             <div class="form-group">
-              <div class="form-check">
-                <input style="position:absolute; left:20px;" class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                <label class="form-check-label" for="invalidCheck">
-                  Agree to terms and conditions
-                </label>
-                <div class="invalid-feedback">
-                </div>
-              </div>
               <div class="form-check">
                 <input style="position:absolute; left:20px;" class="form-check-input" type="radio" value="" id="invalidCheck" required>
                 <label class="form-check-label" for="invalidCheck">
@@ -265,7 +267,7 @@ if (isset($_POST['pay'])) {
               </span>
             </div>
           </div>
-          <button type="submit" name="checkout" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+          <button type="submit" name="pay" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
             Pay
           </button>
           <?php
