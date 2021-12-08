@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $passwordConfirmError = "";
     $user_name_Error = "";
     // Check file size
-    if ($image["size"] > 500000 || $image["size"] == 0) {
+    /*  if ($image["size"] > 500000 || $image["size"] == 0) {
         $imageError = "Sorry, your file is too large.";
         $check     = 0;
     } // Check if image file is a actual image or fake image
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($check_if_image == false) {
         $imageError = "File is not an image.";
         $check = 0;
-    }
+    } */
     if (!preg_match("/^[a-zA-Z-' ]*$/", $user_name)) {
         $user_name_Error = "Only letters and white space allowed";
         $check = 0;
@@ -149,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div style="color: red;font-weight:bold;" id="pass2Help"><?php echo @$passwordConfirmError ?></div>
                 </div>
                 <div class="form-wrapper">
-                    <input name="image" type="file" class="form-control" required>
+                    <input name="image" type="file" class="form-control">
                     <div style="color: red;font-weight:bold;" id="image"><?php echo @$imageError ?></div>
                 </div>
                 <button id="signUp_insignup_btn" type="submit" name="btn">Register

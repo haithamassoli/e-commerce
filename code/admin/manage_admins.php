@@ -11,22 +11,8 @@ $admin_name = "";
 $admin_email = "";
 $admin_password = "";
 $admin_type = "";
-// Function 
-// function redirect($url)
-// {
-//   if (!headers_sent()) {
-//     header('Location: ' . $url);
-//     exit;
-//   } else {
-//     echo '<script type="text/javascript">';
-//     echo 'window.location.href="' . $url . '";';
-//     echo '</script>';
-//     echo '<noscript>';
-//     echo '<meta http-equiv="refresh" content="0;url=' . $url . '" />';
-//     echo '</noscript>';
-//     exit;
-//   }
-// }
+
+
 $sql = "SELECT * FROM admins";
 $result = mysqli_query($conn, $sql);
 $admins  = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -128,16 +114,11 @@ if (isset($_GET['do'])) {
         $check = 0;
         $passwordErr = "The password shouldn't be empty!";
       }
-      /* if ($admin_type == "") {
-        $check = 0;
-        $typeErr = "The type shouldn't be empty!";
-      }
-      if ($admin_type == 1 || $admin_type == 0) {
-        $check = 1;
+      if ($admin_type == "0") {
+        $admin_type = 0;
       } else {
-        $typeErr = " The type value should be 0 or 1 ";
-        $check = 0;
-      }*/
+        $admin_type = 1;
+      }
       $image = ($_FILES["admin_image"]);
       $image_folder = "uploads/admin_image/";
       $target_file = $image_folder . uniqid() . basename($image["name"]);
@@ -230,8 +211,12 @@ if (isset($_GET['do'])) {
                     <div class="position-relative row justify-content-center align-items-center d-flex">
 
                       <select name="admin_type" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;">
-                        <option value="0" <?php echo $row['admin_type'] == 0 ? "selected" : ""; ?>>Admin</option>
-                        <option value="1" <?php echo $row['admin_type'] == 1 ? "selected" : ""; ?>>SuperAdmin </option>
+                        <option value="0" <?php if ($do == "edit") {
+                                            echo $row['admin_type'] == 0 ? "selected" : "";
+                                          } ?>> Admin</option>
+                        <option value="1" <?php if ($do == "edit") {
+                                            echo $row['admin_type'] == 1 ? "selected" : "";
+                                          } ?>> SuperAdmin </option>
                       </select>
 
                       <div class="form-control-icon col-3">
@@ -241,6 +226,9 @@ if (isset($_GET['do'])) {
                     </div>
                   </div>
                 </div>
+                <div class="col-md-4">
+                  <label>Image</label>
+                </div>
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
@@ -249,7 +237,7 @@ if (isset($_GET['do'])) {
                       <div class="form-control-icon col-3">
                         <i class="bi bi-phone" style="position: absolute; top:-10px; left: -20px;"></i>
                       </div>
-                      <div style="color:red"><?php echo @$typeErr;  ?></div>
+
                     </div>
                   </div>
                 </div>

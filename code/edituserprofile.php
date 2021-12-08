@@ -1,6 +1,8 @@
 <?php
 include('includes/header.php');
 
+
+
 $image     = "";
 $name      = "";
 $email     = "";
@@ -26,12 +28,11 @@ function redirect($url)
     }
 }
 
-
-
 // start Edit 
 $sql    = "SELECT * FROM users WHERE user_id='{$_SESSION["user_id"]}'";
 $result = mysqli_query($conn, $sql);
 $user   = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check    = 1;
     $image    = ($_FILES["userimg"]);
@@ -67,6 +68,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check          = 0;
         $passError      = "The password shouldn't be empty!";
     }
+    if ($gender == "0") {
+        $gender = 0;
+    } else {
+        $gender = 1;
+    }
     if (!preg_match("/^[077|079|078]+[0-9]{7}$/", $mobile)) { //mobile 
         $mobileError  = "should be a mobile number";
         $check      = 0;
@@ -88,16 +94,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $image_folder   = "admin/uploads/user_image/";
     $target_file    = $image_folder . uniqid() . basename($image["name"]);
     $image_check    = ",user_image='$target_file'";
-    if (isset($user['user_image'])) {
+    if (!isset($user['user_image'])) {
         if (($image["size"]) == 0) {
-            $target_file    = $user['user_image'];
+            $target_file    = $user[0]['user_image'];
             $image_check    = "";
         }
     }
 
     move_uploaded_file($image["tmp_name"], $target_file);
     if ($check == 1) {
-        $sql2 = "UPDATE users  SET user_name = '$name', user_email ='$email', user_mobile='$mobile', user_location='$location', user_password='$password', user_gender='$gender' {$image_check} WHERE user_id = '{$_SESSION["user_id"]}'";
+
+        $id = (int)$_SESSION["user_id"];
+
+        $sql2 = "UPDATE users  SET user_name = '$name', user_email ='$email', user_mobile='$mobile', user_location='$location', user_gender='$gender', user_password='$password' {$image_check} WHERE user_id =$id ";
         if ($conn->query($sql2) === TRUE) {
             echo "New record created successfully";
         } else {
@@ -124,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="col-md-6 ml-auto mr-auto">
                         <div class="profile" style="text-align: center;">
                             <div class="avatar">
-                                <img src="<?php echo $user[0]['user_image'] ?>" alt="photo" style="margin-top:-90px border-radius: 50%; width : 180px; height: 180px;">
+                                <img src="<?php echo $user[0]['user_image'] ?>" alt="photo" style="margin-top:-90px; border-radius: 50%; width : 180px; height: 180px;">
                                 <div class="file ck">
                                     <!-- Change Photo -->
                                     <input name="userimg" type="file" class="form-control" id="exampleInputPassword1">
@@ -179,11 +188,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <label for="Street">Gender</label>
 
                             <select name="gender" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female </option>
+                                <option value="0" <?php echo $user[0]['user_gender'] == 0 ? "selected" : ""; ?>> Male </option>
+                                <option value="1" <?php echo $user[0]['user_gender'] == 1 ? "selected" : ""; ?>> Female </option>
                             </select>
                         </div>
-                        <div style="color:red"><?php echo @$genderError; ?></div>
+
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="form-group f ii">
