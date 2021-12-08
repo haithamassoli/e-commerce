@@ -50,7 +50,7 @@ if (isset($_GET['id'])) {
                             <td><?php echo isset($order['order_total']) ? $order['order_total'] : ''; ?></td>
                             <td><?php echo isset($order['order_status']) ? $order['order_status'] : ''; ?></td>
                             <td>
-                                <a href="manage_orders.php?id=<?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>">arrive</a>
+                                <a href="manage_orders.php?id=<?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>" class="btn btn-success">arrive</a>
                             </td>
                         </tr>
                     <?php } ?>

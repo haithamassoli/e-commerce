@@ -50,8 +50,7 @@ if (isset($_SESSION["type"]) && $_SESSION["type"] != 0) {
             <span class="sr-only">Home</span>
             <span class="icon logo" aria-hidden="true"></span>
             <div class="logo-text">
-              <span class="logo-title">COZ SHOP</span>
-              <span class="logo-subtitle">Dashboard</span>
+              <i class="fa-light fa-house"></i>
             </div>
 
           </a>
@@ -134,7 +133,7 @@ if (isset($_SESSION["type"]) && $_SESSION["type"] != 0) {
       <nav class="main-nav--bg">
         <div class="container main-nav">
           <div class="main-nav-start">
-            <div style=" font-family: fantasy;background-color: blue;color: white;line-height: 2;width: 100px;padding-left: 22px;opacity: 0.5;">COZ SHOP</div>
+            <div style=" font-family: fantasy;background-color: blue;color: white;line-height: 2;width: 100px;padding-left: 22px;opacity: 0.5;"><a href="../index.php" style="text-decoration: none; color:white;">COZ SHOP</a></div>
           </div>
           <div class="main-nav-end">
             <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
