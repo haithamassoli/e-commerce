@@ -2,9 +2,9 @@
 include "./admin/includes/connect.php";
 session_start();
 
-if (isset($_SESSION["type"])) {
-    header('location:../index.php');
-}
+// if (isset($_SESSION["type"])) {
+//     header('location:index.php');
+// }
 
 //$_SESSION["type"] 0 => user, 1 => admin, 2 => super admin
 function redirect($url)
