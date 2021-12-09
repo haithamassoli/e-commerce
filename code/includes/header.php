@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 $total = 0;
 $quantity = 0;
 $totalback = 0;

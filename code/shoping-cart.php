@@ -21,10 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				}
 			}
 		}
-		if (isset($_POST['remove'])) {
-			unset($_SESSION['cart']);
-			header("location:shoping-cart.php");
-		}
+		// if (isset($_POST['remove'])) {
+		// 	unset($_SESSION['cart']);
+		// 	unset($_SESSION['total']);
+		// 	header("location:shoping-cart.php");
+		// }
 	}
 }
 ?>
@@ -134,13 +135,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								border-radius: 50%;
 							}
 						</style>
-						<div class="flex-c-m stext-101 cl2 p-2 trans-04 pointer m-tb-10 deleteCart">
+						<!-- <div class="flex-c-m stext-101 cl2 p-2 trans-04 pointer m-tb-10 deleteCart">
 							<button name="remove" type="submit">
 								<div style="display: flex; align-items:center;">
 									<i style="display: block;" class="far fa-trash-alt fa-lg"></i><span class="ml-3">Delete All</span>
 								</div>
 							</button>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
