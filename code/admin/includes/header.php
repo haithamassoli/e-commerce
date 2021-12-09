@@ -106,10 +106,10 @@ if (isset($_SESSION["type"]) && $_SESSION["type"] != 0) {
               echo '<div class="sidebar-footer" style="margin-top: 70px;">
             <a href="##" class="sidebar-user">
               <span class="sidebar-user-img">
-              <img src="' . $admins[0]['admin_image'] . '">
+              <img src="' . @$admins[0]['admin_image'] . '">
               </span>
               <div class="sidebar-user-info">
-                <span class="sidebar-user__title">' . $admins[0]['admin_name'] . '</span>
+                <span class="sidebar-user__title">' . @$admins[0]['admin_name'] . '</span>
               </div>
             </a>
           </div>';
