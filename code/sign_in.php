@@ -2,7 +2,7 @@
 include "./admin/includes/connect.php";
 
 if (isset($_SESSION["type"])) {
-    header('location:../index.php');
+    header('location:index.php');
 }
 
 session_start();
