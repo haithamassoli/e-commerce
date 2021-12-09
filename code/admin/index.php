@@ -15,19 +15,6 @@ $num_of_visitors = $result->num_rows;
 $visitors = mysqli_fetch_all($result);
 ?>
 <?php
-if (isset($_SESSION['type'])) {
-  if ($_SESSION["type"] == 2) {
-    $id = $_SESSION["super_admin_id"];
-  } else {
-    $id = $_SESSION["admin_id"];
-  }
-
-  $sql    = "SELECT * FROM admins WHERE admin_id=$id ";
-  $result = mysqli_query($conn, $sql);
-  $admins = mysqli_fetch_all($result, MYSQLI_ASSOC);
-}
-?>
-<?php
 $sql = "SELECT * FROM (
   SELECT *
   FROM `comments`
@@ -38,27 +25,35 @@ $result = mysqli_query($conn, $sql);
 $last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 <?php
+if (isset($_SESSION['type'])) {
+  if ($_SESSION["type"] == 2) {
+    $id = $_SESSION["super_admin_id"];
+  } else {
+    $id = $_SESSION["admin_id"];
+  }
+
+  $sql    = "SELECT * FROM admins WHERE admin_id=$id ";
+  $result = mysqli_query($conn, $sql);
+}
+?>
+<?php
 $sql = "SELECT * FROM orders WHERE order_status='arrived'";
 $result = mysqli_query($conn, $sql);
-$last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $completed = ($result->num_rows)
 ?>
 <?php
 $sql = "SELECT * FROM orders WHERE order_status='on delevery'";
 $result = mysqli_query($conn, $sql);
-$last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $onDeliver = ($result->num_rows)
 ?>
 <?php
 $sql = "SELECT * FROM orders WHERE order_status='preparing'";
 $result = mysqli_query($conn, $sql);
-$last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $preparing = ($result->num_rows)
 ?>
 <?php
 $sql = "SELECT * FROM orders WHERE order_status='blocked'";
 $result = mysqli_query($conn, $sql);
-$last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $blocked = ($result->num_rows)
 ?>
 
@@ -164,7 +159,7 @@ $blocked = ($result->num_rows)
                   <tr>
                     <td>
                       <div class="categories-table-img">
-                        <img src="<?php echo isset($comment['comment_image']) ? $comment['comment_image'] : "" ?>" alt="avc">
+                        <img src="<?php echo isset($comment['comment_image']) ? "admin/" . $comment['comment_image'] : "" ?>" alt="avc">
                       </div>
                       </label>
                     </td>
