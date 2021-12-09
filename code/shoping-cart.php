@@ -1,20 +1,11 @@
 <?php
 ob_start(); // Output Buffering Start
 include "./includes/header.php";
-$total = 0;
-$totalback = 0;
-
-if (isset($_GET['delete'])) {
-	$del = $_GET['delete'];
-	if (isset($_SESSION['cart'])) {
-		foreach ($_SESSION['cart'] as $key => $value) {
-			if ($key == $del) {
-				unset($_SESSION['cart'][$key]);
-				header("location:shoping-cart.php");
-			}
-		}
-	}
-}
+// $total = 0;
+// $totalback = 0;
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	@$coupon = $_POST["coupon"];
@@ -73,9 +64,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								foreach ($_SESSION['cart'] as $key => $value) { ?>
 									<tr class="table_row">
 										<td class="column-1">
-											<div class="how-itemcart1">
-												<img src="<?php echo 'admin/' . $value['product_image']; ?>" alt="IMG">
-											</div>
+											<a href="shoping-cart.php?delete=<?php echo $value['product_id'] . $value['size'] ?>">
+												<div class="how-itemcart1">
+													<img src="<?php echo 'admin/' . $value['product_image']; ?>" alt="IMG">
+												</div>
+											</a>
 										</td>
 										<td class="column-2"><?php echo $value['product_name'] .  " " . $value['size']; ?></td>
 										<td class="column-3">$ <?php echo $value['product_price']; ?></td>
@@ -160,11 +153,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					<div class="flex-w flex-t p-t-27 p-b-33">
 						<div class="size-208">
 							<span class="mtext-101 cl2">
-								<?php if (isset($_POST['coupon_set'])) { ?>
+								<?php if (isset($_POST['coupon_set']) && isset($_SESSION['cart'])) { ?>
 									<div style="color:red; width:120%; margin-bottom: 30px !important;">Coupon: <?php echo   $couponsDis . '%'; ?></div>
 								<?php } ?> <div style=" margin-bottom: 10px !important; width:125%;">Total: <?php echo   "$"  . $total . "  ";
-																																														echo isset($_POST['coupon_set']) ? '<del style="color:#999;">' . '   ' . ' $' . $totalback . '<del></div>' : "";
-																																														$_SESSION['cart'][$value['product_id'] . $value['size']]['total'] = $total
+																																														echo isset($_POST['coupon_set']) && isset($_SESSION['cart']) ? '<del style="color:#999;">' . '   ' . ' $' . $totalback . '<del></div>' : "";
+																																														$_SESSION['total'] = $total
 																																														?>
 							</span>
 						</div>

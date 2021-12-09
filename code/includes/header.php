@@ -1,8 +1,21 @@
 <?php
 session_start();
+
 $total = 0;
 $quantity = 0;
+$totalback = 0;
 include "./admin/includes/connect.php";
+if (isset($_GET['delete'])) {
+	$del = $_GET['delete'];
+	if (isset($_SESSION['cart'])) {
+		foreach ($_SESSION['cart'] as $key => $value) {
+			if ($key == $del) {
+				unset($_SESSION['cart'][$key]);
+				header('Location: ' . $_SERVER['PHP_SELF']);
+			}
+		}
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -239,9 +252,11 @@ include "./admin/includes/connect.php";
 					<?php if (isset($_SESSION['cart'])) {
 						foreach ($_SESSION['cart'] as $key => $value) { ?>
 							<li class="header-cart-item flex-w flex-t m-b-12">
-								<div class="header-cart-item-img">
-									<img src="<?php echo 'admin/' . $value['product_image']; ?>" alt="IMG">
-								</div>
+								<a href="?delete=<?php echo $value['product_id'] . $value['size'] ?>">
+									<div class="header-cart-item-img">
+										<img src="<?php echo 'admin/' . $value['product_image']; ?>" alt="IMG">
+									</div>
+								</a>
 
 								<div class="header-cart-item-txt p-t-8">
 									<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
