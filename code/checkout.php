@@ -138,7 +138,7 @@ if (isset($_POST['checkout']) && $total == 0) {
             </div>
             <div class="form-group">
               <div class="form-check">
-                <input style="position:absolute; left:20px;" class="form-check-input" type="radio" value="" id="invalidCheck" required>
+                <input style="position:absolute; left:20px;" class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                 <label class="form-check-label" for="invalidCheck">
                   Cash on delivery
                 </label>
