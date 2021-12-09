@@ -21,7 +21,6 @@ if (isset($_POST['pay'])) {
   $name = ($_POST["name"]);
   $email = strtolower($_POST["email"]);
   $location = ($_POST["city"]);
-  echo $location;
   $mobile   = ($_POST["number"]);
   if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
     $nameError = "Only letters and white space allowed";
