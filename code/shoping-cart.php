@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 										<td class="column-1">
 											<a href="shoping-cart.php?delete=<?php echo $value['product_id'] . $value['size'] ?>">
 												<div class="how-itemcart1">
-													<img src="<?php echo 'admin/' . $value['product_image']; ?>" alt="IMG">
+													<img src="<?php echo 'admin/' . $value['product_image']; ?>" loading="lazy" alt="IMG">
 												</div>
 											</a>
 										</td>
@@ -80,8 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 											</div>
 										</td>
 										<td class="column-5"> $ <?php $total += $value['product_price'] * $value['quantity'];
-																$totalback += $value['product_price'] * $value['quantity'];
-																echo $value['product_price'] * $value['quantity']; ?><a href="shoping-cart.php?delete=<?php echo $value['product_id'] . $value['size'] ?>"><button class="ml-4" type="button" name="<?php echo "removeItem" . $value['product_id'] . $value['size'] ?>"><i style="display: block;" class="far fa-trash-alt fa-lg"></i></button></a>
+																						$totalback += $value['product_price'] * $value['quantity'];
+																						echo $value['product_price'] * $value['quantity']; ?><a href="shoping-cart.php?delete=<?php echo $value['product_id'] . $value['size'] ?>"><button class="ml-4" type="button" name="<?php echo "removeItem" . $value['product_id'] . $value['size'] ?>"><i style="display: block;" class="far fa-trash-alt fa-lg"></i></button></a>
 										</td>
 									</tr>
 							<?php }
@@ -151,9 +151,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								<?php if (isset($_POST['coupon_set']) && isset($_SESSION['cart'])) { ?>
 									<div style="color:red; width:120%; margin-bottom: 30px !important;">Coupon: <?php echo   $couponsDis . '%'; ?></div>
 								<?php } ?> <div style=" margin-bottom: 10px !important; width:125%;">Total: <?php echo   "$"  . $total . "  ";
-																											echo isset($_POST['coupon_set']) && isset($_SESSION['cart']) ? '<del style="color:#999;">' . '   ' . ' $' . $totalback . '<del></div>' : "";
-																											$_SESSION['total'] = $total
-																											?>
+																																														echo isset($_POST['coupon_set']) && isset($_SESSION['cart']) ? '<del style="color:#999;">' . '   ' . ' $' . $totalback . '<del></div>' : "";
+																																														$_SESSION['total'] = $total
+																																														?>
 							</span>
 						</div>
 					</div>

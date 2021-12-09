@@ -264,7 +264,7 @@ $results_per_page = 12;
 									<?php if ($val["product_tag"] == "sales") { ?>
 										<div style="width:15%;height:5vh;border-radius:50px;background-color:red;text-align:center;position:absolute ;padding-top:10px;color:white;font-weight:bold"> 50% </div>
 									<?php } ?>
-									<img src="<?php echo 'admin/' . $val['product_main_image']; ?>" alt="IMG-PRODUCT">
+									<img src="<?php echo 'admin/' . $val['product_main_image']; ?>" loading="lazy" alt="IMG-PRODUCT">
 									</div>
 
 									<div class="block2-txt flex-w flex-t p-t-14">

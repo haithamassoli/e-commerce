@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="profile" style="text-align: center;">
                             <label>
                                 <div class="avatar">
-                                    <img src="<?php echo $user[0]['user_image'] ?>" alt="photo" style="margin-top:-90px; border-radius: 50%; width : 180px; height: 180px; cursor:pointer;">
+                                    <img loading="lazy" src="<?php echo $user[0]['user_image'] ?>" alt="photo" style="margin-top:-90px; border-radius: 50%; width : 180px; height: 180px; cursor:pointer;">
                                     <div class="file ck" style="position: relative;">
 
                                         <input name="userimg" type="file" class="form-control" id="exampleInputPassword1" style="display: none;">
