@@ -145,7 +145,6 @@ $blocked = ($result->num_rows)
             <table class="posts-table">
               <thead>
                 <tr class="users-table-info">
-                  <th>image</th>
                   <th>comment</th>
                   <th>user_id</th>
                   <th>product_id</th>
@@ -157,12 +156,6 @@ $blocked = ($result->num_rows)
                 foreach ($last_comments as $comment) {
                 ?>
                   <tr>
-                    <td>
-                      <div class="categories-table-img">
-                        <img src="<?php echo isset($comment['comment_image']) ? "admin/" . $comment['comment_image'] : "" ?>" alt="avc">
-                      </div>
-                      </label>
-                    </td>
                     <td>
                       <?php echo isset($comment['comment']) ? $comment['comment'] : "" ?>
                     </td>
