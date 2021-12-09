@@ -313,5 +313,7 @@ $cat  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 
 <?php
+session_unset();
+
 include("includes/footer.php");
 ?>
