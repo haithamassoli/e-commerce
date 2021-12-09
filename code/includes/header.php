@@ -13,6 +13,7 @@ if (isset($_GET['delete'])) {
 				header('Location: ' . $_SERVER['PHP_SELF']);
 			}
 		}
+		header('Location: ' . $_SERVER['PHP_SELF']);
 	}
 }
 ?>

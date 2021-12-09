@@ -1,7 +1,6 @@
 <?php
 ob_start(); // Output Buffering Start
 include "./includes/header.php";
-print_r($_SESSION);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	@$coupon = $_POST["coupon"];
 	if (isset($_SESSION['cart'])) {
