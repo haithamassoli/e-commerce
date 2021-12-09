@@ -458,7 +458,7 @@ if (!isset($_GET['do'])) {
 ?>
   <style>
     .product_description {
-      width: 250px;
+      width: 270px;
       height: 100px;
       white-space: nowrap;
       overflow: hidden;

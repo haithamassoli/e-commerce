@@ -150,8 +150,7 @@ if (isset($_GET["id"])) {
 	</div>
 </div>
 
-<?php foreach ($product as $key => $row) { 
-	echo $row["product_fourth_color_image"];?>
+<?php foreach ($product as $key => $row) { ?>
 
 	<!-- Product Detail -->
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
