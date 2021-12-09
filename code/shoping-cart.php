@@ -2,6 +2,7 @@
 ob_start(); // Output Buffering Start
 include "./includes/header.php";
 $total = 0;
+
 if (isset($_GET['delete'])) {
 	$del = $_GET['delete'];
 	if (isset($_SESSION['cart'])) {
@@ -67,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								<th class="column-5">Total</th>
 							</tr>
 							<?php
-							if (isset($_SESSION["cart"])) {
+							if (isset($_SESSION["cart"]) && count($_SESSION["cart"]) >= 1) {
 								foreach ($_SESSION['cart'] as $key => $value) { ?>
 									<tr class="table_row">
 										<td class="column-1">
@@ -95,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 									</tr>
 							<?php }
 							} else {
-								echo	'<div class="text-center h2 mb-5">no item in cart</div>';
+								echo	'<div class="text-center h2 mb-5">No item in cart</div>';
 							}
 							?>
 
@@ -116,13 +117,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							$result = mysqli_query($conn, $sql);
 							if ($result->num_rows > 0) {
 								$coupons = mysqli_fetch_all($result, MYSQLI_ASSOC);
+								$couponsDis = $coupons[0]['coupon_percent'];
 								if ($coupons[0]['coupon_status'] == 'enable') {
 									$couponError = "";
-									$total *= ($coupons[0]['coupon_percent'] / 100);
+									$total -= $total * ($coupons[0]['coupon_percent'] / 100);
 								} else {
 									$couponError = " Sorry this coupon is Disaples";
 								}
-								$_SESSION['total'] = $total;
 							} else {
 								$couponError = "this coupon isnt valid";
 								$_SESSION['total'] = $total;
@@ -157,16 +158,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					<div class="flex-w flex-t p-t-27 p-b-33">
 						<div class="size-208">
 							<span class="mtext-101 cl2">
-								Total: <?php echo "$" . $total ?>
+								<?php if (isset($_POST['coupon_set'])) { ?>
+									<div style="color:red;"><strong>Coupon:</strong> <?php echo '<span>' . $couponsDis . '%'; ?></div>
+								<?php } ?> <strong>Total:</strong> <?php echo "$" . $total;
+																										$_SESSION['cart'][$value['product_id'] . $value['size']]['total'] = $total
+																										?>
 							</span>
 						</div>
 					</div>
 					<button type="submit" name="checkout" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-						<a href="checkout.php?checkout" style="text-decoration: none;color:white">Proceed to Checkout</a>
+						<a href="checkout.php" style="text-decoration: none;color:white">Proceed to Checkout</a>
 					</button>
 					<?php
-					if (isset($_POST['checkout']) && $total == 0) {
-						echo	'<div class="text-center h5 mt-5">you must add to cart!</div>';
+					if (isset($_POST['checkout']) && $total == 0 || count($_SESSION['cart']) == 0) {
+						echo	'<div class="text-center text-danger h5 mt-5">you must add to cart!</div>';
 					} elseif (isset($_POST['checkout']) && $total != 0) {
 						header("location:checkout.php");
 					}

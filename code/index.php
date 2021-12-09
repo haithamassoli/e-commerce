@@ -1,7 +1,15 @@
 <?php
 include("admin/includes/connect.php");
-
 /*adding new visitor */
+if (isset($_GET["checked"])) {
+?>
+	<script>
+		setTimeout(() => {
+			swal("Thank you!", "your order is sent", "success");
+		}, 100);
+	</script>
+<?php } ?>
+<?php
 $visitor_ip = $_SERVER["REMOTE_ADDR"];
 /* CHECK IF VISITOR IS UNIQUE*/
 $sql = "SELECT * FROM `unique_visitors`";

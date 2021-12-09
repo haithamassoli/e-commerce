@@ -68,38 +68,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check          = 0;
         $passError      = "The password shouldn't be empty!";
     }
-    if ($gender == "0") {
-        $gender = 0;
-    } else {
-        $gender = 1;
-    }
-    if (!preg_match("/^[077|079|078]+[0-9]{7}$/", $mobile)) { //mobile 
-        $mobileError  = "should be a mobile number";
-        $check      = 0;
-    }
-    if ($mobile == "") {
-        $check          = 0;
-        $mobileError      = "The mobile shouldn't be empty!";
-    }
-
-
-    if ($location == "") {
-
-        $check              = 0;
-        $locationError      = "The location shouldn't be empty!";
-    }
-
-
-    //Image File
-    $image_folder   = "admin/uploads/user_image/";
-    $target_file    = $image_folder . uniqid() . basename($image["name"]);
-    $image_check    = ",user_image='$target_file'";
     if (!isset($user['user_image'])) {
         if (($image["size"]) == 0) {
             $target_file    = $user[0]['user_image'];
             $image_check    = "";
         }
     }
+    //Image File
+    $image_folder   = "admin/uploads/user_image/";
+    $target_file    = $image_folder . uniqid() . basename($image["name"]);
+    $image_check    = ",user_image='$target_file'";
 
     move_uploaded_file($image["tmp_name"], $target_file);
     if ($check == 1) {
@@ -193,8 +171,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <label for="Street">Gender</label>
 
                             <select name="gender" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;">
-                                <option value="0" <?php echo $user[0]['user_gender'] == 0 ? "selected" : ""; ?>> Male </option>
-                                <option value="1" <?php echo $user[0]['user_gender'] == 1 ? "selected" : ""; ?>> Female </option>
+                                <option value="male" <?php echo $user[0]['user_gender'] == 'male' ? "selected" : ""; ?>> Male </option>
+                                <option value="female" <?php echo $user[0]['user_gender'] == 'female' ? "selected" : ""; ?>> Female </option>
                             </select>
                         </div>
 

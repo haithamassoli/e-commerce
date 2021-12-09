@@ -5,13 +5,34 @@ $result = mysqli_query($conn, $sql);
 $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 <?php
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "UPDATE orders SET order_status='arrived' WHERE order_id =$id";
-    $result = mysqli_query($conn, $sql);
-    unset($_SESSION['cart']);
+if (isset($_GET['do'])) {
+    if ($_GET['do'] == 'arrive') {
+        $id = $_GET['id'];
+        $sql = "UPDATE orders SET order_status='arrived' WHERE order_id =$id";
+        $result = mysqli_query($conn, $sql);
+        redirect("manage_orders.php");
+    }
+    if ($_GET['do'] == 'deliver') {
+        $id = $_GET['id'];
+        $sql = "UPDATE orders SET order_status='on delevery' WHERE order_id =$id";
+        $result = mysqli_query($conn, $sql);
+        redirect("manage_orders.php");
+    }
+    if ($_GET['do'] == 'prepare') {
+        $id = $_GET['id'];
+        $sql = "UPDATE orders SET order_status='preparing' WHERE order_id =$id";
+        $result = mysqli_query($conn, $sql);
+        redirect("manage_orders.php");
+    }
+    if ($_GET['do'] == 'block') {
+        $id = $_GET['id'];
+        $sql = "UPDATE orders SET order_status='blocked' WHERE order_id =$id";
+        $result = mysqli_query($conn, $sql);
+        redirect("manage_orders.php");
+    }
 }
 ?>
+
 <div class="card-header">
     <h4 class="card-title">Manage Orders</h4>
 </div>
@@ -49,8 +70,15 @@ if (isset($_GET['id'])) {
                             <td><?php echo isset($order['order_date']) ? $order['order_date'] : ''; ?></td>
                             <td><?php echo isset($order['order_total']) ? $order['order_total'] : ''; ?></td>
                             <td><?php echo isset($order['order_status']) ? $order['order_status'] : ''; ?></td>
-                            <td>
-                                <a href="manage_orders.php?id=<?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>" class="btn btn-success">arrive</a>
+                            <td class="row">
+                                <div class="d-grid gap-2 d-md-block">
+                                    <a href="manage_orders.php?do=prepare&id=<?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>" class="btn btn-outline-warning btn-sm">preparing</a>
+                                    <a href="manage_orders.php?do=deliver&id=<?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>" class="btn btn-outline-primary btn-sm">on deliver</a>
+                                </div>
+                                <div class="d-grid gap-2 d-md-block" style="margin-top: 10px;margin-left:20px;">
+                                    <a href="manage_orders.php?do=arrive&id=<?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>" class="btn btn-outline-success btn-sm">arrive</a>
+                                    <a href="manage_orders.php?do=block&id=<?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>" class="btn btn-outline-danger btn-sm">block</a>
+                                </div>
                             </td>
                         </tr>
                     <?php } ?>

@@ -52,7 +52,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($email == $user["user_email"] && $password == $user["user_password"]) {
                     $_SESSION["type"] = 0;
                     $_SESSION["user_id"] = $user['user_id'];
-                    redirect("index.php");
+                    if (isset($_GET['back_to_checkout'])) {
+                        redirect('checkout.php');
+                    } else {
+                        redirect("index.php");
+                    }
                 } else {
                     $error = "your email or password is wrong";
                 }
@@ -61,7 +65,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $error = "your email isnt exist please register";
         }
     }
-    
 }
 ?>
 <!DOCTYPE html>

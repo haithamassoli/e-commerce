@@ -101,20 +101,17 @@ if (isset($_SESSION['type']) && $_SESSION['type'] == 0) {
 					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 						<div class="form-group f">
 							<label for="zIp">Zip Code</label>
-							<<div class="borderDiv">ggg </div> 
+							<<div class="borderDiv">ggg </div>
 						</div>
 					</div> -->
 
 
 					<div style="text-align: right;">
-						<button type="button" id="submit" name="submit" class="btn btn-primary">
-							<a class="bt" href="edituserprofile.php" style="text-decoration: none;"> Edit Profile </a>
-						</button>
-					</div>
-					<div>
-						<button type="button" id="submit" name="submit" class="btn btn-primary" style="margin-left: 28px;margin-top: 5px;">
-							<a class="bt" href="order.php" style="text-decoration: none;"> last order </a>
-						</button>
+						<a class="bt" href="edituserprofile.php" style="text-decoration: none;">
+							<button type="button" id="submit" name="submit" class="btn btn-primary">
+								Edit Profile
+							</button>
+						</a>
 					</div>
 				</div>
 			</div>
