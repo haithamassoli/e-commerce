@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 											</div>
 										</td>
 										<td class="column-5"> $ <?php $total += $value['product_price'] * $value['quantity'];
-																						echo $value['product_price'] * $value['quantity']; ?><a href="shoping-cart.php?delete=<?php echo $value['product_id'] . $value['size'] ?>"><button class="ml-4" type="button" name="<?php echo "removeItem" . $value['product_id'] . $value['size'] ?>"><i style="display: block;" class="far fa-trash-alt fa-lg"></i></button></a>
+																echo $value['product_price'] * $value['quantity']; ?><a href="shoping-cart.php?delete=<?php echo $value['product_id'] . $value['size'] ?>"><button class="ml-4" type="button" name="<?php echo "removeItem" . $value['product_id'] . $value['size'] ?>"><i style="display: block;" class="far fa-trash-alt fa-lg"></i></button></a>
 										</td>
 									</tr>
 							<?php }
@@ -118,11 +118,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								$coupons = mysqli_fetch_all($result, MYSQLI_ASSOC);
 								if ($coupons[0]['coupon_status'] == 'enable') {
 									$couponError = "";
-									$total *= ($coupons[0]['coupon_percent'] / 100);
+									$total -= $total * ($coupons[0]['coupon_percent'] / 100);
 								} else {
 									$couponError = " Sorry this coupon is Disaples";
 								}
-								$_SESSION['total'] = $total;
 							} else {
 								$couponError = "this coupon isnt valid";
 								$_SESSION['total'] = $total;
@@ -157,12 +156,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					<div class="flex-w flex-t p-t-27 p-b-33">
 						<div class="size-208">
 							<span class="mtext-101 cl2">
-								Total: <?php echo "$" . $total ?>
+								Total: <?php echo "$" . $total;
+										$_SESSION['cart'][$value['product_id'] . $value['size']]['total'] = $total
+										?>
 							</span>
 						</div>
 					</div>
 					<button type="submit" name="checkout" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-						<a href="checkout.php?checkout" style="text-decoration: none;color:white">Proceed to Checkout</a>
+						<a href="checkout.php" style="text-decoration: none;color:white">Proceed to Checkout</a>
 					</button>
 					<?php
 					if (isset($_POST['checkout']) && $total == 0) {
