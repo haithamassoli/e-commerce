@@ -1,12 +1,6 @@
 <?php
 ob_start(); // Output Buffering Start
 include "./includes/header.php";
-// $total = 0;
-// $totalback = 0;
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	@$coupon = $_POST["coupon"];
 	if (isset($_SESSION['cart'])) {
@@ -21,10 +15,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				}
 			}
 		}
-		if (isset($_POST['remove'])) {
-			unset($_SESSION['cart']);
-			header("location:shoping-cart.php");
-		}
+		// if (isset($_POST['remove'])) {
+		// 	unset($_SESSION['cart']);
+		// 	unset($_SESSION['total']);
+		// 	header("location:shoping-cart.php");
+		// }
 	}
 }
 ?>
@@ -85,8 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 											</div>
 										</td>
 										<td class="column-5"> $ <?php $total += $value['product_price'] * $value['quantity'];
-																						$totalback += $value['product_price'] * $value['quantity'];
-																						echo $value['product_price'] * $value['quantity']; ?><a href="shoping-cart.php?delete=<?php echo $value['product_id'] . $value['size'] ?>"><button class="ml-4" type="button" name="<?php echo "removeItem" . $value['product_id'] . $value['size'] ?>"><i style="display: block;" class="far fa-trash-alt fa-lg"></i></button></a>
+																$totalback += $value['product_price'] * $value['quantity'];
+																echo $value['product_price'] * $value['quantity']; ?><a href="shoping-cart.php?delete=<?php echo $value['product_id'] . $value['size'] ?>"><button class="ml-4" type="button" name="<?php echo "removeItem" . $value['product_id'] . $value['size'] ?>"><i style="display: block;" class="far fa-trash-alt fa-lg"></i></button></a>
 										</td>
 									</tr>
 							<?php }
@@ -134,13 +129,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								border-radius: 50%;
 							}
 						</style>
-						<div class="flex-c-m stext-101 cl2 p-2 trans-04 pointer m-tb-10 deleteCart">
+						<!-- <div class="flex-c-m stext-101 cl2 p-2 trans-04 pointer m-tb-10 deleteCart">
 							<button name="remove" type="submit">
 								<div style="display: flex; align-items:center;">
 									<i style="display: block;" class="far fa-trash-alt fa-lg"></i><span class="ml-3">Delete All</span>
 								</div>
 							</button>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -156,18 +151,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								<?php if (isset($_POST['coupon_set']) && isset($_SESSION['cart'])) { ?>
 									<div style="color:red; width:120%; margin-bottom: 30px !important;">Coupon: <?php echo   $couponsDis . '%'; ?></div>
 								<?php } ?> <div style=" margin-bottom: 10px !important; width:125%;">Total: <?php echo   "$"  . $total . "  ";
-																																														echo isset($_POST['coupon_set']) && isset($_SESSION['cart']) ? '<del style="color:#999;">' . '   ' . ' $' . $totalback . '<del></div>' : "";
-																																														$_SESSION['total'] = $total
-																																														?>
+																											echo isset($_POST['coupon_set']) && isset($_SESSION['cart']) ? '<del style="color:#999;">' . '   ' . ' $' . $totalback . '<del></div>' : "";
+																											$_SESSION['total'] = $total
+																											?>
 							</span>
 						</div>
 					</div>
 					<button type="submit" name="checkout" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-						<a href="checkout.php" style="text-decoration: none;color:white">Proceed to Checkout</a>
+						Proceed to Checkout
 					</button>
 					<?php
-					if (isset($_POST['checkout']) && $total == 0 || count($_SESSION['cart']) == 0) {
-						echo	'<div class="text-center text-danger h5 mt-5">you must add to cart!</div>';
+					if (isset($_POST['checkout']) && $total == 0 && count($_SESSION['cart']) == 0) {
+						echo	'<div style="width:100%;" class="text-center text-danger h5 mt-2">you must add to cart!</div>';
 					} elseif (isset($_POST['checkout']) && $total != 0) {
 						header("location:checkout.php");
 					}

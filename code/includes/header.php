@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 $total = 0;
 $quantity = 0;
 $totalback = 0;
@@ -14,6 +13,7 @@ if (isset($_GET['delete'])) {
 				header('Location: ' . $_SERVER['PHP_SELF']);
 			}
 		}
+		header('Location: ' . $_SERVER['PHP_SELF']);
 	}
 }
 ?>
@@ -249,7 +249,7 @@ if (isset($_GET['delete'])) {
 
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
-					<?php if (isset($_SESSION['cart'])) {
+					<?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
 						foreach ($_SESSION['cart'] as $key => $value) { ?>
 							<li class="header-cart-item flex-w flex-t m-b-12">
 								<a href="?delete=<?php echo $value['product_id'] . $value['size'] ?>">
@@ -270,6 +270,8 @@ if (isset($_GET['delete'])) {
 								</div>
 							</li>
 					<?php }
+					} else {
+						echo '<div style="" class="header-cart-item-txt h4 text-center p-t-8">No items in cart</div>';
 					} ?>
 				</ul>
 

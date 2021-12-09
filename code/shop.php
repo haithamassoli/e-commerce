@@ -8,6 +8,7 @@ $sql = "SELECT * FROM products";
 $result = mysqli_query($conn, $sql);
 $tags = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $tagsArray = [];
+
 foreach ($tags as $key => $value) {
 	array_push($tagsArray, $value['product_tag']);
 }
