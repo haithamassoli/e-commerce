@@ -1,5 +1,6 @@
 <?php
 ob_start();
+$title = "Checkout";
 include "./includes/header.php";
 include "admin/includes/functions.php";
 if (!isset($_SESSION["type"]) || $_SESSION["type"] != 0) {
@@ -160,7 +161,7 @@ if (isset($_POST['checkout']) && $total == 0) {
               foreach ($_SESSION['cart'] as $key => $value) { ?>
                 <li class="header-cart-item flex-w flex-t m-b-12">
                   <div class="header-cart-item-img">
-                    <img src="<?php echo "admin/" . $value['product_image']; ?>" alt="IMG">
+                    <img loading="lazy" src="<?php echo "admin/" . $value['product_image']; ?>" alt="IMG">
                   </div>
 
                   <div class="header-cart-item-txt p-t-8">

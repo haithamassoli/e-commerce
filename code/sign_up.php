@@ -103,14 +103,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- STYLE CSS -->
     <link rel="stylesheet" href="css/signing_style.css">
 </head>
-<img src="" alt="">
 
 <body>
 
     <div class="wrapper" style="background-image: url('images/bg-registration-form-1.jpg');">
         <div class="inner">
             <div class="image-holder">
-                <img src="https://cdn.discordapp.com/attachments/914883219546058815/917071612061319290/registration-form-1.jpg" alt="">
+                <img loading="lazy" src="https://cdn.discordapp.com/attachments/914883219546058815/917071612061319290/registration-form-1.jpg" alt="">
             </div>
             <form id="signup_form" method="POST" enctype="multipart/form-data">
                 <h3>Register Now</h3>

@@ -21,7 +21,7 @@ if (isset($_GET['delete'])) {
 <html lang="en">
 
 <head>
-	<title>CozaStore</title>
+	<title><?php echo isset($title) ? $title : "CozaStore"; ?></title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->

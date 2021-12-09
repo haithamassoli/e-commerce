@@ -5,6 +5,7 @@ if (!isset($_GET["id"])) {
 ?>
 <?php
 ob_start(); // Output Buffering Start
+$title = "Product";
 include "./includes/header.php";
 function redirect($url)
 {
@@ -164,7 +165,7 @@ if (isset($_GET["id"])) {
 							<div class="slick3 gallery-lb">
 								<div class="item-slick3" data-thumb="<?php echo 'admin/' . $row["product_main_image"]; ?>">
 									<div class="wrap-pic-w pos-relative">
-										<img src="<?php echo 'admin/' . $row["product_main_image"]; ?>" alt="IMG-PRODUCT">
+										<img loading="lazy" src="<?php echo 'admin/' . $row["product_main_image"]; ?>" alt="IMG-PRODUCT">
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?php echo 'admin/' . $row["product_main_image"]; ?>">
 											<i class="fa fa-expand"></i>
@@ -174,7 +175,7 @@ if (isset($_GET["id"])) {
 								<?php if (isset($row["product_desc_image_2"])) { ?>
 									<div class="item-slick3" data-thumb="<?php echo 'admin/' . $row["product_desc_image_2"];  ?>">
 										<div class="wrap-pic-w pos-relative">
-											<img src="<?php echo 'admin/' . $row["product_desc_image_2"]; ?>" alt="IMG-PRODUCT">
+											<img loading="lazy" src="<?php echo 'admin/' . $row["product_desc_image_2"]; ?>" alt="IMG-PRODUCT">
 
 											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?php echo 'admin/' . $row["product_desc_image_2"]; ?>">
 												<i class="fa fa-expand"></i>
@@ -185,7 +186,7 @@ if (isset($_GET["id"])) {
 								<?php if (isset($row["product_desc_image_3"])) { ?>
 									<div class="item-slick3" data-thumb="<?php echo 'admin/' . $row["product_desc_image_3"]; ?>">
 										<div class="wrap-pic-w pos-relative">
-											<img src="<?php echo 'admin/' . $row["product_desc_image_3"]; ?>" alt="IMG-PRODUCT">
+											<img loading="lazy" src="<?php echo 'admin/' . $row["product_desc_image_3"]; ?>" alt="IMG-PRODUCT">
 
 											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?php echo 'admin/' . $row["product_desc_image_3"]; ?>">
 												<i class="fa fa-expand"></i>
@@ -196,7 +197,7 @@ if (isset($_GET["id"])) {
 								<?php if (isset($row["product_nd_color_image"])) { ?>
 									<div class="item-slick3" data-thumb="<?php echo 'admin/' . $row["product_nd_color_image"]; ?>">
 										<div class="wrap-pic-w pos-relative">
-											<img src="<?php echo 'admin/' . $row["product_nd_color_image"]; ?>" alt="IMG-PRODUCT">
+											<img loading="lazy" src="<?php echo 'admin/' . $row["product_nd_color_image"]; ?>" alt="IMG-PRODUCT">
 
 											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?php echo 'admin/' . $row["product_nd_color_image"]; ?>">
 												<i class="fa fa-expand"></i>
@@ -207,7 +208,7 @@ if (isset($_GET["id"])) {
 								<?php if (isset($row["product_thd_color_image"])) { ?>
 									<div class="item-slick3" data-thumb="<?php echo 'admin/' . $row["product_thd_color_image"]; ?>">
 										<div class="wrap-pic-w pos-relative">
-											<img src="<?php echo 'admin/' . $row["product_thd_color_image"]; ?>" alt="IMG-PRODUCT">
+											<img loading="lazy" src="<?php echo 'admin/' . $row["product_thd_color_image"]; ?>" alt="IMG-PRODUCT">
 
 											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?php echo 'admin/' . $row["product_thd_color_image"]; ?>">
 												<i class="fa fa-expand"></i>
@@ -218,7 +219,7 @@ if (isset($_GET["id"])) {
 								<?php if ($row["product_fourth_color_image"] == '') { ?>
 									<div class="item-slick3" data-thumb="<?php echo 'admin/' . $row["product_fourth_color_image"]; ?>">
 										<div class="wrap-pic-w pos-relative">
-											<img src="<?php echo 'admin/' . $row["product_fourth_color_image"]; ?>" alt="IMG-PRODUCT">
+											<img loading="lazy" src="<?php echo 'admin/' . $row["product_fourth_color_image"]; ?>" alt="IMG-PRODUCT">
 
 											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?php echo 'admin/' . $row["product_fourth_color_image"]; ?>">
 												<i class="fa fa-expand"></i>
@@ -359,7 +360,7 @@ if (isset($_GET["id"])) {
 										<?php foreach ($comments as  $row) { ?>
 											<div class="flex-w flex-t p-b-68">
 												<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-													<img src="<?php echo $row["user_image"];  ?>" alt="AVATAR">
+													<img loading="lazy" src="<?php echo $row["user_image"];  ?>" alt="AVATAR">
 												</div>
 												<div class="size-207">
 													<div class="flex-w flex-sb-m p-b-17">
@@ -391,7 +392,7 @@ if (isset($_GET["id"])) {
 													</p>
 													<p class="stext-102 cl6">
 														<?php if ($row["comment_image"] != "") { ?>
-															<img src="<?php echo $row["comment_image"];  ?>" style='width:300px; height:200px; ' alt="">
+															<img loading="lazy" src="<?php echo $row["comment_image"];  ?>" style='width:300px; height:200px; ' alt="">
 														<?php } ?>
 													</p>
 												</div>
@@ -468,7 +469,7 @@ if (isset($_GET["id"])) {
 							<div class="block2">
 								<a href="product-detail.php?id=<?php echo $row["product_id"] ?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 									<div class="block2-pic hov-img0">
-										<img src="<?php echo 'admin/' . $row["product_main_image"];  ?>" alt="IMG-PRODUCT">
+										<img loading="lazy" src="<?php echo 'admin/' . $row["product_main_image"];  ?>" alt="IMG-PRODUCT">
 									</div>
 								</a>
 								<div class="block2-txt flex-w flex-t p-t-14">
