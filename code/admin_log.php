@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check = 0;
         $passwordError = "The email shouldn't be empty!";
     }
-    
+
     if ($check == 1) {
         $check_exist = "SELECT * FROM admins WHERE admin_email = '$email'";
         $result = mysqli_query($conn, $check_exist);
@@ -57,12 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($email == $admin["admin_email"] && $password == $admin["admin_password"] && $admin["admin_type"] == 1) {
                     $_SESSION["type"] = 2;
                     $_SESSION["super_admin_id"] = $admin['admin_id'];
-                    redirect("index.php");
+                    redirect("admin/index.php");
                     // admin 
                 } elseif ($email == $admin["admin_email"] && $password == $admin["admin_password"] && $admin["admin_type"] == 0) {
                     $_SESSION["type"] = 1;
                     $_SESSION["admin_id"] = $admin['admin_id'];
-                    redirect("index.php");
+                    redirect("admin/index.php");
                 } else {
                     $error = "your email or password is wrong";
                 }
