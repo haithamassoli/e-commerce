@@ -61,7 +61,6 @@ $result = mysqli_query($conn, $sql);
 $last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $blocked = ($result->num_rows)
 ?>
-
 <!-- ! Main -->
 <main class="main users chart-page" id="skip-target">
   <div class="container">
@@ -70,7 +69,7 @@ $blocked = ($result->num_rows)
       <div class="col-md-6 col-xl-3">
         <article class="stat-cards-item">
           <div class="stat-cards-icon warning">
-            <i data-feather="file" aria-hidden="true"></i>
+            <i data-feather="users" aria-hidden="true"></i>
           </div>
           <div class="stat-cards-info">
             <p class="stat-cards-info__num"><?php echo $num_of_users ?></p>
@@ -81,7 +80,7 @@ $blocked = ($result->num_rows)
       <div class="col-md-6 col-xl-3">
         <article class="stat-cards-item">
           <div class="stat-cards-icon warning">
-            <i data-feather="file" aria-hidden="true"></i>
+            <i data-feather="user" aria-hidden="true"></i>
           </div>
           <div class="stat-cards-info">
             <p class="stat-cards-info__num"><?php echo $num_of_visitors ?></p>
@@ -92,7 +91,7 @@ $blocked = ($result->num_rows)
       <div class="col-md-6 col-xl-3">
         <article class="stat-cards-item">
           <div class="stat-cards-icon warning">
-            <i data-feather="file" aria-hidden="true"></i>
+            <i data-feather="users" aria-hidden="true"></i>
           </div>
           <div class="stat-cards-info">
             <p class="stat-cards-info__num"><?php echo $num_of_users ?></p>
@@ -103,7 +102,7 @@ $blocked = ($result->num_rows)
       <div class="col-md-6 col-xl-3">
         <article class="stat-cards-item">
           <div class="stat-cards-icon warning">
-            <i data-feather="file" aria-hidden="true"></i>
+            <i data-feather="check" aria-hidden="true"></i>
           </div>
           <div class="stat-cards-info">
             <p class="stat-cards-info__num"><?php echo $completed ?></p>
@@ -114,7 +113,7 @@ $blocked = ($result->num_rows)
       <div class="col-md-6 col-xl-3">
         <article class="stat-cards-item">
           <div class="stat-cards-icon warning">
-            <i data-feather="file" aria-hidden="true"></i>
+            <i data-feather="truck" aria-hidden="true"></i>
           </div>
           <div class="stat-cards-info">
             <p class="stat-cards-info__num"><?php echo $onDeliver ?></p>
@@ -125,7 +124,7 @@ $blocked = ($result->num_rows)
       <div class="col-md-6 col-xl-3">
         <article class="stat-cards-item">
           <div class="stat-cards-icon warning">
-            <i data-feather="file" aria-hidden="true"></i>
+            <i data-feather="shopping-cart" aria-hidden="true"></i>
           </div>
           <div class="stat-cards-info">
             <p class="stat-cards-info__num"><?php echo $preparing ?></p>
@@ -136,7 +135,7 @@ $blocked = ($result->num_rows)
       <div class="col-md-6 col-xl-3">
         <article class="stat-cards-item">
           <div class="stat-cards-icon warning">
-            <i data-feather="file" aria-hidden="true"></i>
+            <i data-feather="lock" aria-hidden="true"></i>
           </div>
           <div class="stat-cards-info">
             <p class="stat-cards-info__num"><?php echo $blocked ?></p>
