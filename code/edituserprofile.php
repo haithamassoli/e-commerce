@@ -1,4 +1,5 @@
 <?php
+$title = "Profile";
 include('includes/header.php');
 
 

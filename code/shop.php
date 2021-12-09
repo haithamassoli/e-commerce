@@ -1,4 +1,6 @@
-<?php include("includes/header.php");
+<?php
+$title = "Shop";
+include("includes/header.php");
 include "./admin/includes/functions.php";
 include "./admin/includes/connect.php";
 $sql = "SELECT * FROM categories";
@@ -8,13 +10,18 @@ $sql = "SELECT * FROM products";
 $result = mysqli_query($conn, $sql);
 $tags = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $tagsArray = [];
+if (isset($_POST['numPage'])) {
 
+	$results_per_page = $_POST['numPage'];
+} else {
+	$results_per_page = 12;
+}
 foreach ($tags as $key => $value) {
 	array_push($tagsArray, $value['product_tag']);
 }
 $tags_unique = array_unique($tagsArray);
 // define how many results you want per page
-$results_per_page = 12;
+
 ?>
 <!-- Product -->
 <style>
@@ -33,14 +40,36 @@ $results_per_page = 12;
 			max-width: 100% !important;
 		}
 	}
+
+	.selectn {
+		border: none;
+		outline: none;
+		width: 100px;
+		border-radius: 6px;
+		padding: 8px 20px 8px 0;
+	}
+
+	.label {
+		width: 100px;
+	}
 </style>
 <div class="bg0">
 	<div class="containera row">
 		<div class="col-lg-3 col-md-4 col-12">
-
 			<div class="flex-w flex-sb-m p-b-52 mt-1">
 				<div class=" panel-filter w-full p-t-10">
 					<div class="row wrap-filter flex-w bg6 w-full p-l-40 p-t-27 p-lr-15-sm">
+						<form method="POST" class="size-204 respon6-next">
+							<div class="col-md-12 col-sm-4 col-12 filter-col1 p-r-15 p-b-27">
+								<label class="label" for="selectn">Items on page</label>
+								<select name="numPage" class="selectn" id="selectn" onchange='this.form.submit()'>
+									<option class="selectn" value=12>12</option>
+									<option class="selectn" value=16>16</option>
+									<option class="selectn" value=20>20</option>
+								</select>
+							</div>
+							<noscript><input type="submit" value="Submit"></noscript>
+						</form>
 						<div class="col-md-12 col-sm-4 col-12 filter-col1 p-r-15 p-b-27">
 							<div class="mtext-102 cl2 p-b-15">
 								Sort By
@@ -161,7 +190,7 @@ $results_per_page = 12;
 				$product = mysqli_fetch_all($result, MYSQLI_ASSOC);
 			}
 			if ($_GET["sort"] == "low") {
-				$sql = "SELECT * FROM products ORDER BY product_price";
+				$sql = "SELECT * FROM products ORDER BY product_price ASC";
 				$result = mysqli_query($conn, $sql);
 				$product = mysqli_fetch_all($result, MYSQLI_ASSOC);
 			}

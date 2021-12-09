@@ -1,5 +1,6 @@
 <?php
 ob_start(); // Output Buffering Start
+$title = "Cart";
 include "./includes/header.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	@$coupon = $_POST["coupon"];

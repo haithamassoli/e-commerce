@@ -5,6 +5,7 @@ if (!isset($_GET["id"])) {
 ?>
 <?php
 ob_start(); // Output Buffering Start
+$title = "Product";
 include "./includes/header.php";
 function redirect($url)
 {

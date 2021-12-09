@@ -1,4 +1,5 @@
 <?php
+$title = "CozaStore";
 include("admin/includes/connect.php");
 /*adding new visitor */
 if (isset($_GET["checked"])) {
@@ -52,7 +53,7 @@ $cat  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 					<div class="flex-col-c-m h-full p-t-100 p-b-60 respon5">
 						<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
 							<span class="ltext-202 txt-center cl0 respon2">
-								Women Collection 2018
+								Women Collection 2022
 							</span>
 						</div>
 
@@ -100,7 +101,7 @@ $cat  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 					<div class="flex-col-c-m h-full p-t-100 p-b-60 respon5">
 						<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
 							<span class="ltext-202 txt-center cl0 respon2">
-								Men Collection 2018
+								Men Collection 2022
 							</span>
 						</div>
 

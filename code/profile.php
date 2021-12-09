@@ -1,5 +1,6 @@
 <?php
 //start sesstion
+$title = "Profile";
 include('includes/header.php');
 function redirect($url)
 {

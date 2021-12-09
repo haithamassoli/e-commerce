@@ -1,5 +1,6 @@
 <?php
 ob_start();
+$title = "Checkout";
 include "./includes/header.php";
 include "admin/includes/functions.php";
 if (!isset($_SESSION["type"]) || $_SESSION["type"] != 0) {
