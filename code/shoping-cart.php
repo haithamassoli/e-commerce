@@ -2,6 +2,7 @@
 ob_start(); // Output Buffering Start
 include "./includes/header.php";
 $total = 0;
+
 if (isset($_GET['delete'])) {
 	$del = $_GET['delete'];
 	if (isset($_SESSION['cart'])) {
@@ -67,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								<th class="column-5">Total</th>
 							</tr>
 							<?php
-							if (isset($_SESSION["cart"])) {
+							if (isset($_SESSION["cart"]) && count($_SESSION["cart"]) >= 1) {
 								foreach ($_SESSION['cart'] as $key => $value) { ?>
 									<tr class="table_row">
 										<td class="column-1">
@@ -95,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 									</tr>
 							<?php }
 							} else {
-								echo	'<div class="text-center h2 mb-5">no item in cart</div>';
+								echo	'<div class="text-center h2 mb-5">No item in cart</div>';
 							}
 							?>
 
@@ -165,8 +166,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						<a href="checkout.php?checkout" style="text-decoration: none;color:white">Proceed to Checkout</a>
 					</button>
 					<?php
-					if (isset($_POST['checkout']) && $total == 0) {
-						echo	'<div class="text-center h5 mt-5">you must add to cart!</div>';
+					if (isset($_POST['checkout']) && $total == 0 || count($_SESSION['cart']) == 0) {
+						echo	'<div class="text-center text-danger h5 mt-5">you must add to cart!</div>';
 					} elseif (isset($_POST['checkout']) && $total != 0) {
 						header("location:checkout.php");
 					}

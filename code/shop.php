@@ -93,12 +93,12 @@ $results_per_page = 12;
 									</a>
 								</li>
 								<li class="p-b-6">
-									<a href="?sort=200" class="filter-link stext-106 trans-04 <?php echo isset($_GET['sort']) && $_GET['sort'] == 200 ? "filter-link-active" : ""; ?>">
+									<a href="?sort=200" class="filter-link stext-106 trans-04 <?php echo isset($_GET['sort']) && $_GET['sort'] === '200' ? "filter-link-active" : ""; ?>">
 										$150.00 - $200.00
 									</a>
 								</li>
 								<li class="p-b-6">
-									<a href="?sort=200+" class="filter-link stext-106 trans-04 <?php echo isset($_GET['sort']) && $_GET['sort'] == '200+' ? "filter-link-active" : ""; ?>">
+									<a href="?sort=all" class="filter-link stext-106 trans-04 <?php echo isset($_GET['sort']) && $_GET['sort'] == 'all' ? "filter-link-active" : ""; ?>">
 										$200.00+
 									</a>
 								</li>
@@ -194,8 +194,8 @@ $results_per_page = 12;
 				$result = mysqli_query($conn, $sql);
 				$product = mysqli_fetch_all($result, MYSQLI_ASSOC);
 			}
-			if ($_GET["sort"] == "200+") {
-				$sql = "SELECT * FROM products WHERE product_price>50";
+			if ($_GET["sort"] == "all") {
+				$sql = "SELECT * FROM products WHERE product_price>200";
 				$result = mysqli_query($conn, $sql);
 				$product = mysqli_fetch_all($result, MYSQLI_ASSOC);
 			}

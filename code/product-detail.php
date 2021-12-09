@@ -246,14 +246,15 @@ if (isset($_GET["id"])) {
 
 							<!--  -->
 							<div class="p-t-33">
-								<div class="flex-w flex-r-m p-b-10">
+
+								<div class="flex-w flex-r-m p-b-10" style="<?php echo $row['product_size'] == "" ? 'display: none' : ''; ?>;">
 									<div class="size-203 flex-c-m respon6">
 										Size
 									</div>
 
 									<div class="size-204 respon6-next">
 										<div class="rs1-select2 bor8 bg0">
-											<select <?php echo $row['product_size'] == "" ? "disabled" : ''; ?> class="js-select2" name="size">
+											<select class="js-select2" name="size">
 												<option value="<?php echo $row['product_size'] == "" ? "-" : 0; ?>">Choose an option</option>
 												<?php
 												if ($row['product_size'] != "") {
@@ -270,6 +271,7 @@ if (isset($_GET["id"])) {
 										<span class="text-danger"><?php echo isset($sizeError) ? $sizeError : ""; ?></span>
 									</div>
 								</div>
+
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-204 flex-w flex-m respon6-next">
 										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
