@@ -58,7 +58,7 @@ $preparing = ($result->num_rows)
 <?php
 $sql = "SELECT * FROM orders WHERE order_status='blocked'";
 $result = mysqli_query($conn, $sql);
-$last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$blocked_items = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $blocked = ($result->num_rows)
 ?>
 <!-- ! Main -->
