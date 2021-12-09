@@ -26,6 +26,10 @@ $sql = "SELECT * FROM products INNER JOIN categories ON categories.category_id =
 $result = mysqli_query($conn, $sql);
 $product  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+$sql = "SELECT * FROM products";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result ,MYSQLI_ASSOC);
+
 //Delete
 if (isset($_GET['delete'])) {
   $id = $_GET['delete'];
@@ -69,35 +73,6 @@ if (isset($_GET['do'])) {
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $check = 1;
-      // Check file size
-      if ($image["size"] > 500000 || $image["size"] == 0) {
-        $imageError = "Sorry, your file is too large.";
-        $check      = 0;
-      }
-      if ($image1["size"] > 500000 || $image1["size"] == 0) {
-        $imageError = "Sorry, your file is too large.";
-        $check      = 0;
-      }
-      if ($image2["size"] > 500000 || $image2["size"] == 0) {
-        $imageError = "Sorry, your file is too large.";
-        $check      = 0;
-      }
-      if ($image3["size"] > 500000 || $image3["size"] == 0) {
-        $imageError = "Sorry, your file is too large.";
-        $check      = 0;
-      }
-      if ($image4["size"] > 500000 || $image4["size"] == 0) {
-        $imageError = "Sorry, your file is too large.";
-        $check      = 0;
-      }
-      if ($image5["size"] > 500000 || $image5["size"] == 0) {
-        $imageError = "Sorry, your file is too large.";
-        $check      = 0;
-      }
-      if ($image6["size"] > 500000 || $image6["size"] == 0) {
-        $imageError = "Sorry, your file is too large.";
-        $check      = 0;
-      }
       //Validation
       if (isset($product_name)) {
         if ($product_name == "") {
@@ -135,8 +110,6 @@ if (isset($_GET['do'])) {
           $product_sizeError = "The product size shouldn't be empty!";
         }
       }
-
-
       if ($check == 1) {
         $image_folder = "uploads/";
         $target_file  = $image_folder . uniqid() . basename($image["name"]);
@@ -173,23 +146,6 @@ if (isset($_GET['do'])) {
   else if ($do == "add") {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $check = 1;
-      // Check file size
-      if ($image["size"] > 500000 || $image["size"] == 0) {
-        $imageError = "Sorry, your file is too large.";
-        $check      = 0;
-      }
-      if ($image1["size"] > 500000 || $image1["size"] == 0) {
-        $imageError = "Sorry, your file is too large.";
-        $check      = 0;
-      }
-      if ($image2["size"] > 500000 || $image2["size"] == 0) {
-        $imageError = "Sorry, your file is too large.";
-        $check      = 0;
-      }
-      if ($image3["size"] > 500000 || $image3["size"] == 0) {
-        $imageError = "Sorry, your file is too large.";
-        $check      = 0;
-      }
       //Validation
       if (isset($product_name)) {
         if ($product_name == "") {
@@ -221,19 +177,6 @@ if (isset($_GET['do'])) {
           $product_tagError = "The product tag shouldn't be empty!";
         }
       }
-      if (isset($product_size)) {
-        if ($product_size == "") {
-          $check = 0;
-          $product_tagError = "The product size shouldn't be empty!";
-        }
-      }
-
-      // // Check if image file is a actual image or fake image
-      // $check_if_image = getimagesize($image["tmp_name"]);
-      // if ($check_if_image == false) {
-      //     $imageError = "File is not an image.";
-      //     $check = 0;
-      // }
       if ($check == 1) {
         $image_folder = "uploads/";
         $target_file  = $image_folder . uniqid() . basename($image["name"]);
@@ -284,8 +227,8 @@ if (isset($_GET['do'])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="text" name="product_name" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                      <div id="emailerr" class="form-text" style='color:red;'>
+                      <input type="text" name="product_name" value="<?php   if($do == 'edit'){ echo $row["product_name"]; } ?>" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <div class="form-text"  style='color:red;'>
                         <?php if (isset($product_nameError)) {
                           echo $product_nameError;
                         }  ?>
@@ -300,8 +243,8 @@ if (isset($_GET['do'])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="text" name="product_description" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                      <div id="emailerr" class="form-text" style='color:red;'>
+                      <input type="text" name="product_description" value="<?php   if($do == 'edit'){ echo $row["product_description"]; } ?>" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <div class="form-text" style='color:red;'>
                         <?php if (isset($product_descriptionError)) {
                           echo $product_descriptionError;
                         }  ?>
@@ -316,8 +259,8 @@ if (isset($_GET['do'])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="number" name="product_price" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                      <div id="emailerr" class="form-text" style='color:red;'>
+                      <input type="number" name="product_price" value="<?php   if($do == 'edit'){ echo $row["product_price"]; } ?>" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <div class="form-text" style='color:red;'>
                         <?php if (isset($product_priceError)) {
                           echo $product_priceError;
                         }  ?>
@@ -333,8 +276,8 @@ if (isset($_GET['do'])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="number" name="product_quantity" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                      <div id="emailerr" class="form-text" style='color:red;'>
+                      <input type="number" name="product_quantity" value="<?php   if($do == 'edit'){ echo $row["product_quantity"]; } ?>" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <div class="form-text" style='color:red;'>
                         <?php if (isset($product_nameError)) {
                           echo $product_nameError;
                         }  ?>
@@ -350,7 +293,7 @@ if (isset($_GET['do'])) {
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
                       <input name="mainimage" class="mt-2 p-2" type="file" />
-                      <div id="emailerr" class="form-text" style='color:red;'>
+                      <div class="form-text" style='color:red;'>
                         <?php if (isset($imageError)) {
                           echo $imageError;
                         }  ?></div>
@@ -365,7 +308,7 @@ if (isset($_GET['do'])) {
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
                       <input name="image1" class="mt-2 p-2" type="file" />
-                      <div id="emailerr" class="form-text" style='color:red;'>
+                      <div class="form-text" style='color:red;'>
                         <?php if (isset($imageError)) {
                           echo $imageError;
                         }  ?></div>
@@ -380,7 +323,7 @@ if (isset($_GET['do'])) {
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
                       <input name="image2" class="mt-2 p-2" type="file" />
-                      <div id="emailerr" class="form-text" style='color:red;'>
+                      <div class="form-text" style='color:red;'>
                         <?php if (isset($imageError)) {
                           echo $imageError;
                         }  ?></div>
@@ -395,7 +338,7 @@ if (isset($_GET['do'])) {
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
                       <input name="image3" class="mt-2 p-2" type="file" />
-                      <div id="emailerr" class="form-text" style='color:red;'>
+                      <div class="form-text" style='color:red;'>
                         <?php if (isset($imageError)) {
                           echo $imageError;
                         }  ?></div>
@@ -410,7 +353,7 @@ if (isset($_GET['do'])) {
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
                       <input name="image4" class="mt-2 p-2" type="file" />
-                      <div id="emailerr" class="form-text" style='color:red;'>
+                      <div class="form-text" style='color:red;'>
                         <?php if (isset($imageError)) {
                           echo $imageError;
                         }  ?></div>
@@ -425,7 +368,7 @@ if (isset($_GET['do'])) {
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
                       <input name="image5" class="mt-2 p-2" type="file" />
-                      <div id="emailerr" class="form-text" style='color:red;'>
+                      <div class="form-text" style='color:red;'>
                         <?php if (isset($imageError)) {
                           echo $imageError;
                         }  ?></div>
@@ -440,7 +383,7 @@ if (isset($_GET['do'])) {
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
                       <input name="image6" class="mt-2 p-2" type="file" />
-                      <div id="emailerr" class="form-text" style='color:red;'>
+                      <div class="form-text" style='color:red;'>
                         <?php if (isset($imageError)) {
                           echo $imageError;
                         }  ?></div>
@@ -454,8 +397,8 @@ if (isset($_GET['do'])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="text" name="product_tag" placeholder="Separate Tags With Comma (,)" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
-                      <div id="emailerr" class="form-text" style='color:red;'>
+                      <input type="text" name="product_tag" value="<?php   if($do == 'edit'){ echo $row["product_tag"]; } ?>" placeholder="Separate Tags With Comma (,)" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <div class="form-text" style='color:red;'>
                         <?php if (isset($product_tagError)) {
                           echo $product_tagError;
                         }  ?></div>
@@ -469,7 +412,7 @@ if (isset($_GET['do'])) {
                 <div class="col-md-8">
                   <div class="form-group has-icon-left">
                     <div class="position-relative row justify-content-center align-items-center d-flex">
-                      <input type="text" name="product_size" placeholder="Separate sizes With Comma (,)" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
+                      <input type="text" name="product_size" value="<?php   if($do == 'edit'){ echo $row["product_size"]; } ?>" placeholder="Separate sizes With Comma (,)" class="form-control col-9 mb-2" style="border: 1px solid #dce7f1 !important;" id="first-name-icon">
                       <div id="product-size" class="form-text" style='color:red;'>
                         <?php if (isset($product_sizeError)) {
                           echo $product_sizeError;
@@ -505,7 +448,7 @@ if (isset($_GET['do'])) {
     </div>
   </div>
   <!-- end form -->
-<?php }
+<?php }  
 if (!isset($_GET['do'])) { ?>
   <!-- end form -->
 <?php
@@ -526,15 +469,9 @@ if (!isset($_GET['do'])) {
       overflow: visible;
       white-space: normal;
     }
-
-    .product_image {
-      width: 600px !important;
-      height: 100px !important;
-    }
-
     td img {
-      width: 80px !important;
-      height: 80px !important;
+      width: 60px !important;
+      height: 60px !important;
       border-radius: 0% !important;
       padding: 5px;
       object-fit: cover;
@@ -556,15 +493,14 @@ if (!isset($_GET['do'])) {
                     </label>
                   </th>
                   <th>name</th>
-                  <th class="product_description">description</th>
+                  <th>description</th>
                   <th>price</th>
                   <th>quantity </th>
-                  <th class="product_image">images</th>
+                  <th>images</th>
                   <th>tag</th>
                   <th>sizes</th>
                   <th>categorie</th>
                   <th>Action</th>
-
                 </tr>
               </thead>
               <tbody>
@@ -572,11 +508,10 @@ if (!isset($_GET['do'])) {
                   <tr>
                     <td>
                       <label class="users-table__checkbox">
-
                         <div class="categories-table-img">
                           <picture>
                             <source srcset="<?php echo isset($row['product_main_image']) ? $row['product_main_image'] : ''; ?>" type="image/webp">
-                            <img src="<?php echo isset($row['product_main_image']) ? $row['product_main_image'] : ''; ?>" alt="ff">
+                            <img src="<?php echo isset($row['product_main_image']) ? $row['product_main_image'] : ''; ?>" alt="image">
                           </picture>
                         </div>
                       </label>
@@ -584,7 +519,6 @@ if (!isset($_GET['do'])) {
                     <td>
                       <?php echo isset($row['product_name']) ? $row['product_name'] : ''; ?>
                     </td>
-
                     <td class="product_description">
                       <div class="product_description"><?php echo isset($row['product_description']) ? $row['product_description'] : ''; ?></div>
                     </td>
@@ -602,16 +536,8 @@ if (!isset($_GET['do'])) {
                     <td><?php echo isset($row['product_size']) ? $row['product_size'] : ''; ?></td>
                     <td><?php echo isset($row['category_name']) ? $row['category_name'] : ''; ?></td>
                     <td>
-                      <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                          <div class="sr-only">More info</div>
-                          <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                          <li><a href="manage_products.php?do=edit&id=<?php echo $row['product_id']; ?>">Edit</a></li>
-                          <li><a href="manage_products.php?delete=<?php echo $row['product_id']; ?>">Trash</a></li>
-                        </ul>
-                      </span>
+                    <a href="manage_products.php?do=edit&id=<?php echo $row['product_id']; ?>"> <i class="fas fa-edit"></i></a>
+                    <a href="manage_products.php?delete=<?php echo $row['product_id']; ?>"><i class="far fa-trash-alt"></i></a>
                     </td>
                   </tr>
                 <?php } ?>

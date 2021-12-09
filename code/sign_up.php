@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "./admin/includes/connect.php";
 if (isset($_SESSION["type"])) {
     header('location:../index.php');
@@ -21,20 +22,18 @@ function redirect($url)
     }
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   $img = '<img src="./uploads/61addacec48a1blog-06.jpg">';
-   echo $img ;
+    $img = '<img src="./uploads/61addacec48a1blog-06.jpg">';
     $check               = 1;
     $user_name           = ($_POST["user_name"]);
     $email               = strtolower($_POST["email"]);
     $password            = $_POST['password'];
-    $gender              = $_POST['gender'];
     $password_confirm    = $_POST['password_confirm'];
     $emailError          = "";
     $passwordError       = "";
     $passwordConfirmError = "";
     $user_name_Error = "";
     // Check file size
-   
+
     if (!preg_match("/^[a-zA-Z-' ]*$/", $user_name)) {
         $user_name_Error = "Only letters and white space allowed";
         $check = 0;
@@ -65,21 +64,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check = 0;
     }
     if ($check == 1) {
-        $check_exist = "SELECT * FROM users WHERE user_email = '$email'";
+        $check_exist = "SELECT * FROM users WHERE user_email = '$email' ORDER BY user_id DESC";
         $result = mysqli_query($conn, $check_exist);
         $data = mysqli_fetch_array($result, MYSQLI_NUM);
         if ($data[0] > 1) {
             $emailError = "User Already exist go to sign in";
         } else {
-           
-            $sql = "INSERT INTO `users`( `user_name`, `user_email`, `user_password`, `user_gender`) VALUES ('$user_name','$email','$password','$gender')";
+            $check_exist2 = "SELECT * FROM users  ORDER BY user_id DESC";
+            $result2 = mysqli_query($conn, $check_exist2);
+            $data2 = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+            $NEW_USER_ID = $data2[0]["user_id"];
+            $_SESSION["type"] = 0;
+            $_SESSION["user_id"] = $NEW_USER_ID;
+            $sql = "INSERT INTO `users`( `user_name`, `user_email`, `user_password`) VALUES ('$user_name','$email','$password')";
             if (mysqli_query($conn, $sql)) {
                 echo "New record created successfully";
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
             $conn->close();
-            redirect("sign_in.php");
+            redirect("index.php");
         }
     }
 }
@@ -99,7 +103,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- STYLE CSS -->
     <link rel="stylesheet" href="css/signing_style.css">
 </head>
-     <img src="" alt="">
+<img src="" alt="">
+
 <body>
 
     <div class="wrapper" style="background-image: url('images/bg-registration-form-1.jpg');">
@@ -120,15 +125,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div style="color: red;font-weight:bold;" id="emailHelp"><?php echo @$emailError ?></div>
                 </div>
                 <div class="form-wrapper">
-                    <select name="gender" id="" class="form-control">
-                        <option value="" disabled selected>Gender</option>
-                        <option value="male">Male</option>
-                        <option value="femal" selected>Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
-                </div>
-                <div class="form-wrapper">
                     <input type="password" placeholder="Password" class="form-control" id="signUP_pass_input" name="password">
                     <i class="zmdi zmdi-lock"></i>
                     <div style="color: red;font-weight:bold;" id="passHelp"><?php echo @$passwordError ?></div>
@@ -142,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <!-- <input name="image" type="file" class="form-control" required> -->
                     <!-- <div style="color: red;font-weight:bold;" id="image"><?php echo @$imageError ?></div> -->
 
-                
+
                 </div>
                 <button id="signUp_insignup_btn" type="submit" name="btn">Register
                     <i class="zmdi zmdi-arrow-right"></i>
