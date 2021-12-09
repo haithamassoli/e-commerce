@@ -182,7 +182,7 @@ if (isset($_POST['checkout']) && $total == 0) {
           <div class="flex-w flex-t  p-b-33">
             <div class="size-208">
               <span class="mtext-101 cl2">
-                Total: <?php echo isset($_SESSION['cart'][$value['product_id'] . $value['size']]['total']) ?  "$" . $_SESSION['cart'][$value['product_id'] . $value['size']]['total'] : "$" . $total / 2 ?>
+                Total: <?php echo isset($_SESSION['total']) ?  "$" . $_SESSION['total'] : "$" . $total / 2 ?>
               </span>
             </div>
           </div>
