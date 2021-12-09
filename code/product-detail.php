@@ -55,39 +55,37 @@ if (isset($_GET["id"])) {
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if (isset($_POST["submit"])) {
 			$check = 1;
-			// Check file size
-			if ($image["size"] > 500000) {
-				$imageError = "Sorry, your file is too large.";
-				$check      = 0;
-			}
-			// Check if image file is a actual image or fake image
+			// // Check file size
+			// if ($image["size"] > 500000) {
+			// 	$imageError = "Sorry, your file is too large.";
+			// 	$check      = 0;
+			// }
 			if ($check == 1 && $image["size"] == 0) {
 				$sql = "INSERT INTO `comments` (`comment`, 
 			`comment_product_id`,`comment_user_id`,`comment_rate`)
 			VALUES ('$comment',$comment_product_id,$user_id,$rating)";
-			}
+			
 			if (mysqli_query($conn, $sql)) {
 				redirect("product-detail.php?id={$comment_product_id}");
 			} else {
 				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 			}
-			if ($check == 1 && $image["size"] != 0) {
+		}else {
 				$image_folder = "uploads/";
 				$target_file  = $image_folder . uniqid() . basename($image["name"]);
 				move_uploaded_file($image["tmp_name"], $target_file);
-				$sql = "INSERT INTO `comments` (`comment`, `comment_image`, 
+				$sql1 = "INSERT INTO `comments` (`comment`, `comment_image`, 
 			`comment_product_id`,`comment_user_id`,`comment_rate`)
 			VALUES ('$comment','$target_file',$comment_product_id,$user_id,$rating)";
-
-				if (mysqli_query($conn, $sql)) {
+			}
+				if (mysqli_query($conn, $sql1)) {
 					redirect("product-detail.php?id={$comment_product_id}");
 				} else {
-					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+					echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
 				}
 				$conn->close();
 				redirect("product-detail.php?id={$comment_product_id}");
 			}
-		}
 	}
 	// add to cart
 	if (isset($_POST["add_to_cart"])) {
@@ -152,7 +150,8 @@ if (isset($_GET["id"])) {
 	</div>
 </div>
 
-<?php foreach ($product as $key => $row) { ?>
+<?php foreach ($product as $key => $row) { 
+	echo $row["product_fourth_color_image"];?>
 
 	<!-- Product Detail -->
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
@@ -173,8 +172,8 @@ if (isset($_GET["id"])) {
 										</a>
 									</div>
 								</div>
-
-								<div class="item-slick3" data-thumb="<?php echo 'admin/' . $row["product_desc_image_2"]; ?>">
+								<?php if(isset($row["product_desc_image_2"])){ ?>
+								<div class="item-slick3" data-thumb="<?php echo'admin/' . $row["product_desc_image_2"];  ?>">
 									<div class="wrap-pic-w pos-relative">
 										<img src="<?php echo 'admin/' . $row["product_desc_image_2"]; ?>" alt="IMG-PRODUCT">
 
@@ -183,7 +182,8 @@ if (isset($_GET["id"])) {
 										</a>
 									</div>
 								</div>
-
+								<?php } ?>
+								<?php if(isset($row["product_desc_image_3"])){ ?>
 								<div class="item-slick3" data-thumb="<?php echo 'admin/' . $row["product_desc_image_3"]; ?>">
 									<div class="wrap-pic-w pos-relative">
 										<img src="<?php echo 'admin/' . $row["product_desc_image_3"]; ?>" alt="IMG-PRODUCT">
@@ -193,7 +193,8 @@ if (isset($_GET["id"])) {
 										</a>
 									</div>
 								</div>
-
+								<?php } ?>
+								<?php if(isset($row["product_nd_color_image"])){ ?>
 								<div class="item-slick3" data-thumb="<?php echo 'admin/' . $row["product_nd_color_image"]; ?>">
 									<div class="wrap-pic-w pos-relative">
 										<img src="<?php echo 'admin/' . $row["product_nd_color_image"]; ?>" alt="IMG-PRODUCT">
@@ -203,6 +204,8 @@ if (isset($_GET["id"])) {
 										</a>
 									</div>
 								</div>
+								<?php } ?>
+								<?php if(isset($row["product_thd_color_image"])){ ?>
 								<div class="item-slick3" data-thumb="<?php echo 'admin/' . $row["product_thd_color_image"]; ?>">
 									<div class="wrap-pic-w pos-relative">
 										<img src="<?php echo 'admin/' . $row["product_thd_color_image"]; ?>" alt="IMG-PRODUCT">
@@ -212,6 +215,8 @@ if (isset($_GET["id"])) {
 										</a>
 									</div>
 								</div>
+								<?php } ?>
+								<?php if($row["product_fourth_color_image"] == ''){ ?>
 								<div class="item-slick3" data-thumb="<?php echo 'admin/' . $row["product_fourth_color_image"]; ?>">
 									<div class="wrap-pic-w pos-relative">
 										<img src="<?php echo 'admin/' . $row["product_fourth_color_image"]; ?>" alt="IMG-PRODUCT">
@@ -221,6 +226,7 @@ if (isset($_GET["id"])) {
 										</a>
 									</div>
 								</div>
+								<?php } ?>
 							</div>
 						</div>
 					</div>
