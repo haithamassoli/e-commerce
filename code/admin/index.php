@@ -61,6 +61,7 @@ $result = mysqli_query($conn, $sql);
 $last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $blocked = ($result->num_rows)
 ?>
+
 <!-- ! Main -->
 <main class="main users chart-page" id="skip-target">
   <div class="container">
@@ -72,7 +73,7 @@ $blocked = ($result->num_rows)
             <i data-feather="file" aria-hidden="true"></i>
           </div>
           <div class="stat-cards-info">
-            <p class="stat-cards-info__num"><?php echo $num_of_users ?></p>
+            <i class="fas fa-user"></i><?php echo $num_of_users ?>
             <p class="stat-cards-info__title">Total signed users</p>
           </div>
         </article>

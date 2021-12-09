@@ -104,12 +104,6 @@ if (isset($_GET['do'])) {
           $product_tagError = "The product tag shouldn't be empty!";
         }
       }
-      if (isset($product_size)) {
-        if ($product_size == "") {
-          $check = 0;
-          $product_sizeError = "The product size shouldn't be empty!";
-        }
-      }
       if ($check == 1) {
         $image_folder = "uploads/";
         $target_file  = $image_folder . uniqid() . basename($image["name"]);
