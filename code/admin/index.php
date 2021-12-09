@@ -40,21 +40,25 @@ $last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <?php
 $sql = "SELECT * FROM orders WHERE order_status='arrived'";
 $result = mysqli_query($conn, $sql);
+$last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $completed = ($result->num_rows)
 ?>
 <?php
 $sql = "SELECT * FROM orders WHERE order_status='on delevery'";
 $result = mysqli_query($conn, $sql);
+$last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $onDeliver = ($result->num_rows)
 ?>
 <?php
 $sql = "SELECT * FROM orders WHERE order_status='preparing'";
 $result = mysqli_query($conn, $sql);
+$last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $preparing = ($result->num_rows)
 ?>
 <?php
 $sql = "SELECT * FROM orders WHERE order_status='blocked'";
 $result = mysqli_query($conn, $sql);
+$last_comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $blocked = ($result->num_rows)
 ?>
 
@@ -69,7 +73,7 @@ $blocked = ($result->num_rows)
             <i data-feather="file" aria-hidden="true"></i>
           </div>
           <div class="stat-cards-info">
-            <i class="fas fa-user"></i><?php echo $num_of_users ?>
+            <p class="stat-cards-info__num"><?php echo $num_of_users ?></p>
             <p class="stat-cards-info__title">Total signed users</p>
           </div>
         </article>
