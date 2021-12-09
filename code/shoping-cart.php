@@ -2,6 +2,7 @@
 ob_start(); // Output Buffering Start
 include "./includes/header.php";
 $total = 0;
+$totalback = 0;
 
 if (isset($_GET['delete'])) {
 	$del = $_GET['delete'];
@@ -91,6 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 											</div>
 										</td>
 										<td class="column-5"> $ <?php $total += $value['product_price'] * $value['quantity'];
+																						$totalback += $value['product_price'] * $value['quantity'];
 																						echo $value['product_price'] * $value['quantity']; ?><a href="shoping-cart.php?delete=<?php echo $value['product_id'] . $value['size'] ?>"><button class="ml-4" type="button" name="<?php echo "removeItem" . $value['product_id'] . $value['size'] ?>"><i style="display: block;" class="far fa-trash-alt fa-lg"></i></button></a>
 										</td>
 									</tr>
@@ -159,10 +161,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						<div class="size-208">
 							<span class="mtext-101 cl2">
 								<?php if (isset($_POST['coupon_set'])) { ?>
-									<div style="color:red;"><strong>Coupon:</strong> <?php echo '<span>' . $couponsDis . '%'; ?></div>
-								<?php } ?> <strong>Total:</strong> <?php echo "$" . $total;
-																										$_SESSION['cart'][$value['product_id'] . $value['size']]['total'] = $total
-																										?>
+									<div style="color:red; width:120%; margin-bottom: 30px !important;">Coupon: <?php echo   $couponsDis . '%'; ?></div>
+								<?php } ?> <div style=" margin-bottom: 10px !important; width:125%;">Total: <?php echo   "$"  . $total . "  ";
+																																														echo isset($_POST['coupon_set']) ? '<del style="color:#999;">' . '   ' . ' $' . $totalback . '<del></div>' : "";
+																																														$_SESSION['cart'][$value['product_id'] . $value['size']]['total'] = $total
+																																														?>
 							</span>
 						</div>
 					</div>
