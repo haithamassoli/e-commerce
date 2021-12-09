@@ -108,13 +108,13 @@ include "./admin/includes/connect.php";
 						</div>
 
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php if (isset($_SESSION['cart'])) {
-																																		foreach ($_SESSION['cart'] as $key => $value) {
-																																			$quantity += $value['quantity'];
-																																		}
-																																		echo $quantity;
-																																	} else {
-																																		echo 0;
-																																	}; ?>">
+																																																													foreach ($_SESSION['cart'] as $key => $value) {
+																																																														$quantity += $value['quantity'];
+																																																													}
+																																																													echo $quantity;
+																																																												} else {
+																																																													echo 0;
+																																																												}; ?>">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
@@ -137,13 +137,13 @@ include "./admin/includes/connect.php";
 				</div>
 
 				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?php if (isset($_SESSION['cart'])) {
-																																foreach ($_SESSION['cart'] as $key => $value) {
-																																	$quantity += $value['quantity'];
-																																}
-																																echo $quantity;
-																															} else {
-																																echo 0;
-																															}; ?>">
+																																																											foreach ($_SESSION['cart'] as $key => $value) {
+																																																												$quantity += $value['quantity'];
+																																																											}
+																																																											echo $quantity;
+																																																										} else {
+																																																											echo 0;
+																																																										}; ?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
 
 				</div>

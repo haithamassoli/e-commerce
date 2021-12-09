@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 											</div>
 										</td>
 										<td class="column-5"> $ <?php $total += $value['product_price'] * $value['quantity'];
-																echo $value['product_price'] * $value['quantity']; ?><a href="shoping-cart.php?delete=<?php echo $value['product_id'] . $value['size'] ?>"><button class="ml-4" type="button" name="<?php echo "removeItem" . $value['product_id'] . $value['size'] ?>"><i style="display: block;" class="far fa-trash-alt fa-lg"></i></button></a>
+																						echo $value['product_price'] * $value['quantity']; ?><a href="shoping-cart.php?delete=<?php echo $value['product_id'] . $value['size'] ?>"><button class="ml-4" type="button" name="<?php echo "removeItem" . $value['product_id'] . $value['size'] ?>"><i style="display: block;" class="far fa-trash-alt fa-lg"></i></button></a>
 										</td>
 									</tr>
 							<?php }
@@ -117,6 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							$result = mysqli_query($conn, $sql);
 							if ($result->num_rows > 0) {
 								$coupons = mysqli_fetch_all($result, MYSQLI_ASSOC);
+								$couponsDis = $coupons[0]['coupon_percent'];
 								if ($coupons[0]['coupon_status'] == 'enable') {
 									$couponError = "";
 									$total -= $total * ($coupons[0]['coupon_percent'] / 100);
@@ -157,9 +158,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					<div class="flex-w flex-t p-t-27 p-b-33">
 						<div class="size-208">
 							<span class="mtext-101 cl2">
-								Total: <?php echo "$" . $total;
-										$_SESSION['cart'][$value['product_id'] . $value['size']]['total'] = $total
-										?>
+								<?php if (isset($_POST['coupon_set'])) { ?>
+									<div style="color:red;"><strong>Coupon:</strong> <?php echo '<span>' . $couponsDis . '%'; ?></div>
+								<?php } ?> <strong>Total:</strong> <?php echo "$" . $total;
+																										$_SESSION['cart'][$value['product_id'] . $value['size']]['total'] = $total
+																										?>
 							</span>
 						</div>
 					</div>
