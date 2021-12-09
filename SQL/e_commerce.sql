@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2021 at 11:25 PM
+-- Generation Time: Dec 09, 2021 at 08:34 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -84,6 +84,17 @@ CREATE TABLE `comments` (
   `comment_rate` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`comment_id`, `comment`, `comment_image`, `comment_date`, `comment_product_id`, `comment_user_id`, `comment_rate`) VALUES
+(7, 'I like it', NULL, '2021-12-09 07:26:17', 74, 33, 5),
+(8, 'beautiful', 'uploads/61b1afdddd288women-02.jpg', '2021-12-09 07:27:25', 24, 33, 5),
+(9, 'beautiful', NULL, '2021-12-09 07:28:19', 41, 33, 5),
+(10, 'Not good', NULL, '2021-12-09 07:28:59', 54, 33, 2),
+(11, 'beautiful', 'uploads/61b1b087f1040sales-21.jpg', '2021-12-09 07:30:15', 79, 33, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -122,6 +133,24 @@ CREATE TABLE `orders` (
   `order_user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `order_details`, `order_location`, `order_mobile`, `order_user_name`, `order_date`, `order_total`, `order_status`, `order_user_id`) VALUES
+(46, ',Sera Relaxed Tee,22,24,,', 'amman', '1234567', 'farah', '2021-12-09 02:48:35', '88', 'on delevery', 33),
+(47, ',Sera Relaxed Tee,22,24,,', 'amman', '1234567', 'farah', '2021-12-09 02:50:26', '88', 'on delevery', 33),
+(50, '$cart', '$location', '33', '$name', '2021-12-09 02:53:14', '$total', 'preparing', 33),
+(51, ',Drop Shoulder Pullover & Sweatpants Set,55,40,,', 'amman', '792851914', 'farah', '2021-12-09 02:56:47', '550', 'on delevery', 33),
+(52, ',Gabbie Panelled Flare,88,39,,', 'amman', '12', 'farah', '2021-12-09 03:03:35', '528', 'blocked', 33),
+(53, ',Gabbie Panelled Flare,88,39,,', 'zarqa', '123456789', 'ahmad', '2021-12-09 03:09:56', '352', 'preparing', 35),
+(54, ',Drop Shoulder Tie Dye Pullover,71,42,,', 'zarqa', '792851914', 'ahmad', '2021-12-09 06:23:30', '142', 'blocked', 34),
+(55, ',Geometric Pattern Dome Bag,55,52,,', 'zarqa', '792851914', 'ahmad', '2021-12-09 06:23:58', '110', 'preparing', 34),
+(56, ',Geometric Pattern Dome Bag,55,52,,', 'zarqa', '792851914', 'ahmad', '2021-12-09 06:23:58', '110', 'preparing', 34),
+(57, ',Drop Shoulder Tie Dye Pullover,71,42,,', 'zarqa', '792851914', 'ahmad', '2021-12-09 06:23:30', '142', 'arrived', 34),
+(58, ',Drop Shoulder Tie Dye Pullover,71,42,,', 'zarqa', '792851914', 'ahmad', '2021-12-09 06:23:30', '142', 'preparing', 34),
+(59, ',Sera Relaxed Tee,22,24,,', 'amman', '1234567', 'farah', '2021-12-09 02:48:35', '88', 'preparing', 33);
+
 -- --------------------------------------------------------
 
 --
@@ -159,16 +188,16 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_description`, `pr
 (35, 'Gabbie Panelled Flare ', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '77', 77, NULL, 'uploads/61ae58ce05ae4bag-70.jpg', 'uploads/61ae58ce05af1bag-71.jpg', 'uploads/61ae58ce05af6bag-72.jpg', 'uploads/61ae58ce05afbbag-72.jpg', 'bag', 13, 'uploads/61ae58ce05b00bag-73.jpg', 'uploads/61ae58ce05b06bag-70.jpg', 'uploads/61ae58ce05b0bbag-71.jpg', 'Small,Medium,L,XL,XXL'),
 (36, 'Gabbie Panelled Flare', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '82', 32, NULL, 'uploads/61ae591843385bag-00.jpg', 'uploads/61ae591843396bag-01.jpg', 'uploads/61ae59184339bbag-02.jpg', 'uploads/61ae5918433a0bag-00.jpg', 'bag', 13, 'uploads/61ae5918433a4bag-01.jpg', 'uploads/61ae5918433a8bag-02.jpg', 'uploads/61ae5918433aebag-00.jpg', 'Small,Medium,L,XL,XXL'),
 (37, 'Gabbie Panelled Flare ', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '73', 52, NULL, 'uploads/61ae599bc30e1acs-00.jpg', 'uploads/61ae599bc30f0acs-01.jpg', 'uploads/61ae599bc30f3acs-02.jpg', 'uploads/61ae599bc30f5acs-03.jpg', 'accessories', 15, 'uploads/61ae599bc30f8acs-00.jpg', 'uploads/61ae599bc30faacs-01.jpg', 'uploads/61ae599bc3102acs-02.jpg', NULL),
-(38, 'Gabbie Panelled Flare ', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '88', 55, NULL, 'uploads/61ae59ef382fcmen-00.jpg', 'uploads/61ae59ef3830bmen-01.jpg', 'uploads/61ae59ef3830fmen-02.jpg', 'uploads/61ae59ef38314men-03.jpg', 'men', 12, 'uploads/61ae59ef38317men-00.jpg', 'uploads/61ae59ef3831bmen-03.jpg', 'uploads/61ae59ef3831fmen-02.jpg', 'Small,Medium,L,XL,XXL'),
+(38, 'Gabbie Panelled Flare ', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '200', 55, 0, 'uploads/61b14da1063bfmen-00.jpg', 'uploads/61b14da1063cbmen-01.jpg', 'uploads/61b14da1063d0men-02.jpg', 'uploads/61b14da1063d4men-03.jpg', 'men', 12, 'uploads/61b14da1063d8men-00.jpg', 'uploads/61b14da1063demen-01.jpg', 'uploads/61b14da1063e3men-02.jpg', 'Small,Medium,L,XL,XXL'),
 (39, 'Gabbie Panelled Flare', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '88', 66, NULL, 'uploads/61ae5a2ccca66men-50.jpg', 'uploads/61ae5a2ccca6fmen-11.jpg', 'uploads/61ae5a2ccca72men-12.jpg', 'uploads/61ae5a2ccca75men-13.jpg', 'men', 12, 'uploads/61ae5a2ccca77men-10.jpg', 'uploads/61ae5a2ccca7amen-11.jpg', 'uploads/61ae5a2ccca7dmen-12.jpg', 'Small,Medium,L,XL,XXL'),
 (40, 'Drop Shoulder Pullover & Sweatpants Set', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '55', 333, NULL, 'uploads/61af167ddc4bfwomen-60.jpg', 'uploads/61af167ddc4d4women-61.jpg', 'uploads/61af167ddc4d9women-62.jpg', 'uploads/61af167ddc4dewomen-63.jpg', 'women', 11, 'uploads/61af167ddc4e2women-60.jpg', 'uploads/61af167ddc4e6women-61.jpg', 'uploads/61af167ddc4ebwomen-63.jpg', 'Small,Medium,L,XL,XXL'),
 (41, 'Drop Shoulder Pullover & Sweatpants Set', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '33', 55, NULL, 'uploads/61af1716715b7women-20.jpg', 'uploads/61af1716715c6women-21.jpg', 'uploads/61af1716715cawomen-22.jpg', 'uploads/61af1716715cewomen-23.jpg', 'women', 11, 'uploads/61af1716715d1women-20.jpg', 'uploads/61af1716715d5women-21.jpg', 'uploads/61af1716715d8women-23.jpg', 'Small,Medium,L,XL,XXL'),
 (42, 'Drop Shoulder Tie Dye Pullover', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '71', 72, NULL, 'uploads/61af17ab3fd37women-30.jpg', 'uploads/61af17ab3fd49women-31.jpg', 'uploads/61af17ab3fd4ewomen-32.jpg', 'uploads/61af17ab3fd53women-33.jpg', 'women', 11, 'uploads/61af17ab3fd58women-30.jpg', 'uploads/61af17ab3fd5dwomen-31.jpg', 'uploads/61af17ab3fd62women-33.jpg', 'Small,Medium,L,XL,XXL'),
 (43, 'Drop Shoulder Tie Dye Pullover', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '22', 322, NULL, 'uploads/61af17f1ba9d2women-40.jpg', 'uploads/61af17f1ba9dcwomen-41.jpg', 'uploads/61af17f1ba9e1women-42.jpg', 'uploads/61af17f1ba9e6women-43.jpg', 'women', 11, 'uploads/61af17f1ba9eawomen-40.jpg', 'uploads/61af17f1ba9efwomen-41.jpg', 'uploads/61af17f1ba9f3women-43.jpg', 'Small,Medium,L,XL,XXL'),
-(44, 'Drop Shoulder Drawstring Crop Hoodie', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '38', 76, NULL, 'uploads/61af18505a99dwomen-50.jpg', 'uploads/61af18505a9a9women-51.jpg', 'uploads/61af18505a9aewomen-52.jpg', 'uploads/61af18505a9b2women-53.jpg', 'women', 11, 'uploads/61af18505a9bewomen-50.jpg', 'uploads/61af18505a9c2women-51.jpg', 'uploads/61af18505a9c6women-53.jpg', 'Small,Medium,L,XL,XXL'),
+(44, 'Drop Shoulder Drawstring Crop Hoodie', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '150', 76, 0, 'uploads/61b14d306e884women-50.jpg', 'uploads/61b14d306e892women-51.jpg', 'uploads/61b14d306e898women-52.jpg', 'uploads/61b14d306e89dwomen-53.jpg', 'women', 11, 'uploads/61b14d306e8a2women-50.jpg', 'uploads/61b14d306e8a8women-52.jpg', 'uploads/61b14d306e8adwomen-53.jpg', 'Small,Medium,L,XL,XXL'),
 (45, 'Gabbie Panelled Flare Skirt', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '22', 33, NULL, 'uploads/61af190a7c948women-70.jpg', 'uploads/61af190a7c955women-71.jpg', 'uploads/61af190a7c95cwomen-72.jpg', 'uploads/61af190a7c963women-73.jpg', 'women', 11, 'uploads/61af190a7c96awomen-70.jpg', 'uploads/61af190a7c970women-71.jpg', 'uploads/61af190a7c975women-72.jpg', 'Small,Medium,L,XL,XXL'),
 (46, 'Men Buffalo Plaid Print Teddy Top', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '22', 33, NULL, 'uploads/61af19a70e1a5men-10.jpg', 'uploads/61af19a70e1b4men-11.jpg', 'uploads/61af19a70e1b9men-12.jpg', 'uploads/61af19a70e1bemen-13.jpg', 'men', 12, 'uploads/61af19a70e1c3men-10.jpg', 'uploads/61af19a70e1c8men-11.jpg', 'uploads/61af19a70e1cemen-13.jpg', 'Small,Medium,L,XL,XXL'),
-(47, 'Men Buffalo Plaid Print Teddy Top', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '90', 44, NULL, 'uploads/61af19f39bd78men-20.jpg', 'uploads/61af19f39bd8bmen-21.jpg', 'uploads/61af19f39bd90men-22.jpg', 'uploads/61af19f39bd94men-23.jpg', 'men', 12, 'uploads/61af19f39bd98men-20.jpg', 'uploads/61af19f39bd9cmen-21.jpg', 'uploads/61af19f39bda1men-22.jpg', 'Small,Medium,L,XL,XXL'),
+(47, 'Men Buffalo Plaid Print Teddy Top', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '250', 44, 0, 'uploads/61b14ea1ddea9men-20.jpg', 'uploads/61b14ea1ddebemen-21.jpg', 'uploads/61b14ea1ddec3men-22.jpg', 'uploads/61b14ea1ddec7men-23.jpg', 'men', 12, 'uploads/61b14ea1ddecbmen-20.jpg', 'uploads/61b14ea1ddecfmen-21.jpg', 'uploads/61b14ea1dded3men-23.jpg', 'Small,Medium,L,XL,XXL'),
 (48, 'Gabbie Panelled Flare ', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '22', 77, NULL, 'uploads/61af1a46e6727men-30.jpg', 'uploads/61af1a46e6734men-31.jpg', 'uploads/61af1a46e6739men-32.jpg', 'uploads/61af1a46e673fmen-33.jpg', 'men', 12, 'uploads/61af1a46e6744men-30.jpg', 'uploads/61af1a46e6749men-31.jpg', 'uploads/61af1a46e6750men-32.jpg', 'Small,Medium,L,XL,XXL'),
 (49, 'Extended Sizes Men Patch Detail Contrast Trim Sweatshirt', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '22', 55, NULL, 'uploads/61af1ac5d7d2amen-60.jpg', 'uploads/61af1ac5d7d32men-61.jpg', 'uploads/61af1ac5d7d36men-62.jpg', 'uploads/61af1ac5d7d39men-63.jpg', 'men', 12, 'uploads/61af1ac5d7d3cmen-60.jpg', 'uploads/61af1ac5d7d40men-61.jpg', 'uploads/61af1ac5d7d43men-62.jpg', 'Small,Medium,L,XL,XXL'),
 (50, 'Sweatshirt', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '50', 15, NULL, 'uploads/61af1b1503052men-70.jpg', 'uploads/61af1b150305fmen-71.jpg', 'uploads/61af1b1503065men-72.jpg', 'uploads/61af1b150307amen-73.jpg', 'men', 12, 'uploads/61af1b150307fmen-70.jpg', 'uploads/61af1b1503083men-72.jpg', 'uploads/61af1b1503087men-73.jpg', 'Small,Medium,L,XL,XXL'),
@@ -188,7 +217,7 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_description`, `pr
 (64, 'Minimalist ', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '77', 33, NULL, 'uploads/61af23b06e73dshoes-50.jpg', 'uploads/61af23b06e749shoes-51.jpg', 'uploads/61af23b06e74fshoes-52.jpg', 'uploads/61af23b06e755shoes-53.jpg', 'shoes', 14, 'uploads/61af23b06e75ashoes-50.jpg', 'uploads/61af23b06e75fshoes-52.jpg', 'uploads/61af23b06e764shoes-53.jpg', '37,38,39,40,41,42,43,44,45'),
 (65, 'Minimalist ', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '66', 66, NULL, 'uploads/61af23f6d3dc7shoes-60.jpg', 'uploads/61af23f6d3ddbshoes-61.jpg', 'uploads/61af23f6d3ddfshoes-62.jpg', 'uploads/61af23f6d3de4shoes-60.jpg', 'shoes', 14, 'uploads/61af23f6d3de8shoes-61.jpg', 'uploads/61af23f6d3dedshoes-62.jpg', 'uploads/61af23f6d3df2shoes-60.jpg', '37,38,39,40,41,42,43,44,45'),
 (66, 'Letter Graphic High Top Boots', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '55', 33, NULL, 'uploads/61af2451cb5beshoes-70.jpg', 'uploads/61af2451cb5cdshoes-71.jpg', 'uploads/61af2451cb5d1shoes-72.jpg', 'uploads/61af2451cb5d6shoes-70.jpg', 'shoes', 14, 'uploads/61af2451cb5d9shoes-71.jpg', 'uploads/61af2451cb5ddshoes-72.jpg', 'uploads/61af2451cb5e1shoes-70.jpg', '37,38,39,40,41,42,43,44,45'),
-(67, 'Geometric Rhinestone Decor', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '61', 32, NULL, 'uploads/61af24e505e20acs-10.jpg', 'uploads/61af24e505e2cacs-11.jpg', 'uploads/61af24e505e31acs-12.jpg', 'uploads/61af24e505e36acs-13.jpg', 'accessories', 15, 'uploads/61af24e505e3bacs-10.jpg', 'uploads/61af24e505e40acs-11.jpg', 'uploads/61af24e505e45acs-12.jpg', NULL),
+(67, 'Geometric Rhinestone Decor', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '300', 32, 0, 'uploads/61b1ab96acea0acs-10.jpg', 'uploads/61b1ab96aceaeacs-11.jpg', 'uploads/61b1ab96aceb2acs-12.jpg', 'uploads/61b1ab96aceb5acs-13.jpg', 'accessories', 15, 'uploads/61b1ab96aceb8acs-10.jpg', 'uploads/61b1ab96acebbacs-11.jpg', 'uploads/61b1ab96acebeacs-12.jpg', ''),
 (68, 'Geometric Rhinestone Decor', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '10', 44, NULL, 'uploads/61af251d30966acs-40.jpg', 'uploads/61af251d30981acs-41.jpg', 'uploads/61af251d30987acs-42.jpg', 'uploads/61af251d3098cacs-43.jpg', 'accessories', 15, 'uploads/61af251d30991acs-40.jpg', 'uploads/61af251d30997acs-41.jpg', 'uploads/61af251d3099cacs-42.jpg', NULL),
 (69, 'Geometric Rhinestone Decor', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '22', 12, NULL, 'uploads/61af2563598a1acs-50.jpg', 'uploads/61af2563598aeacs-51.jpg', 'uploads/61af2563598b4acs-52.jpg', 'uploads/61af2563598b9acs-53.jpg', 'accessories', 15, 'uploads/61af2563598beacs-50.jpg', 'uploads/61af2563598c3acs-51.jpg', 'uploads/61af2563598c8acs-52.jpg', NULL),
 (70, 'Geometric Rhinestone Decor', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus e', '77', 22, NULL, 'uploads/61af25b340c97acs-60.jpg', 'uploads/61af25b340c9facs-61.jpg', 'uploads/61af25b340ca2acs-62.jpg', 'uploads/61af25b340ca4acs-63.jpg', 'accessories', 15, 'uploads/61af25b340ca7acs-60.jpg', 'uploads/61af25b340ca9acs-61.jpg', 'uploads/61af25b340cadacs-62.jpg', NULL),
@@ -327,7 +356,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `coupons`
@@ -339,7 +368,7 @@ ALTER TABLE `coupons`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -351,7 +380,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `unique_visitors`
 --
 ALTER TABLE `unique_visitors`
-  MODIFY `visittor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
+  MODIFY `visittor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
 --
 -- AUTO_INCREMENT for table `users`
